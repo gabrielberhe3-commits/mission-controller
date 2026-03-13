@@ -13,15 +13,14 @@ const taskColumns: TaskStatus[] = ["Backlog", "In Progress", "Blocked", "Done"];
 
 export default function TasksPage() {
   const [projectFilter, setProjectFilter] = useState("all");
-  const { openDrawer, projects, showFeedback, tasks } =
-    useWorkspace();
+  const { openDrawer, projects, showFeedback, tasks } = useWorkspace();
   const filteredTasks =
     projectFilter === "all"
       ? tasks
       : tasks.filter((task) => task.projectId === projectFilter);
 
   return (
-    <div className="space-y-5">
+    <div className="space-y-4">
       <PageHeader
         eyebrow="Tasks"
         title="Execution queue for operator-managed and automation-ready work."
@@ -61,9 +60,11 @@ export default function TasksPage() {
             const count = filteredTasks.filter((task) => task.status === column).length;
 
             return (
-              <div key={column} className="surface-subtle rounded-xl p-4">
-                <p className="text-[11px] font-semibold uppercase tracking-[0.18em] text-[#8ea0b5]">{column}</p>
-                <p className="mt-2 text-3xl font-semibold text-white">{count}</p>
+              <div key={column} className="surface-subtle rounded-[14px] p-4">
+                <p className="text-[10px] font-semibold uppercase tracking-[0.18em] text-[#8ea0b5]">
+                  {column}
+                </p>
+                <p className="mt-2 text-3xl font-semibold tracking-[-0.04em] text-white">{count}</p>
               </div>
             );
           })}

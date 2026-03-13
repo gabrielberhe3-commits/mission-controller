@@ -1,21 +1,22 @@
 @import "tailwindcss";
 
 :root {
-  --background: #06090f;
-  --foreground: #e8edf5;
-  --surface-base: #0d131b;
-  --surface-raised: #121a24;
-  --surface-muted: #0a1016;
-  --surface-selected: #151f2b;
-  --border-subtle: rgba(148, 163, 184, 0.16);
-  --border-strong: rgba(148, 163, 184, 0.24);
-  --text-muted: #97a5b8;
-  --text-soft: #b9c4d3;
-  --accent: #c8a36a;
-  --accent-strong: #e0bf88;
-  --success: #61b38f;
-  --warning: #c79b57;
-  --danger: #d67878;
+  --background: #0a0d10;
+  --foreground: #eef2f6;
+  --surface-base: #101418;
+  --surface-raised: #161b20;
+  --surface-muted: #0d1115;
+  --surface-subtle: #14191f;
+  --surface-selected: #1a2128;
+  --border-subtle: rgba(164, 174, 186, 0.14);
+  --border-strong: rgba(164, 174, 186, 0.24);
+  --text-muted: #93a0ae;
+  --text-soft: #b3becb;
+  --accent: #b29061;
+  --accent-strong: #d7b27b;
+  --success: #6aa48a;
+  --warning: #bf9156;
+  --danger: #c56f6f;
 }
 
 @theme inline {
@@ -29,38 +30,41 @@
 
 * {
   box-sizing: border-box;
-  border-color: rgba(255, 255, 255, 0.08);
+  border-color: var(--border-subtle);
 }
 
 html {
   scroll-behavior: smooth;
 }
 
-body,
-html {
+html,
+body {
   min-height: 100%;
 }
 
 body {
   background:
-    radial-gradient(circle at top, rgba(200, 163, 106, 0.08), transparent 28%),
-    linear-gradient(180deg, #070b10 0%, #090d12 40%, #06090f 100%);
+    radial-gradient(circle at top left, rgba(178, 144, 97, 0.06), transparent 28%),
+    linear-gradient(180deg, #0c0f13 0%, #090c0f 100%);
   color: var(--foreground);
   font-family: var(--font-sans);
   text-rendering: optimizeLegibility;
 }
 
 ::selection {
-  background: rgba(214, 155, 83, 0.35);
+  background: rgba(178, 144, 97, 0.3);
 }
 
 a,
-button {
+button,
+input,
+select,
+textarea {
   transition:
     background-color 160ms ease,
     border-color 160ms ease,
     color 160ms ease,
-    transform 160ms ease,
+    box-shadow 160ms ease,
     opacity 160ms ease;
 }
 
@@ -68,55 +72,56 @@ button {
   cursor: pointer;
 }
 
-.grain {
+.dashboard-grid {
   position: relative;
 }
 
-.grain::before {
+.dashboard-grid::before {
   content: "";
   position: absolute;
   inset: 0;
   pointer-events: none;
-  opacity: 0.04;
   background-image:
-    linear-gradient(rgba(255, 255, 255, 0.025) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(255, 255, 255, 0.025) 1px, transparent 1px);
+    linear-gradient(rgba(255, 255, 255, 0.014) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.014) 1px, transparent 1px);
   background-size: 28px 28px;
+  mask-image: linear-gradient(180deg, rgba(0, 0, 0, 0.48), transparent 84%);
 }
 
 @layer components {
   .surface-panel {
-    background: linear-gradient(180deg, rgba(18, 26, 36, 0.96), rgba(12, 18, 26, 0.98));
+    background: linear-gradient(180deg, rgba(22, 27, 32, 0.96), rgba(15, 19, 24, 0.98));
     border: 1px solid var(--border-subtle);
-    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.22);
+    box-shadow: 0 10px 24px rgba(0, 0, 0, 0.18);
   }
 
   .surface-subtle {
-    background: rgba(13, 19, 27, 0.82);
-    border: 1px solid rgba(148, 163, 184, 0.12);
+    background: rgba(20, 25, 31, 0.92);
+    border: 1px solid rgba(164, 174, 186, 0.12);
   }
 
   .surface-muted {
-    background: rgba(10, 16, 22, 0.94);
-    border: 1px solid rgba(148, 163, 184, 0.1);
+    background: rgba(13, 17, 21, 0.98);
+    border: 1px solid rgba(164, 174, 186, 0.1);
   }
 
   .surface-selected {
-    background: linear-gradient(180deg, rgba(24, 34, 46, 0.98), rgba(18, 26, 36, 0.98));
-    border: 1px solid rgba(200, 163, 106, 0.3);
+    background: linear-gradient(180deg, rgba(28, 35, 42, 0.98), rgba(22, 27, 32, 0.98));
+    border: 1px solid rgba(178, 144, 97, 0.34);
+    box-shadow: inset 0 0 0 1px rgba(178, 144, 97, 0.08);
   }
 
   .section-label {
-    color: #90a0b4;
-    font-size: 11px;
+    color: #8f9aa6;
+    font-size: 10px;
     font-weight: 600;
-    letter-spacing: 0.22em;
+    letter-spacing: 0.2em;
     text-transform: uppercase;
   }
 
   .section-title {
     color: var(--foreground);
-    font-size: 1rem;
+    font-size: 0.95rem;
     font-weight: 600;
     letter-spacing: -0.02em;
   }
@@ -132,19 +137,19 @@ button {
   .control-input {
     width: 100%;
     border-radius: 12px;
-    border: 1px solid rgba(148, 163, 184, 0.16);
-    background: rgba(7, 11, 16, 0.9);
-    padding: 0.7rem 0.85rem;
+    border: 1px solid rgba(164, 174, 186, 0.16);
+    background: rgba(11, 15, 19, 0.96);
+    padding: 0.72rem 0.88rem;
     color: var(--foreground);
     outline: none;
   }
 
   .control-input::placeholder {
-    color: #64748b;
+    color: #667281;
   }
 
   .control-input:focus {
-    border-color: rgba(200, 163, 106, 0.45);
-    box-shadow: 0 0 0 1px rgba(200, 163, 106, 0.16);
+    border-color: rgba(178, 144, 97, 0.44);
+    box-shadow: 0 0 0 1px rgba(178, 144, 97, 0.16);
   }
 }

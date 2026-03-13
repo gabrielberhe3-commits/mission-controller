@@ -21,7 +21,7 @@ export default function ProjectsPage() {
   const selectedProject = projects.find((project) => project.id === selectedProjectId) ?? projects[0];
 
   return (
-    <div className="space-y-5">
+    <div className="space-y-4">
       <PageHeader
         eyebrow="Projects"
         title="Project inspection layer for deliverables, linked work, and history."
@@ -36,7 +36,7 @@ export default function ProjectsPage() {
         }
       />
 
-      <div className="grid gap-5 xl:grid-cols-[0.4fr_0.6fr]">
+      <div className="grid gap-4 xl:grid-cols-[320px_minmax(0,1fr)]">
         <Panel
           title="Portfolio"
           description="Select a project to inspect its deliverables, updates, history, and linked operational objects."

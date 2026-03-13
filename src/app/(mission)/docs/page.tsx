@@ -10,7 +10,7 @@ export default function DocsPage() {
   const { briefs, docs, openDrawer, showFeedback } = useWorkspace();
 
   return (
-    <div className="space-y-5">
+    <div className="space-y-4">
       <PageHeader
         eyebrow="Docs"
         title="Reference library and brief archive for the active operating workflow."
@@ -30,7 +30,7 @@ export default function DocsPage() {
         }
       />
 
-      <div className="grid gap-5 xl:grid-cols-[0.54fr_0.46fr]">
+      <div className="grid gap-4 xl:grid-cols-[minmax(0,1fr)_420px]">
         <Panel
           title="Reference library"
           description="Structured notes and specs stay close to the operating surface and active projects."

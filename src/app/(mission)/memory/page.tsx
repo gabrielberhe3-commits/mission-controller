@@ -14,7 +14,7 @@ export default function MemoryPage() {
   const uncategorized = memories.filter((memory) => !memory.linkedProjectId);
 
   return (
-    <div className="space-y-5">
+    <div className="space-y-4">
       <PageHeader
         eyebrow="Memory"
         title="Durable context with visible structure and project-linked notes."
@@ -35,7 +35,7 @@ export default function MemoryPage() {
         }
       />
 
-      <div className="grid gap-5 xl:grid-cols-[0.38fr_0.62fr]">
+      <div className="grid gap-4 xl:grid-cols-[320px_minmax(0,1fr)]">
         <Panel
           title="Project memory"
           description="Choose a project to inspect the durable notes linked to it."
@@ -43,7 +43,7 @@ export default function MemoryPage() {
           <ProjectList projects={projects} selectedProjectId={selectedProject.id} />
         </Panel>
 
-        <div className="space-y-5">
+        <div className="space-y-4">
           <Panel
             title="Linked entries"
             description={`${selectedProject.name} has ${linkedMemories.length} memory anchor(s) attached to active work.`}
