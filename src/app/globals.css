@@ -1,22 +1,16 @@
 @import "tailwindcss";
 
 :root {
-  --background: #020202;
-  --foreground: #f3f3f3;
-  --surface-base: #050505;
-  --surface-raised: #0a0a0a;
-  --surface-muted: #080808;
-  --surface-subtle: #0d0d0d;
-  --surface-selected: #111111;
-  --border-subtle: rgba(255, 255, 255, 0.08);
+  --background: #000000;
+  --foreground: #f5f5f5;
+  --panel: #050505;
+  --panel-alt: #090909;
+  --panel-soft: #0d0d0d;
+  --panel-strong: #111111;
+  --border: rgba(255, 255, 255, 0.08);
   --border-strong: rgba(255, 255, 255, 0.14);
-  --text-muted: #8a8a8a;
-  --text-soft: #b6b6b6;
-  --accent: #d9d9d9;
-  --accent-strong: #ffffff;
-  --success: #cfcfcf;
-  --warning: #d8d8d8;
-  --danger: #b3b3b3;
+  --muted: #787878;
+  --soft: #bcbcbc;
 }
 
 @theme inline {
@@ -25,16 +19,12 @@
   --font-sans:
     "IBM Plex Sans", "Avenir Next", "Segoe UI", "Helvetica Neue", ui-sans-serif, system-ui, sans-serif;
   --font-mono:
-    "SFMono-Regular", "SF Mono", "IBM Plex Mono", "Roboto Mono", ui-monospace, monospace;
+    "IBM Plex Mono", "SFMono-Regular", "SF Mono", "Roboto Mono", ui-monospace, monospace;
 }
 
 * {
   box-sizing: border-box;
-  border-color: var(--border-subtle);
-}
-
-html {
-  scroll-behavior: smooth;
+  border-color: var(--border);
 }
 
 html,
@@ -42,15 +32,22 @@ body {
   min-height: 100%;
 }
 
+html {
+  scroll-behavior: smooth;
+}
+
 body {
-  background: var(--background);
+  margin: 0;
+  background:
+    radial-gradient(circle at top left, rgba(255, 255, 255, 0.045), transparent 28%),
+    linear-gradient(180deg, #030303 0%, #000000 100%);
   color: var(--foreground);
   font-family: var(--font-sans);
   text-rendering: optimizeLegibility;
 }
 
 ::selection {
-  background: rgba(255, 255, 255, 0.2);
+  background: rgba(255, 255, 255, 0.18);
 }
 
 a,
@@ -71,65 +68,65 @@ button {
 }
 
 @layer components {
-  .surface-panel {
-    background: rgba(10, 10, 10, 0.98);
-    border: 1px solid var(--border-subtle);
+  .app-shell-grid {
+    background-image:
+      linear-gradient(rgba(255, 255, 255, 0.025) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255, 255, 255, 0.025) 1px, transparent 1px);
+    background-position: center;
+    background-size: 24px 24px;
   }
 
-  .surface-subtle {
-    background: rgba(13, 13, 13, 0.98);
-    border: 1px solid rgba(255, 255, 255, 0.06);
+  .shell-panel {
+    background: rgba(5, 5, 5, 0.92);
+    border: 1px solid var(--border);
   }
 
-  .surface-muted {
-    background: rgba(8, 8, 8, 0.98);
-    border: 1px solid rgba(255, 255, 255, 0.05);
+  .shell-panel-alt {
+    background: rgba(9, 9, 9, 0.96);
+    border: 1px solid rgba(255, 255, 255, 0.07);
   }
 
-  .surface-selected {
-    background: rgba(17, 17, 17, 0.98);
-    border: 1px solid rgba(255, 255, 255, 0.16);
+  .shell-card {
+    background: rgba(11, 11, 11, 0.98);
+    border: 1px solid rgba(255, 255, 255, 0.07);
   }
 
-  .section-label {
-    color: #8f9aa6;
+  .shell-card-strong {
+    background: rgba(15, 15, 15, 0.98);
+    border: 1px solid var(--border-strong);
+  }
+
+  .eyebrow {
+    color: var(--muted);
     font-size: 10px;
     font-weight: 600;
     letter-spacing: 0.2em;
     text-transform: uppercase;
   }
 
-  .section-title {
-    color: var(--foreground);
-    font-size: 0.95rem;
+  .metric-value {
+    font-size: 1.9rem;
     font-weight: 600;
-    letter-spacing: -0.02em;
-  }
-
-  .text-muted {
-    color: var(--text-muted);
-  }
-
-  .text-soft {
-    color: var(--text-soft);
+    letter-spacing: -0.06em;
+    line-height: 1;
   }
 
   .control-input {
     width: 100%;
-    border-radius: 14px;
+    border-radius: 12px;
     border: 1px solid rgba(255, 255, 255, 0.08);
-    background: rgba(6, 6, 6, 0.98);
-    padding: 0.72rem 0.88rem;
+    background: rgba(8, 8, 8, 0.98);
+    padding: 0.78rem 0.88rem;
     color: var(--foreground);
     outline: none;
   }
 
   .control-input::placeholder {
-    color: #666666;
+    color: #5f5f5f;
   }
 
   .control-input:focus {
-    border-color: rgba(255, 255, 255, 0.18);
-    box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.08);
+    border-color: rgba(255, 255, 255, 0.16);
+    box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.05);
   }
 }

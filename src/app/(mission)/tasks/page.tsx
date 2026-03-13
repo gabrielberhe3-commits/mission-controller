@@ -21,17 +21,16 @@ export default function TasksPage() {
       <PageHeader
         eyebrow="Tasks"
         title="Queue"
-        description="Active work only."
+        description="Active work."
         actions={
           <Button size="sm" variant="primary" onClick={() => openDrawer("task")}>
-            New task
+            New
           </Button>
         }
       />
 
-      <section className="rounded-[24px] border border-white/6 bg-[#0a0a0a] p-4">
-        <div className="flex flex-col gap-3 border-b border-white/6 pb-3 lg:flex-row lg:items-center lg:justify-between">
-          <p className="text-sm font-medium text-white">Filters</p>
+      <section className="shell-panel rounded-[20px] p-4">
+        <div className="flex flex-col gap-3 lg:flex-row lg:items-center lg:justify-between">
           <SegmentedControl
             items={[
               { label: "All", value: "all" },
@@ -40,23 +39,21 @@ export default function TasksPage() {
             value={projectFilter}
             onChange={setProjectFilter}
           />
-        </div>
-        <div className="mt-4 grid gap-3 md:grid-cols-4">
-          {taskColumns.map((column) => (
-            <div key={column} className="rounded-[16px] border border-white/6 bg-[#090909] px-4 py-3">
-              <p className="text-[10px] uppercase tracking-[0.16em] text-[#666]">{column}</p>
-              <p className="mt-1 text-2xl font-semibold text-white">
-                {filteredTasks.filter((task) => task.status === column).length}
-              </p>
-            </div>
-          ))}
+          <div className="grid grid-cols-2 gap-2 md:grid-cols-4">
+            {taskColumns.map((column) => (
+              <div key={column} className="rounded-[12px] border border-white/8 bg-[#080808] px-3 py-3">
+                <p className="eyebrow">{column}</p>
+                <p className="mt-2 text-2xl font-semibold tracking-[-0.06em] text-white">
+                  {filteredTasks.filter((task) => task.status === column).length}
+                </p>
+              </div>
+            ))}
+          </div>
         </div>
       </section>
 
-      <section className="rounded-[24px] border border-white/6 bg-[#0a0a0a] p-4">
-        <div className="border-b border-white/6 pb-3">
-          <p className="text-sm font-medium text-white">All tasks</p>
-        </div>
+      <section className="shell-panel rounded-[20px] p-4">
+        <p className="eyebrow">All tasks</p>
         <div className="mt-4">
           <TaskList tasks={filteredTasks} />
         </div>

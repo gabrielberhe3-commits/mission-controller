@@ -21,33 +21,29 @@ export default function ProjectsPage() {
       <PageHeader
         eyebrow="Projects"
         title="Portfolio"
-        description="Delivery and linked context."
+        description="Delivery and context."
         actions={
           <>
             <Button size="sm" onClick={() => openDrawer("task")}>
-              Add task
+              Task
             </Button>
             <Button size="sm" variant="primary" onClick={() => openDrawer("memory")}>
-              Add note
+              Note
             </Button>
           </>
         }
       />
 
-      <div className="grid gap-3 xl:grid-cols-[320px_minmax(0,1fr)]">
-        <section className="rounded-[24px] border border-white/6 bg-[#0a0a0a] p-4">
-          <div className="border-b border-white/6 pb-3">
-            <p className="text-sm font-medium text-white">Projects</p>
-          </div>
+      <div className="grid gap-3 xl:grid-cols-[340px_minmax(0,1fr)]">
+        <section className="shell-panel rounded-[20px] p-4">
+          <p className="eyebrow">Projects</p>
           <div className="mt-4">
             <ProjectList projects={projects} selectedProjectId={selectedProject.id} />
           </div>
         </section>
 
-        <section className="rounded-[24px] border border-white/6 bg-[#0a0a0a] p-4">
-          <div className="border-b border-white/6 pb-3">
-            <p className="text-sm font-medium text-white">{selectedProject.name}</p>
-          </div>
+        <section className="shell-panel rounded-[20px] p-4">
+          <p className="eyebrow">{selectedProject.name}</p>
           <div className="mt-4">
             <ProjectDetail
               project={selectedProject}

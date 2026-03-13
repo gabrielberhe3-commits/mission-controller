@@ -5,17 +5,15 @@ type ButtonVariant = "primary" | "secondary" | "ghost";
 type ButtonSize = "sm" | "md";
 
 const variantClasses: Record<ButtonVariant, string> = {
-  primary:
-    "border border-white/12 bg-[#141414] text-white hover:bg-[#1a1a1a]",
-  secondary:
-    "border border-white/8 bg-[#0c0c0c] text-[#d8d8d8] hover:bg-[#121212]",
+  primary: "border border-white/14 bg-white text-black hover:bg-[#d8d8d8]",
+  secondary: "border border-white/10 bg-[#111] text-white hover:bg-[#171717]",
   ghost:
-    "border border-transparent bg-transparent text-[#9f9f9f] hover:border-white/8 hover:bg-[#111] hover:text-white",
+    "border border-transparent bg-transparent text-[#929292] hover:border-white/8 hover:bg-[#101010] hover:text-white",
 };
 
 const sizeClasses: Record<ButtonSize, string> = {
-  sm: "px-3 py-1.5 text-[10px] font-semibold uppercase tracking-[0.14em]",
-  md: "px-3.5 py-2 text-[11px] font-semibold uppercase tracking-[0.14em]",
+  sm: "h-8 px-3 text-[10px] font-semibold uppercase tracking-[0.16em]",
+  md: "h-10 px-4 text-[11px] font-semibold uppercase tracking-[0.16em]",
 };
 
 type SharedProps = {
@@ -34,7 +32,7 @@ export function Button({
 }: SharedProps & ComponentPropsWithoutRef<"button">) {
   return (
     <button
-      className={`inline-flex items-center justify-center rounded-[12px] ${sizeClasses[size]} ${variantClasses[variant]} ${className}`}
+      className={`inline-flex items-center justify-center rounded-[10px] ${sizeClasses[size]} ${variantClasses[variant]} ${className}`}
       {...props}
     >
       {children}
@@ -52,7 +50,7 @@ export function ButtonLink({
   return (
     <Link
       href={href}
-      className={`inline-flex items-center justify-center rounded-[12px] ${sizeClasses[size]} ${variantClasses[variant]} ${className}`}
+      className={`inline-flex items-center justify-center rounded-[10px] ${sizeClasses[size]} ${variantClasses[variant]} ${className}`}
     >
       {children}
     </Link>

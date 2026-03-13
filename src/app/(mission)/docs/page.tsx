@@ -17,7 +17,7 @@ export default function DocsPage() {
         actions={
           <>
             <Button size="sm" variant="primary" onClick={() => showFeedback("Document editing is not implemented yet.")}>
-              New doc
+              Doc
             </Button>
             <Button size="sm" onClick={() => openDrawer("memory")}>
               Note
@@ -27,19 +27,15 @@ export default function DocsPage() {
       />
 
       <div className="grid gap-3 xl:grid-cols-[minmax(0,1fr)_380px]">
-        <section className="rounded-[24px] border border-white/6 bg-[#0a0a0a] p-4">
-          <div className="border-b border-white/6 pb-3">
-            <p className="text-sm font-medium text-white">Docs</p>
-          </div>
+        <section className="shell-panel rounded-[20px] p-4">
+          <p className="eyebrow">Docs</p>
           <div className="mt-4">
             <DocList docs={docs} />
           </div>
         </section>
 
-        <section className="rounded-[24px] border border-white/6 bg-[#0a0a0a] p-4">
-          <div className="border-b border-white/6 pb-3">
-            <p className="text-sm font-medium text-white">Briefs</p>
-          </div>
+        <section className="shell-panel rounded-[20px] p-4">
+          <p className="eyebrow">Briefs</p>
           <div className="mt-4">
             <BriefFeed briefs={briefs} />
           </div>

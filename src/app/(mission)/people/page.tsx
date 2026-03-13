@@ -27,20 +27,18 @@ export default function PeoplePage() {
         description="Who is in the loop."
         actions={
           <Button size="sm" variant="primary" onClick={() => showFeedback("People are seeded locally in this build.")}>
-            Add person
+            Add
           </Button>
         }
       />
 
-      <section className="rounded-[24px] border border-white/6 bg-[#0a0a0a] p-4">
-        <div className="border-b border-white/6 pb-3">
-          <p className="text-sm font-medium text-white">Directory</p>
-        </div>
+      <section className="shell-panel rounded-[20px] p-4">
+        <p className="eyebrow">Directory</p>
         <div className="mt-4 grid gap-3 md:grid-cols-2 xl:grid-cols-3">
           {seededPeople.map((person) => (
-            <div key={person.id} className="rounded-[18px] border border-white/6 bg-[#0b0b0b] p-4">
+            <div key={person.id} className="shell-card rounded-[16px] p-4">
               <div className="flex items-center justify-between">
-                <div className="flex h-11 w-11 items-center justify-center rounded-full border border-white/8 bg-[#141414] text-sm font-semibold text-white">
+                <div className="flex h-12 w-12 items-center justify-center rounded-[12px] border border-white/8 bg-[#101010] text-sm font-semibold text-white">
                   {person.initials}
                 </div>
                 <span className={`text-[10px] uppercase tracking-[0.16em] ${statusClass(person.status)}`}>
@@ -49,7 +47,7 @@ export default function PeoplePage() {
               </div>
               <p className="mt-4 text-sm font-medium text-white">{person.name}</p>
               <p className="mt-1 text-sm text-[#8a8a8a]">{person.role}</p>
-              <p className="mt-3 text-[10px] uppercase tracking-[0.16em] text-[#666]">Current focus</p>
+              <p className="mt-3 text-[10px] uppercase tracking-[0.16em] text-[#666]">Focus</p>
               <p className="mt-1 text-sm text-[#d2d2d2]">{person.focus}</p>
               <div className="mt-4">
                 <Button size="sm" onClick={() => showFeedback(`${person.name} is represented as local seed data only.`)}>
