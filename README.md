@@ -1,26 +1,82 @@
 # Mission Controller
 
-A local-first personal operating system built with Next.js, TypeScript and Tailwind.
+A local-first personal operating system built with Next.js, TypeScript, and Tailwind CSS.
 
-## What this MVP includes
+This v2 pass upgrades the original single-page MVP into a multi-page product foundation with shared types, seeded domain data, reusable layout/UI components, and route-level information architecture.
 
-- **Mission Control homepage** with overview widgets
-- **Calendar section** with month / week / day toggles and seeded events
-- **Tasks section** with priorities, due dates and status
-- **Projects section** with progress and milestones
-- **Memory section** for durable notes / journal snippets
-- **Docs section** for lightweight knowledge pages
+## Product direction
 
-## Why this exists
+Mission Controller is meant to replace the fragmented feeling of Google Calendar plus scattered notes and task tools.
 
-The goal is to replace the fragmented feeling of Google Calendar + scattered notes/tasks with a more opinionated control center where planning, execution and context live together.
+The intended model is:
 
-## Tech
+- calendar as the time spine
+- tasks as execution
+- projects as containers
+- memory as durable context
+- docs as structured knowledge
+- one mission control homepage for what matters now
 
-- Next.js (App Router)
-- TypeScript
-- Tailwind CSS
-- Static seeded data for now
+## Routes
+
+- `/` mission control overview
+- `/calendar` scheduling and future import surface
+- `/tasks` execution queue
+- `/projects` project portfolio and linked object graph
+- `/memory` durable notes, preferences, and decisions
+- `/docs` structured knowledge pages
+
+## Architecture
+
+```text
+src/
+  app/
+    layout.tsx
+    globals.css
+    (mission)/
+      layout.tsx
+      page.tsx
+      calendar/page.tsx
+      tasks/page.tsx
+      projects/page.tsx
+      memory/page.tsx
+      docs/page.tsx
+  components/
+    layout/
+      app-shell.tsx
+      sidebar-nav.tsx
+      topbar.tsx
+    mission/
+      mission-cards.tsx
+    ui/
+      badge.tsx
+      page-header.tsx
+      panel.tsx
+      progress-bar.tsx
+  data/
+    mission-control.ts
+  types/
+    mission.ts
+```
+
+## Current design choices
+
+- Local-first and seeded/mock-only for now
+- Shared app shell across all primary routes
+- Reusable domain presentation components instead of page-local UI
+- Shared types for events, tasks, projects, memory, docs, navigation, and workspace metrics
+- Seeded data module with lightweight relational helpers
+- Clear extension path for repository-backed persistence and calendar imports
+
+## Extensibility path
+
+The current app is intentionally frontend-heavy, but the structure is ready for the next layer:
+
+1. Add a repository boundary between views and data.
+2. Replace seeded arrays with SQLite, IndexedDB, or another local-first store.
+3. Add `.ics` and Google Calendar export import flows.
+4. Link tasks, events, memories, and docs around shared project and object IDs.
+5. Introduce command palette, shortcuts, and daily planner workflows.
 
 ## Run locally
 
@@ -29,59 +85,17 @@ npm install
 npm run dev
 ```
 
-Then open:
+Then open `http://localhost:3000`.
+
+## Verification
+
+Relevant checks for this pass:
 
 ```bash
-http://localhost:3000
+npm run lint
+npm run build
 ```
-
-## Current structure
-
-```text
-src/app/
-  globals.css
-  layout.tsx
-  page.tsx
-```
-
-For the MVP, the UI and seed data live in `src/app/page.tsx` to move fast.
-
-## Recommended next steps
-
-1. **Move seed data into a real data layer**
-   - start with `src/lib/data/`
-   - then upgrade to SQLite/Postgres
-
-2. **Add persistence**
-   - Prisma + SQLite is the fastest path for a local-first prototype
-   - Drizzle is also a good fit if you want lighter tooling
-
-3. **Calendar import before calendar sync**
-   - first support `.ics` and Google Calendar export import
-   - then add live Google sync only if still needed
-
-4. **Link the objects together**
-   - events ↔ tasks
-   - tasks ↔ projects
-   - memories/docs ↔ projects
-
-5. **Add operator UX**
-   - command palette
-   - keyboard shortcuts
-   - daily planner view
-   - focus mode
-
-## Product direction
-
-A good final version should feel like:
-
-- calendar at the center
-- tasks as execution
-- projects as containers
-- memory as durable context
-- docs as structured knowledge
-- one homepage that shows what matters *today*
 
 ## Notes
 
-This is intentionally a clean foundation, not a full backend yet.
+This is still intentionally a seeded-data app. The goal of this pass was to improve structure, product shape, and future adaptability without overengineering backend concerns yet.
