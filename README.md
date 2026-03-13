@@ -1,30 +1,29 @@
 # Mission Controller
 
-A local-first personal operating system built with Next.js, TypeScript, and Tailwind CSS.
+Mission Controller is a local-first personal operating system built with Next.js App Router, TypeScript, and Tailwind CSS.
 
-This v2 pass upgrades the original single-page MVP into a multi-page product foundation with shared types, seeded domain data, reusable layout/UI components, and route-level information architecture.
+This v3 pass upgrades the app from a mostly static demo into a more functional product foundation aimed at replacing Gabriel's scattered calendar, task, docs, and notes workflow with one operator surface.
 
-## Product direction
+## What changed in v3
 
-Mission Controller is meant to replace the fragmented feeling of Google Calendar plus scattered notes and task tools.
+- Added a shared client-side workspace store with local persistence for task, memory, calendar-view, and project-focus state.
+- Added a visible brief feed with seeded morning briefs and nightly updates on the home and docs surfaces.
+- Added a real local-first task creation flow through reusable quick-add drawers.
+- Structured task actions so future automation can insert tasks through the same `createTask` path the UI already uses.
+- Upgraded the calendar route with working `Month`, `Week`, `Day`, and `Agenda` switching plus date navigation.
+- Made major shell and page actions functional: buttons now navigate, open drawers, change state, or provide explicit feedback.
+- Turned projects into the main inspection layer for deliverables, updates, linked briefs, history, docs, memory, events, and tasks.
+- Improved memory into a structured, project-linked section instead of a flat list.
+- Tightened the information architecture so routes feel like one product rather than disconnected demo pages.
 
-The intended model is:
+## Current routes
 
-- calendar as the time spine
-- tasks as execution
-- projects as containers
-- memory as durable context
-- docs as structured knowledge
-- one mission control homepage for what matters now
-
-## Routes
-
-- `/` mission control overview
-- `/calendar` scheduling and future import surface
-- `/tasks` execution queue
-- `/projects` project portfolio and linked object graph
-- `/memory` durable notes, preferences, and decisions
-- `/docs` structured knowledge pages
+- `/` operator dashboard with metrics, briefs, project focus, tasks, memory, and docs
+- `/calendar` interactive month, week, day, and agenda planning surface
+- `/tasks` local-first execution queue with task creation and status advancement
+- `/projects` portfolio plus detailed inspection of deliverables, updates, history, and linked work
+- `/memory` durable context with project-linked notes and quick capture
+- `/docs` seeded reference library plus brief archive
 
 ## Architecture
 
@@ -46,37 +45,41 @@ src/
       app-shell.tsx
       sidebar-nav.tsx
       topbar.tsx
+      workspace-overlays.tsx
     mission/
       mission-cards.tsx
+    providers/
+      workspace-provider.tsx
     ui/
       badge.tsx
+      button.tsx
+      drawer.tsx
       page-header.tsx
       panel.tsx
       progress-bar.tsx
+      segmented-control.tsx
   data/
     mission-control.ts
   types/
     mission.ts
 ```
 
-## Current design choices
+## Product model
 
-- Local-first and seeded/mock-only for now
-- Shared app shell across all primary routes
-- Reusable domain presentation components instead of page-local UI
-- Shared types for events, tasks, projects, memory, docs, navigation, and workspace metrics
-- Seeded data module with lightweight relational helpers
-- Clear extension path for repository-backed persistence and calendar imports
+- Calendar is the time spine.
+- Tasks are the execution queue.
+- Projects are the discovery and inspection layer for built work.
+- Memory stores durable context, decisions, and project-linked notes.
+- Docs hold reference material and operating specs.
+- Briefs surface daily synthesis and nightly updates inside the product.
 
-## Extensibility path
+## What remains for future automation integration
 
-The current app is intentionally frontend-heavy, but the structure is ready for the next layer:
-
-1. Add a repository boundary between views and data.
-2. Replace seeded arrays with SQLite, IndexedDB, or another local-first store.
-3. Add `.ics` and Google Calendar export import flows.
-4. Link tasks, events, memories, and docs around shared project and object IDs.
-5. Introduce command palette, shortcuts, and daily planner workflows.
+- Replace the current local store with a repository-backed persistence layer such as IndexedDB or SQLite.
+- Add assistant and automation writers for briefs, task creation, project updates, and memory capture.
+- Add real calendar ingestion for `.ics` files and exported Google Calendar data.
+- Add project creation and document editing flows instead of seeded-only placeholders.
+- Add command palette, shortcuts, and a daily planner workflow on top of the shared action model.
 
 ## Run locally
 
@@ -92,10 +95,5 @@ Then open `http://localhost:3000`.
 Relevant checks for this pass:
 
 ```bash
-npm run lint
 npm run build
 ```
-
-## Notes
-
-This is still intentionally a seeded-data app. The goal of this pass was to improve structure, product shape, and future adaptability without overengineering backend concerns yet.

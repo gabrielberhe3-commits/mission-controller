@@ -1,56 +1,74 @@
-import { ProjectList } from "@/components/mission/mission-cards";
+"use client";
+
+import {
+  ProjectDetail,
+  ProjectList,
+} from "@/components/mission/mission-cards";
+import { useWorkspace } from "@/components/providers/workspace-provider";
+import { Button } from "@/components/ui/button";
 import { PageHeader } from "@/components/ui/page-header";
 import { Panel } from "@/components/ui/panel";
 import {
+  getBriefsForProject,
   getDocsForProject,
   getEventsForProject,
   getMemoryForProject,
   getTasksForProject,
-  seededProjects,
 } from "@/data/mission-control";
 
 export default function ProjectsPage() {
-  const featured = seededProjects[0];
+  const { memories, openDrawer, projects, selectedProjectId, showFeedback, tasks } = useWorkspace();
+  const selectedProject = projects.find((project) => project.id === selectedProjectId) ?? projects[0];
 
   return (
     <div className="space-y-6">
       <PageHeader
         eyebrow="Projects"
-        title="Projects become the container layer for connected work."
-        description="This page demonstrates the future model: tasks, events, docs, and memories can all cluster around a project without introducing backend complexity yet."
+        title="Projects are now the discoverability layer for nightly-built work."
+        description="Deliverables, updates, briefs, events, tasks, docs, and memory can now all be inspected from the project surface instead of remaining scattered across the app."
+        actions={
+          <>
+            <Button variant="primary" onClick={() => openDrawer("task")}>
+              Add linked task
+            </Button>
+            <Button onClick={() => openDrawer("memory")}>Add project note</Button>
+          </>
+        }
       />
 
-      <Panel
-        title="Portfolio"
-        description="Each project already carries progress, status, and milestone fields ready for seeded or persistent repositories."
-        action={<button className="rounded-full border border-white/12 px-3 py-1.5 text-xs font-medium text-[#dbe5ee]">New project</button>}
-      >
-        <ProjectList projects={seededProjects} />
-      </Panel>
+      <div className="grid gap-6 xl:grid-cols-[0.4fr_0.6fr]">
+        <Panel
+          title="Portfolio"
+          description="Select a project to inspect its deliverables, updates, history, and linked operational objects."
+          action={
+            <Button
+              size="sm"
+              onClick={() =>
+                showFeedback("Project creation is still seeded-only. The inspection layer is ready for live creation next.")
+              }
+            >
+              New project
+            </Button>
+          }
+        >
+          <ProjectList projects={projects} selectedProjectId={selectedProject.id} />
+        </Panel>
 
-      <Panel
-        title="Connected object graph"
-        description={`Mission Controller currently links seeded objects around ${featured.name}.`}
-      >
-        <div className="grid gap-4 md:grid-cols-4">
-          <div className="rounded-[22px] border border-white/10 bg-black/20 p-4">
-            <p className="text-sm text-[#8ea0b5]">Tasks linked</p>
-            <p className="mt-2 text-3xl font-semibold text-white">{getTasksForProject(featured.id).length}</p>
-          </div>
-          <div className="rounded-[22px] border border-white/10 bg-black/20 p-4">
-            <p className="text-sm text-[#8ea0b5]">Events linked</p>
-            <p className="mt-2 text-3xl font-semibold text-white">{getEventsForProject(featured.id).length}</p>
-          </div>
-          <div className="rounded-[22px] border border-white/10 bg-black/20 p-4">
-            <p className="text-sm text-[#8ea0b5]">Docs linked</p>
-            <p className="mt-2 text-3xl font-semibold text-white">{getDocsForProject(featured.id).length}</p>
-          </div>
-          <div className="rounded-[22px] border border-white/10 bg-black/20 p-4">
-            <p className="text-sm text-[#8ea0b5]">Memories linked</p>
-            <p className="mt-2 text-3xl font-semibold text-white">{getMemoryForProject(featured.id).length}</p>
-          </div>
-        </div>
-      </Panel>
+        <Panel
+          title="Project detail"
+          description={`${selectedProject.name} now exposes discoverable nightly-built work and linked context.`}
+          action={<Button size="sm" onClick={() => showFeedback(selectedProject.nextMilestone)}>Next milestone</Button>}
+        >
+          <ProjectDetail
+            project={selectedProject}
+            linkedTasks={getTasksForProject(selectedProject.id, tasks)}
+            linkedMemories={getMemoryForProject(selectedProject.id, memories)}
+            linkedDocs={getDocsForProject(selectedProject.id)}
+            linkedEvents={getEventsForProject(selectedProject.id)}
+            linkedBriefs={getBriefsForProject(selectedProject.id)}
+          />
+        </Panel>
+      </div>
     </div>
   );
 }

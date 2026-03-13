@@ -1,4 +1,5 @@
 import type {
+  BriefEntry,
   CalendarEvent,
   CalendarView,
   Doc,
@@ -7,14 +8,15 @@ import type {
   Project,
   Task,
   WorkspaceMetric,
+  WorkspaceState,
 } from "@/types/mission";
 
 export const workspaceMeta = {
   operator: "Gabriel",
   productName: "Mission Controller",
-  strapline: "A personal operating system for planning, execution, and context.",
-  status: "Focused mode",
-  snapshotDate: "Friday, March 13",
+  strapline: "A personal operating system for planning, execution, and durable context.",
+  status: "Operator sync ready",
+  snapshotDate: "Friday, March 13, 2026",
 };
 
 export const navigationItems: NavItem[] = [
@@ -22,37 +24,37 @@ export const navigationItems: NavItem[] = [
     href: "/",
     label: "Mission Control",
     shortLabel: "Home",
-    description: "Daily command layer across calendar, tasks, and context.",
+    description: "Daily operating layer across briefs, time, tasks, and context.",
   },
   {
     href: "/calendar",
     label: "Calendar",
     shortLabel: "Cal",
-    description: "Imported and native events will live here.",
+    description: "Plan by month, week, day, and agenda without leaving the workspace.",
   },
   {
     href: "/tasks",
     label: "Tasks",
     shortLabel: "Task",
-    description: "Execution queue with project-aware prioritization.",
+    description: "Local-first execution queue that automation can append to later.",
   },
   {
     href: "/projects",
     label: "Projects",
     shortLabel: "Proj",
-    description: "Containers for goals, milestones, and linked work.",
+    description: "Nightly-built work, deliverables, and change history by project.",
   },
   {
     href: "/memory",
     label: "Memory",
     shortLabel: "Memo",
-    description: "Durable context, preferences, and decisions.",
+    description: "Durable notes, decisions, and project-linked context anchors.",
   },
   {
     href: "/docs",
     label: "Docs",
     shortLabel: "Docs",
-    description: "Structured notes and operating playbooks.",
+    description: "Reference pages, playbooks, and product specs tied to active work.",
   },
 ];
 
@@ -62,37 +64,36 @@ export const seededEvents: CalendarEvent[] = [
   {
     id: "e1",
     title: "Mission Controller product review",
-    dateLabel: "Today",
-    day: "Fri 13",
+    date: "2026-03-13",
     timeRange: "09:00 - 09:45",
     location: "Studio desk",
     kind: "meeting",
     linkedProjectId: "p1",
+    notes: "Finalize the v3 interaction model and operator IA.",
   },
   {
     id: "e2",
-    title: "Deep build sprint: shell + routes",
-    dateLabel: "Today",
-    day: "Fri 13",
+    title: "Deep build sprint",
+    date: "2026-03-13",
     timeRange: "10:30 - 12:30",
     location: "Focus block",
     kind: "focus",
     linkedProjectId: "p1",
+    notes: "Implement shared local-first state and route cohesion.",
   },
   {
     id: "e3",
     title: "Weekly systems reset",
-    dateLabel: "Today",
-    day: "Fri 13",
+    date: "2026-03-13",
     timeRange: "15:00 - 15:30",
     location: "Operations",
     kind: "review",
+    notes: "Reset priorities and capture memory updates.",
   },
   {
     id: "e4",
     title: "Gym + recovery",
-    dateLabel: "Today",
-    day: "Fri 13",
+    date: "2026-03-13",
     timeRange: "18:00 - 19:00",
     location: "Personal",
     kind: "personal",
@@ -100,12 +101,20 @@ export const seededEvents: CalendarEvent[] = [
   {
     id: "e5",
     title: "Calendar import design",
-    dateLabel: "Tomorrow",
-    day: "Sat 14",
+    date: "2026-03-14",
     timeRange: "09:30 - 10:30",
     location: "Planning",
     kind: "focus",
     linkedProjectId: "p1",
+  },
+  {
+    id: "e6",
+    title: "Research block: AI infra map",
+    date: "2026-03-15",
+    timeRange: "11:00 - 12:00",
+    location: "Research",
+    kind: "focus",
+    linkedProjectId: "p2",
   },
 ];
 
@@ -113,20 +122,100 @@ export const seededProjects: Project[] = [
   {
     id: "p1",
     name: "Mission Controller",
-    progress: 72,
+    progress: 78,
     status: "On Track",
     owner: "Gabriel",
-    nextMilestone: "Local persistence and calendar import adapter",
+    nextMilestone: "Local persistence and assistant task insertion contract",
     horizon: "Q2 foundation",
+    summary: "Personal operating system replacing calendar, tasks, docs, and scattered notes with one operator surface.",
+    deliverables: [
+      {
+        id: "pd1",
+        title: "v3 interaction architecture",
+        kind: "Spec",
+        status: "Ready",
+        updatedAt: "Today",
+        summary: "Reusable patterns for briefs, drawers, segmented controls, and project detail inspection.",
+      },
+      {
+        id: "pd2",
+        title: "Local-first task pipeline",
+        kind: "Prototype",
+        status: "In Progress",
+        updatedAt: "Today",
+        summary: "Client-managed task insertion path for user and future assistant automation.",
+      },
+    ],
+    updates: [
+      {
+        id: "pu1",
+        title: "Nightly build wave surfaced in app",
+        createdAt: "2026-03-13 06:20",
+        summary: "Morning brief and nightly updates are now treated as first-class feed items.",
+      },
+      {
+        id: "pu2",
+        title: "Project-linked context graph clarified",
+        createdAt: "2026-03-12 22:10",
+        summary: "Deliverables, memory, docs, and tasks now roll up under project detail rather than living as disconnected lists.",
+      },
+    ],
+    history: [
+      {
+        id: "ph1",
+        date: "2026-03-11",
+        label: "IA reset",
+        detail: "Shifted from demo pages to operator workflows.",
+      },
+      {
+        id: "ph2",
+        date: "2026-03-12",
+        label: "Data model expansion",
+        detail: "Added briefs, deliverables, updates, and richer memory types.",
+      },
+      {
+        id: "ph3",
+        date: "2026-03-13",
+        label: "Interactive v3 foundation",
+        detail: "Enabled working controls, project inspection, and local task creation.",
+      },
+    ],
   },
   {
     id: "p2",
     name: "Investing OS",
-    progress: 38,
+    progress: 42,
     status: "Planning",
     owner: "Gabriel",
-    nextMilestone: "Watchlist thesis pages and review cadence",
+    nextMilestone: "Watchlist thesis pages and weekly review flow",
     horizon: "Research buildout",
+    summary: "Research workspace for tracking themes, theses, and review loops across markets and companies.",
+    deliverables: [
+      {
+        id: "pd3",
+        title: "AI infra watchlist map",
+        kind: "Research",
+        status: "In Progress",
+        updatedAt: "Yesterday",
+        summary: "Map the infra stack, chip cycle, and public market names worth tracking weekly.",
+      },
+    ],
+    updates: [
+      {
+        id: "pu3",
+        title: "Research taxonomy narrowed",
+        createdAt: "2026-03-12 19:00",
+        summary: "Kept focus on AI infra, prediction markets, and systems software.",
+      },
+    ],
+    history: [
+      {
+        id: "ph4",
+        date: "2026-03-10",
+        label: "Theme narrowing",
+        detail: "Dropped low-conviction sectors from the active queue.",
+      },
+    ],
   },
   {
     id: "p3",
@@ -136,6 +225,33 @@ export const seededProjects: Project[] = [
     owner: "Gabriel",
     nextMilestone: "Clarify offer system and outbound loop",
     horizon: "Revenue experiments",
+    summary: "Packaging automation capability into repeatable services with clearer positioning and delivery loops.",
+    deliverables: [
+      {
+        id: "pd4",
+        title: "Offer system outline",
+        kind: "Spec",
+        status: "Queued",
+        updatedAt: "2d ago",
+        summary: "Frame the offer ladder and proof points before increasing outbound effort.",
+      },
+    ],
+    updates: [
+      {
+        id: "pu4",
+        title: "Positioning still unclear",
+        createdAt: "2026-03-11 17:40",
+        summary: "Need sharper problem framing before pushing volume.",
+      },
+    ],
+    history: [
+      {
+        id: "ph5",
+        date: "2026-03-09",
+        label: "Risk flagged",
+        detail: "Positioning ambiguity is slowing outbound execution.",
+      },
+    ],
   },
 ];
 
@@ -143,82 +259,98 @@ export const seededTasks: Task[] = [
   {
     id: "t1",
     title: "Split MVP into reusable route architecture",
-    dueLabel: "Today",
+    dueDate: "2026-03-13",
     priority: "High",
     status: "In Progress",
     projectId: "p1",
     energy: "Deep",
+    source: "system",
+    notes: "Establish reusable primitives rather than page-local hacks.",
+    createdAt: "2026-03-13 06:10",
   },
   {
     id: "t2",
-    title: "Define import adapter shape for .ics and Google exports",
-    dueLabel: "Tomorrow",
+    title: "Define import adapter shape for calendar ingestion",
+    dueDate: "2026-03-14",
     priority: "High",
     status: "Backlog",
     projectId: "p1",
     energy: "Deep",
+    source: "system",
+    createdAt: "2026-03-13 06:12",
   },
   {
     id: "t3",
     title: "Review semiconductor watchlist notes",
-    dueLabel: "Today",
+    dueDate: "2026-03-13",
     priority: "Medium",
     status: "Backlog",
     projectId: "p2",
     energy: "Light",
+    source: "user",
+    createdAt: "2026-03-12 20:05",
   },
   {
     id: "t4",
     title: "Draft operator dashboard metrics",
-    dueLabel: "Mon",
+    dueDate: "2026-03-10",
     priority: "Low",
     status: "Done",
     projectId: "p1",
     energy: "Light",
+    source: "system",
+    createdAt: "2026-03-10 09:10",
   },
   {
     id: "t5",
     title: "Resolve unclear outbound positioning",
-    dueLabel: "Sun",
+    dueDate: "2026-03-16",
     priority: "Medium",
     status: "Blocked",
     projectId: "p3",
     energy: "Deep",
+    source: "user",
+    notes: "Needs a cleaner problem statement and proof stack.",
+    createdAt: "2026-03-11 17:42",
   },
 ];
 
 export const seededMemories: MemoryItem[] = [
   {
     id: "m1",
-    title: "Mission principle",
-    note: "The calendar should be the spine, but tasks, docs, and memory must attach to time without feeling bolted on.",
+    title: "Calendar is the spine",
+    note: "Tasks, docs, and memory should attach to time without feeling bolted on.",
     kind: "focus",
     updatedAt: "2h ago",
     linkedProjectId: "p1",
+    source: "system",
   },
   {
     id: "m2",
-    title: "Operator preference",
-    note: "Prefer local-first systems with explicit imports before any live sync or auth complexity.",
+    title: "Prefer local-first systems",
+    note: "Import before sync, explicit state before auth, and repositories behind the UI layer.",
     kind: "preference",
     updatedAt: "Yesterday",
     linkedProjectId: "p1",
+    source: "system",
   },
   {
     id: "m3",
-    title: "Recent decision",
-    note: "Build extensible seeded modules now so persistence can swap in behind repositories later.",
+    title: "Automation should add work, not obscure it",
+    note: "System-created tasks must look native in the queue and remain editable by the operator.",
     kind: "decision",
     updatedAt: "Yesterday",
     linkedProjectId: "p1",
+    source: "system",
   },
   {
     id: "m4",
-    title: "Market lens",
-    note: "AI infra, prediction markets, and systems software remain the highest-leverage research areas.",
+    title: "Highest leverage research areas",
+    note: "AI infra, prediction markets, and systems software remain the most important active themes.",
     kind: "insight",
     updatedAt: "2d ago",
     linkedProjectId: "p2",
+    source: "user",
   },
 ];
 
@@ -227,7 +359,7 @@ export const seededDocs: Doc[] = [
     id: "d1",
     title: "Personal operating system spec",
     category: "Product",
-    summary: "Defines the core objects, information hierarchy, and the operator experience across the whole app.",
+    summary: "Core objects, information hierarchy, and desired operator workflows across the product.",
     updatedAt: "Today",
     linkedProjectId: "p1",
   },
@@ -235,7 +367,7 @@ export const seededDocs: Doc[] = [
     id: "d2",
     title: "Calendar import strategy",
     category: "Integration",
-    summary: "Import .ics and Google export flows first, then layer sync once the local model is stable.",
+    summary: "Import .ics and exported calendars first, then add live sync only after the local model stabilizes.",
     updatedAt: "Today",
     linkedProjectId: "p1",
   },
@@ -243,7 +375,7 @@ export const seededDocs: Doc[] = [
     id: "d3",
     title: "Daily operator loop",
     category: "Playbook",
-    summary: "Morning review, focused execution blocks, and end-of-day memory capture keep the system coherent.",
+    summary: "Morning brief, focused execution blocks, and nightly memory capture keep the system coherent.",
     updatedAt: "Yesterday",
     linkedProjectId: "p1",
   },
@@ -251,46 +383,61 @@ export const seededDocs: Doc[] = [
     id: "d4",
     title: "AI infrastructure map",
     category: "Research",
-    summary: "Living notes on model infra, chips, platforms, and the themes worth tracking weekly.",
+    summary: "Living notes on chips, model infra, platforms, and the themes worth tracking weekly.",
     updatedAt: "2d ago",
     linkedProjectId: "p2",
   },
 ];
 
-export const roadmapItems = [
-  "Add a repository layer so seeded data can be replaced with SQLite or IndexedDB without rewriting views.",
-  "Support .ics ingestion and Google export import before considering live OAuth sync.",
-  "Introduce object linking between events, tasks, projects, memories, and docs.",
-  "Add a command palette, keyboard shortcuts, and a daily planner workflow.",
+export const seededBriefs: BriefEntry[] = [
+  {
+    id: "b1",
+    title: "Morning brief: Friday operator plan",
+    type: "Morning Brief",
+    createdAt: "2026-03-13 06:30",
+    summary: "Mission Controller is the primary build today. Keep the workspace cohesive and remove dead controls.",
+    bullets: [
+      "Ship working month, week, and day calendar modes.",
+      "Make local-first task creation visible and fast.",
+      "Surface nightly-built project updates on the homepage and projects route.",
+    ],
+    linkedProjectIds: ["p1"],
+  },
+  {
+    id: "b2",
+    title: "Nightly update: Thursday closeout",
+    type: "Nightly Update",
+    createdAt: "2026-03-12 22:45",
+    summary: "The product direction is clearer: projects should be the inspection surface, memory should preserve decisions, and briefs should anchor the day.",
+    bullets: [
+      "Expanded the domain model to support deliverables and history.",
+      "Identified task automation as a first-class future insertion path.",
+      "Kept storage local-first to avoid premature backend complexity.",
+    ],
+    linkedProjectIds: ["p1", "p2"],
+  },
 ];
 
-export const workspaceMetrics: WorkspaceMetric[] = [
-  {
-    id: "wm1",
-    label: "Open loops",
-    value: "11",
-    detail: "Tasks, meetings, and docs requiring attention this week.",
-  },
-  {
-    id: "wm2",
-    label: "Focus capacity",
-    value: "4.5h",
-    detail: "Protected deep-work time still available today.",
-  },
-  {
-    id: "wm3",
-    label: "Context anchors",
-    value: "8",
-    detail: "Memories and docs linked to active workstreams.",
-  },
+export const roadmapItems = [
+  "Replace the local workspace store with IndexedDB or SQLite behind the same actions.",
+  "Add real command palette and keyboard shortcuts for quick capture and navigation.",
+  "Support calendar import adapters for .ics files and Google exports.",
+  "Introduce assistant automation that inserts tasks, briefs, and linked project updates programmatically.",
 ];
+
+export const initialWorkspaceState: WorkspaceState = {
+  tasks: seededTasks,
+  memories: seededMemories,
+  calendarView: "Week",
+  selectedProjectId: "p1",
+};
 
 export function getProjectById(projectId: string) {
   return seededProjects.find((project) => project.id === projectId);
 }
 
-export function getTasksForProject(projectId: string) {
-  return seededTasks.filter((task) => task.projectId === projectId);
+export function getTasksForProject(projectId: string, tasks: Task[] = seededTasks) {
+  return tasks.filter((task) => task.projectId === projectId);
 }
 
 export function getEventsForProject(projectId: string) {
@@ -301,6 +448,67 @@ export function getDocsForProject(projectId: string) {
   return seededDocs.filter((doc) => doc.linkedProjectId === projectId);
 }
 
-export function getMemoryForProject(projectId: string) {
-  return seededMemories.filter((memory) => memory.linkedProjectId === projectId);
+export function getMemoryForProject(projectId: string, memories: MemoryItem[] = seededMemories) {
+  return memories.filter((memory) => memory.linkedProjectId === projectId);
+}
+
+export function getBriefsForProject(projectId: string) {
+  return seededBriefs.filter((brief) => brief.linkedProjectIds.includes(projectId));
+}
+
+export function buildWorkspaceMetrics(
+  tasks: Task[] = seededTasks,
+  memories: MemoryItem[] = seededMemories,
+): WorkspaceMetric[] {
+  const openTasks = tasks.filter((task) => task.status !== "Done");
+  const todayEvents = seededEvents.filter((event) => event.date === "2026-03-13");
+  const linkedItems = memories.filter((memory) => memory.linkedProjectId).length + seededDocs.length;
+
+  return [
+    {
+      id: "wm1",
+      label: "Open loops",
+      value: String(openTasks.length + todayEvents.length),
+      detail: "Tasks and scheduled events requiring attention across the active horizon.",
+    },
+    {
+      id: "wm2",
+      label: "Deep work blocks",
+      value: `${tasks.filter((task) => task.energy === "Deep" && task.status !== "Done").length}`,
+      detail: "High-cognitive tasks still sitting in the queue.",
+    },
+    {
+      id: "wm3",
+      label: "Context anchors",
+      value: String(linkedItems),
+      detail: "Project-linked memory entries and docs available as durable context.",
+    },
+  ];
+}
+
+export function formatDisplayDate(date: string) {
+  return new Date(`${date}T12:00:00`).toLocaleDateString("en-US", {
+    month: "short",
+    day: "numeric",
+    weekday: "short",
+  });
+}
+
+export function formatDueLabel(date: string) {
+  const target = new Date(`${date}T12:00:00`);
+  const today = new Date("2026-03-13T12:00:00");
+  const diff = Math.round((target.getTime() - today.getTime()) / 86400000);
+
+  if (diff === 0) {
+    return "Today";
+  }
+
+  if (diff === 1) {
+    return "Tomorrow";
+  }
+
+  return target.toLocaleDateString("en-US", {
+    month: "short",
+    day: "numeric",
+  });
 }
