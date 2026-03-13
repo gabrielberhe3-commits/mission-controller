@@ -63,7 +63,7 @@ export function WorkspaceOverlays() {
           resetTask();
         }}
         title="Create Task"
-        description="Tasks are stored locally for now, but the same action path can later accept tasks inserted by automation or an assistant."
+        description="Local-first task capture."
       >
         <form
           className="space-y-4"
@@ -179,7 +179,7 @@ export function WorkspaceOverlays() {
           resetMemory();
         }}
         title="Capture Memory"
-        description="Use this for durable notes, decisions, and project context that should survive beyond any single task."
+        description="Save durable context."
       >
         <form
           className="space-y-4"
@@ -275,7 +275,7 @@ export function WorkspaceOverlays() {
 
       <div className="pointer-events-none fixed bottom-6 right-6 z-50">
         <div
-          className={`rounded-xl border border-[rgba(200,163,106,0.28)] bg-[rgba(12,17,22,0.96)] px-4 py-3 text-sm text-[#f3e1c2] shadow-[0_18px_40px_rgba(0,0,0,0.3)] transition ${
+          className={`rounded-xl border border-white/8 bg-[#0b0b0b] px-4 py-3 text-sm text-white shadow-[0_18px_40px_rgba(0,0,0,0.3)] transition ${
             feedback ? "translate-y-0 opacity-100" : "translate-y-4 opacity-0"
           }`}
         >

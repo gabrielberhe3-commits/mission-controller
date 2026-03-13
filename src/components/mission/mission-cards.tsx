@@ -21,7 +21,7 @@ function getEventTone(kind: CalendarEvent["kind"]) {
     case "meeting":
       return "sky";
     case "focus":
-      return "copper";
+      return "neutral";
     case "personal":
       return "emerald";
     case "review":
@@ -58,25 +58,20 @@ function getStatusTone(status: Project["status"] | Task["status"]) {
 
 function cardClassName(selected = false) {
   return selected
-    ? "surface-selected rounded-[16px] p-4"
-    : "surface-subtle rounded-[16px] p-4";
+    ? "rounded-[16px] border border-white/14 bg-[#111] p-3.5"
+    : "rounded-[16px] border border-white/6 bg-[#0b0b0b] p-3.5";
 }
 
 export function MetricGrid({ metrics }: { metrics: WorkspaceMetric[] }) {
   return (
-    <div className="grid gap-3 lg:grid-cols-3">
+    <div className="grid gap-3 md:grid-cols-3">
       {metrics.map((metric) => (
-        <div key={metric.id} className="surface-panel rounded-[16px] p-4">
-          <p className="text-[10px] font-semibold uppercase tracking-[0.2em] text-[#7f8b98]">
-            {metric.label}
-          </p>
-          <div className="mt-3 flex items-end justify-between gap-3">
-            <p className="text-4xl font-semibold tracking-[-0.05em] text-white">{metric.value}</p>
-            <span className="rounded-[10px] border border-white/8 bg-white/[0.04] px-2 py-1 text-[10px] font-semibold uppercase tracking-[0.16em] text-[#90a0ae]">
-              Live
-            </span>
+        <div key={metric.id} className="rounded-[18px] border border-white/6 bg-[#0a0a0a] px-4 py-3">
+          <p className="text-[10px] uppercase tracking-[0.18em] text-[#666]">{metric.label}</p>
+          <div className="mt-2 flex items-end justify-between gap-3">
+            <p className="text-3xl font-semibold tracking-[-0.05em] text-white">{metric.value}</p>
+            <p className="text-[10px] uppercase tracking-[0.16em] text-[#5d5d5d]">{metric.detail}</p>
           </div>
-          <p className="mt-2 text-sm leading-6 text-[#99a8b7]">{metric.detail}</p>
         </div>
       ))}
     </div>
@@ -87,29 +82,27 @@ export function BriefFeed({ briefs }: { briefs: BriefEntry[] }) {
   const { setSelectedProjectId } = useWorkspace();
 
   return (
-    <div className="space-y-3">
+    <div className="space-y-2">
       {briefs.map((brief) => (
-        <article key={brief.id} className="surface-subtle rounded-[16px] p-4">
-          <div className="flex flex-wrap items-start justify-between gap-3 border-b border-white/8 pb-3">
+        <article key={brief.id} className="rounded-[16px] border border-white/6 bg-[#0b0b0b] p-3.5">
+          <div className="flex items-start justify-between gap-3">
             <div className="min-w-0 flex-1">
               <div className="flex flex-wrap items-center gap-2">
                 <Badge tone={brief.type === "Morning Brief" ? "amber" : "sky"}>{brief.type}</Badge>
-                <p className="text-[10px] font-semibold uppercase tracking-[0.18em] text-[#7f8d9a]">
-                  {brief.createdAt}
-                </p>
+                <p className="text-[10px] uppercase tracking-[0.16em] text-[#666]">{brief.createdAt}</p>
               </div>
-              <p className="mt-3 text-lg font-semibold text-white">{brief.title}</p>
-              <p className="mt-2 max-w-3xl text-sm leading-6 text-[#b6c0cb]">{brief.summary}</p>
+              <p className="mt-2 text-sm font-medium text-white">{brief.title}</p>
+              <p className="mt-1 text-sm text-[#8a8a8a]">{brief.summary}</p>
             </div>
             {brief.linkedProjectIds[0] ? (
               <Button size="sm" onClick={() => setSelectedProjectId(brief.linkedProjectIds[0])}>
-                Inspect project
+                Project
               </Button>
             ) : null}
           </div>
-          <ul className="mt-3 space-y-2 text-sm text-[#dbe4ed]">
+          <ul className="mt-3 space-y-1.5 text-sm text-[#d2d2d2]">
             {brief.bullets.map((bullet) => (
-              <li key={bullet} className="rounded-[12px] border border-white/8 bg-black/20 px-3 py-2.5">
+              <li key={bullet} className="rounded-[12px] border border-white/6 bg-[#090909] px-3 py-2">
                 {bullet}
               </li>
             ))}
@@ -124,25 +117,29 @@ export function EventList({ events }: { events: CalendarEvent[] }) {
   const { setSelectedProjectId, showFeedback } = useWorkspace();
 
   return (
-    <div className="grid gap-2.5">
+    <div className="space-y-2">
       {events.map((event) => (
         <div
           key={event.id}
-          className="surface-subtle flex flex-col gap-3 rounded-[14px] px-4 py-3 sm:flex-row sm:items-center sm:justify-between"
+          className="flex flex-col gap-3 rounded-[16px] border border-white/6 bg-[#0b0b0b] px-3.5 py-3 sm:flex-row sm:items-center"
         >
+          <div className="min-w-[84px] shrink-0">
+            <p className="text-sm font-medium text-white">{event.timeRange.split(" - ")[0]}</p>
+            <p className="mt-1 text-[10px] uppercase tracking-[0.16em] text-[#666]">{event.kind}</p>
+          </div>
           <div className="min-w-0 flex-1">
             <div className="flex flex-wrap items-center gap-2">
-              <p className="font-medium text-white">{event.title}</p>
+              <p className="text-sm font-medium text-white">{event.title}</p>
               <Badge tone={getEventTone(event.kind)}>{event.kind}</Badge>
             </div>
-            <p className="mt-1 text-sm text-[#8d9aa9]">
-              {formatDisplayDate(event.date)} · {event.timeRange} · {event.location}
+            <p className="mt-1 text-sm text-[#8a8a8a]">
+              {formatDisplayDate(event.date)} · {event.location}
             </p>
           </div>
-          <div className="flex flex-wrap gap-2">
+          <div className="flex gap-2">
             {event.linkedProjectId ? (
               <Button size="sm" onClick={() => setSelectedProjectId(event.linkedProjectId!)}>
-                View project
+                Project
               </Button>
             ) : null}
             <Button
@@ -150,7 +147,7 @@ export function EventList({ events }: { events: CalendarEvent[] }) {
               variant="ghost"
               onClick={() => showFeedback(event.notes ?? "No extra event notes captured yet.")}
             >
-              View item
+              Notes
             </Button>
           </div>
         </div>
@@ -163,40 +160,37 @@ export function TaskList({ tasks }: { tasks: Task[] }) {
   const { cycleTaskStatus, getProject, setSelectedProjectId, showFeedback } = useWorkspace();
 
   return (
-    <div className="space-y-2.5">
+    <div className="space-y-2">
       {tasks.map((task) => {
         const project = getProject(task.projectId);
 
         return (
-          <div key={task.id} className="surface-subtle rounded-[14px] p-4">
+          <div key={task.id} className="rounded-[16px] border border-white/6 bg-[#0b0b0b] p-3.5">
             <div className="flex items-start justify-between gap-3">
               <div className="min-w-0 flex-1">
                 <div className="flex flex-wrap items-center gap-2">
-                  <p className="font-medium text-white">{task.title}</p>
+                  <p className="text-sm font-medium text-white">{task.title}</p>
                   <Badge tone={getStatusTone(task.status)}>{task.status}</Badge>
+                  <Badge tone={getPriorityTone(task.priority)}>{task.priority}</Badge>
                 </div>
-                <p className="mt-1 text-sm text-[#8d9aa9]">
-                  {project?.name} · Due {formatDueLabel(task.dueDate)} · {task.energy} work
-                </p>
-                <p className="mt-2 text-[10px] font-semibold uppercase tracking-[0.18em] text-[#708090]">
-                  {task.source === "system" ? "System inserted" : "User added"}
+                <p className="mt-1 text-sm text-[#8a8a8a]">
+                  {project?.name} · {formatDueLabel(task.dueDate)} · {task.energy}
                 </p>
               </div>
-              <Badge tone={getPriorityTone(task.priority)}>{task.priority}</Badge>
             </div>
-            <div className="mt-4 flex flex-wrap gap-2">
+            <div className="mt-3 flex flex-wrap gap-2">
               <Button size="sm" onClick={() => cycleTaskStatus(task.id)}>
-                Advance status
+                Advance
               </Button>
               <Button size="sm" onClick={() => setSelectedProjectId(task.projectId)}>
-                Open project
+                Project
               </Button>
               <Button
                 size="sm"
                 variant="ghost"
                 onClick={() => showFeedback(task.notes ?? "No extra notes on this task yet.")}
               >
-                Details
+                Notes
               </Button>
             </div>
           </div>
@@ -216,7 +210,7 @@ export function ProjectList({
   const { setSelectedProjectId, showFeedback } = useWorkspace();
 
   return (
-    <div className="space-y-2.5">
+    <div className="space-y-2">
       {projects.map((project) => {
         const selected = project.id === selectedProjectId;
 
@@ -225,22 +219,19 @@ export function ProjectList({
             <div className="flex items-start justify-between gap-3">
               <div className="min-w-0 flex-1">
                 <div className="flex flex-wrap items-center gap-2">
-                  <p className="font-medium text-white">{project.name}</p>
+                  <p className="text-sm font-medium text-white">{project.name}</p>
                   <Badge tone={getStatusTone(project.status)}>{project.status}</Badge>
                 </div>
-                <p className="mt-1 text-sm text-[#8d9aa9]">
-                  {project.owner} · {project.horizon}
-                </p>
+                <p className="mt-1 text-sm text-[#8a8a8a]">{project.nextMilestone}</p>
               </div>
-              <span className="text-sm font-medium text-[#d7b27b]">{project.progress}%</span>
+              <span className="text-sm font-medium text-white">{project.progress}%</span>
             </div>
-            <div className="mt-4">
+            <div className="mt-3">
               <ProgressBar value={project.progress} />
             </div>
-            <p className="mt-3 text-sm text-[#a0adba]">Next: {project.nextMilestone}</p>
-            <div className="mt-4 flex flex-wrap gap-2">
+            <div className="mt-3 flex flex-wrap gap-2">
               <Button size="sm" onClick={() => setSelectedProjectId(project.id)}>
-                Inspect
+                Open
               </Button>
               <Button size="sm" variant="ghost" onClick={() => showFeedback(project.summary)}>
                 Summary
@@ -269,21 +260,19 @@ export function ProjectDetail({
   linkedBriefs: BriefEntry[];
 }) {
   return (
-    <div className="space-y-4">
-      <div className="surface-subtle rounded-[16px] p-4">
+    <div className="space-y-3">
+      <div className="rounded-[18px] border border-white/6 bg-[#0b0b0b] p-4">
         <div className="flex flex-wrap items-start justify-between gap-4">
           <div className="min-w-0 flex-1">
             <div className="flex flex-wrap items-center gap-2">
-              <h3 className="text-xl font-semibold text-white">{project.name}</h3>
+              <h3 className="text-lg font-semibold text-white">{project.name}</h3>
               <Badge tone={getStatusTone(project.status)}>{project.status}</Badge>
             </div>
-            <p className="mt-2 max-w-2xl text-sm leading-6 text-[#aab6c2]">{project.summary}</p>
+            <p className="mt-2 max-w-2xl text-sm text-[#8a8a8a]">{project.summary}</p>
           </div>
-          <div className="w-full max-w-56 rounded-[14px] border border-white/8 bg-black/20 p-3">
-            <p className="text-[10px] font-semibold uppercase tracking-[0.18em] text-[#7f8c99]">
-              Progress
-            </p>
-            <p className="mt-2 text-3xl font-semibold text-white">{project.progress}%</p>
+          <div className="w-full max-w-52 rounded-[14px] border border-white/6 bg-[#090909] p-3">
+            <p className="text-[10px] uppercase tracking-[0.16em] text-[#666]">Progress</p>
+            <p className="mt-1 text-2xl font-semibold text-white">{project.progress}%</p>
             <div className="mt-3">
               <ProgressBar value={project.progress} />
             </div>
@@ -291,19 +280,19 @@ export function ProjectDetail({
         </div>
       </div>
 
-      <div className="grid gap-3 md:grid-cols-2 xl:grid-cols-4">
+      <div className="grid gap-3 md:grid-cols-4">
         <DetailStat label="Deliverables" value={String(project.deliverables.length)} />
         <DetailStat label="Updates" value={String(project.updates.length)} />
-        <DetailStat label="Linked tasks" value={String(linkedTasks.length)} />
-        <DetailStat label="Memory anchors" value={String(linkedMemories.length)} />
+        <DetailStat label="Tasks" value={String(linkedTasks.length)} />
+        <DetailStat label="Memory" value={String(linkedMemories.length)} />
       </div>
 
       <div className="grid gap-3 xl:grid-cols-2">
         <InfoColumn title="Deliverables">
           {project.deliverables.map((deliverable) => (
             <RowCard key={deliverable.id}>
-              <div className="flex flex-wrap items-center justify-between gap-3">
-                <p className="font-medium text-white">{deliverable.title}</p>
+              <div className="flex flex-wrap items-center justify-between gap-2">
+                <p className="text-sm font-medium text-white">{deliverable.title}</p>
                 <Badge
                   tone={
                     deliverable.status === "Ready"
@@ -316,83 +305,63 @@ export function ProjectDetail({
                   {deliverable.status}
                 </Badge>
               </div>
-              <p className="mt-2 text-sm text-[#aeb9c4]">{deliverable.summary}</p>
-              <p className="mt-2 text-[10px] font-semibold uppercase tracking-[0.18em] text-[#708090]">
-                {deliverable.kind} · {deliverable.updatedAt}
-              </p>
+              <p className="mt-1 text-sm text-[#8a8a8a]">{deliverable.summary}</p>
             </RowCard>
           ))}
         </InfoColumn>
 
-        <InfoColumn title="Updates and history">
+        <InfoColumn title="Updates">
           {project.updates.map((update) => (
             <RowCard key={update.id}>
-              <p className="font-medium text-white">{update.title}</p>
-              <p className="mt-2 text-sm text-[#aeb9c4]">{update.summary}</p>
-              <p className="mt-2 text-[10px] font-semibold uppercase tracking-[0.18em] text-[#708090]">
-                {update.createdAt}
-              </p>
+              <p className="text-sm font-medium text-white">{update.title}</p>
+              <p className="mt-1 text-sm text-[#8a8a8a]">{update.summary}</p>
             </RowCard>
           ))}
           {project.history.map((item) => (
             <RowCard key={item.id} muted>
-              <p className="font-medium text-white">{item.label}</p>
-              <p className="mt-1 text-sm text-[#aeb9c4]">{item.detail}</p>
-              <p className="mt-2 text-[10px] font-semibold uppercase tracking-[0.18em] text-[#708090]">
-                {item.date}
-              </p>
+              <p className="text-sm font-medium text-white">{item.label}</p>
+              <p className="mt-1 text-sm text-[#8a8a8a]">{item.detail}</p>
             </RowCard>
           ))}
         </InfoColumn>
       </div>
 
       <div className="grid gap-3 xl:grid-cols-2">
-        <LinkedList title="Linked tasks" items={linkedTasks.map((task) => `${task.title} · ${task.status}`)} />
-        <LinkedList title="Linked docs" items={linkedDocs.map((doc) => `${doc.title} · ${doc.category}`)} />
+        <LinkedList title="Tasks" items={linkedTasks.map((task) => `${task.title} · ${task.status}`)} />
+        <LinkedList title="Docs" items={linkedDocs.map((doc) => `${doc.title} · ${doc.category}`)} />
         <LinkedList
-          title="Linked events"
+          title="Events"
           items={linkedEvents.map((event) => `${event.title} · ${formatDisplayDate(event.date)}`)}
         />
-        <LinkedList title="Linked briefs" items={linkedBriefs.map((brief) => `${brief.type} · ${brief.title}`)} />
+        <LinkedList title="Briefs" items={linkedBriefs.map((brief) => `${brief.type} · ${brief.title}`)} />
       </div>
     </div>
   );
 }
 
-function InfoColumn({
-  title,
-  children,
-}: {
-  title: string;
-  children: ReactNode;
-}) {
+function InfoColumn({ title, children }: { title: string; children: ReactNode }) {
   return (
-    <div className="surface-subtle rounded-[16px] p-4">
-      <p className="text-[10px] font-semibold uppercase tracking-[0.22em] text-[#8fa2b8]">
-        {title}
-      </p>
-      <div className="mt-4 space-y-3">{children}</div>
+    <div className="rounded-[18px] border border-white/6 bg-[#0b0b0b] p-4">
+      <p className="text-[10px] uppercase tracking-[0.18em] text-[#666]">{title}</p>
+      <div className="mt-3 space-y-2">{children}</div>
     </div>
   );
 }
 
 function LinkedList({ title, items }: { title: string; items: string[] }) {
   return (
-    <div className="surface-subtle rounded-[16px] p-4">
-      <p className="text-[10px] font-semibold uppercase tracking-[0.22em] text-[#8fa2b8]">{title}</p>
-      <div className="mt-4 space-y-2">
+    <div className="rounded-[18px] border border-white/6 bg-[#0b0b0b] p-4">
+      <p className="text-[10px] uppercase tracking-[0.18em] text-[#666]">{title}</p>
+      <div className="mt-3 space-y-2">
         {items.length ? (
           items.map((item) => (
-            <div
-              key={item}
-              className="rounded-[12px] border border-white/8 bg-white/[0.03] px-3 py-2.5 text-sm text-[#d5dfea]"
-            >
+            <div key={item} className="rounded-[12px] border border-white/6 bg-[#090909] px-3 py-2 text-sm text-[#d2d2d2]">
               {item}
             </div>
           ))
         ) : (
-          <div className="rounded-[12px] border border-dashed border-white/12 px-3 py-2.5 text-sm text-[#8ea0b5]">
-            Nothing linked yet.
+          <div className="rounded-[12px] border border-dashed border-white/8 px-3 py-2 text-sm text-[#7a7a7a]">
+            Empty
           </div>
         )}
       </div>
@@ -402,26 +371,16 @@ function LinkedList({ title, items }: { title: string; items: string[] }) {
 
 function DetailStat({ label, value }: { label: string; value: string }) {
   return (
-    <div className="surface-subtle rounded-[14px] p-4">
-      <p className="text-[10px] font-semibold uppercase tracking-[0.18em] text-[#8ea0b5]">{label}</p>
-      <p className="mt-2 text-3xl font-semibold tracking-[-0.04em] text-white">{value}</p>
+    <div className="rounded-[16px] border border-white/6 bg-[#0b0b0b] px-4 py-3">
+      <p className="text-[10px] uppercase tracking-[0.16em] text-[#666]">{label}</p>
+      <p className="mt-1 text-2xl font-semibold text-white">{value}</p>
     </div>
   );
 }
 
-function RowCard({
-  children,
-  muted = false,
-}: {
-  children: ReactNode;
-  muted?: boolean;
-}) {
+function RowCard({ children, muted = false }: { children: ReactNode; muted?: boolean }) {
   return (
-    <div
-      className={`rounded-[14px] border p-4 ${
-        muted ? "border-white/8 bg-black/20" : "border-white/8 bg-white/[0.03]"
-      }`}
-    >
+    <div className={`rounded-[14px] border p-3 ${muted ? "border-white/5 bg-[#080808]" : "border-white/6 bg-[#090909]"}`}>
       {children}
     </div>
   );
@@ -431,22 +390,22 @@ export function MemoryList({ memories }: { memories: MemoryItem[] }) {
   const { setSelectedProjectId } = useWorkspace();
 
   return (
-    <div className="space-y-2.5">
+    <div className="space-y-2">
       {memories.map((memory) => (
-        <div key={memory.id} className="surface-subtle rounded-[14px] p-4">
+        <div key={memory.id} className="rounded-[16px] border border-white/6 bg-[#0b0b0b] p-3.5">
           <div className="flex flex-wrap items-center justify-between gap-3">
-            <p className="font-medium text-white">{memory.title}</p>
+            <p className="text-sm font-medium text-white">{memory.title}</p>
             <div className="flex flex-wrap gap-2">
               <Badge tone="neutral">{memory.kind}</Badge>
               <Badge tone={memory.source === "system" ? "sky" : "amber"}>{memory.source}</Badge>
             </div>
           </div>
-          <p className="mt-2 text-sm leading-6 text-[#9caec1]">{memory.note}</p>
-          <div className="mt-3 flex flex-wrap items-center justify-between gap-3">
-            <p className="text-xs text-[#718297]">Updated {memory.updatedAt}</p>
+          <p className="mt-2 text-sm text-[#8a8a8a]">{memory.note}</p>
+          <div className="mt-3 flex items-center justify-between gap-3">
+            <p className="text-[10px] uppercase tracking-[0.16em] text-[#666]">{memory.updatedAt}</p>
             {memory.linkedProjectId ? (
               <Button size="sm" onClick={() => setSelectedProjectId(memory.linkedProjectId!)}>
-                Open project
+                Project
               </Button>
             ) : null}
           </div>
@@ -460,20 +419,20 @@ export function DocList({ docs }: { docs: Doc[] }) {
   const { setSelectedProjectId, showFeedback } = useWorkspace();
 
   return (
-    <div className="space-y-2.5">
+    <div className="space-y-2">
       {docs.map((doc) => (
-        <div key={doc.id} className="surface-subtle rounded-[14px] p-4">
+        <div key={doc.id} className="rounded-[16px] border border-white/6 bg-[#0b0b0b] p-3.5">
           <div className="flex flex-wrap items-center justify-between gap-3">
-            <p className="font-medium text-white">{doc.title}</p>
+            <p className="text-sm font-medium text-white">{doc.title}</p>
             <Badge tone="sky">{doc.category}</Badge>
           </div>
-          <p className="mt-2 text-sm leading-6 text-[#9caec1]">{doc.summary}</p>
+          <p className="mt-2 text-sm text-[#8a8a8a]">{doc.summary}</p>
           <div className="mt-3 flex flex-wrap items-center justify-between gap-3">
-            <p className="text-xs text-[#718297]">Updated {doc.updatedAt}</p>
-            <div className="flex flex-wrap gap-2">
+            <p className="text-[10px] uppercase tracking-[0.16em] text-[#666]">{doc.updatedAt}</p>
+            <div className="flex gap-2">
               {doc.linkedProjectId ? (
                 <Button size="sm" onClick={() => setSelectedProjectId(doc.linkedProjectId!)}>
-                  Open project
+                  Project
                 </Button>
               ) : null}
               <Button
@@ -481,7 +440,7 @@ export function DocList({ docs }: { docs: Doc[] }) {
                 variant="ghost"
                 onClick={() => showFeedback(`${doc.title}: editing is planned for a future document workspace.`)}
               >
-                Open doc
+                Open
               </Button>
             </div>
           </div>
@@ -493,13 +452,10 @@ export function DocList({ docs }: { docs: Doc[] }) {
 
 export function RoadmapList({ items }: { items: string[] }) {
   return (
-    <ol className="space-y-2.5">
+    <ol className="space-y-2">
       {items.map((item, index) => (
-        <li
-          key={item}
-          className="surface-subtle rounded-[14px] p-4 text-sm leading-6 text-[#c8d3df]"
-        >
-          <span className="mr-2 font-semibold text-[#d7b070]">{index + 1}.</span>
+        <li key={item} className="rounded-[16px] border border-white/6 bg-[#0b0b0b] px-4 py-3 text-sm text-[#d2d2d2]">
+          <span className="mr-2 text-[#7a7a7a]">{index + 1}.</span>
           {item}
         </li>
       ))}

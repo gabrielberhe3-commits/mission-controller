@@ -16,7 +16,7 @@ export function SegmentedControl<T extends string>({
   onChange: (value: T) => void;
 }) {
   return (
-    <div className="inline-flex flex-wrap gap-1 rounded-[14px] border border-white/10 bg-[#0d1115] p-1">
+    <div className="inline-flex flex-wrap gap-1 rounded-[14px] border border-white/8 bg-[#080808] p-1">
       {items.map((item) => {
         const active = item.value === value;
 
@@ -26,8 +26,8 @@ export function SegmentedControl<T extends string>({
             onClick={() => onChange(item.value)}
             className={`rounded-[10px] px-3 py-2 text-[10px] font-semibold uppercase tracking-[0.14em] ${
               active
-                ? "border border-[rgba(178,144,97,0.3)] bg-[rgba(178,144,97,0.14)] text-[#efd8b0]"
-                : "border border-transparent text-[#bec8d1] hover:border-white/8 hover:bg-white/[0.05]"
+                ? "border border-white/12 bg-[#151515] text-white"
+                : "border border-transparent text-[#9a9a9a] hover:border-white/8 hover:bg-[#111] hover:text-white"
             }`}
           >
             <span>{item.label}</span>

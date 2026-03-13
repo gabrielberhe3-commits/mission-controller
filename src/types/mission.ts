@@ -139,6 +139,28 @@ export type WorkspaceMetric = {
   detail: string;
 };
 
+export type ApprovalStatus = "Waiting" | "Ready" | "Blocked";
+
+export type ApprovalItem = {
+  id: string;
+  title: string;
+  detail: string;
+  owner: string;
+  due: string;
+  status: ApprovalStatus;
+};
+
+export type PersonStatus = "Available" | "Focus" | "Away";
+
+export type Person = {
+  id: string;
+  name: string;
+  role: string;
+  focus: string;
+  initials: string;
+  status: PersonStatus;
+};
+
 export type WorkspaceState = {
   tasks: Task[];
   memories: MemoryItem[];

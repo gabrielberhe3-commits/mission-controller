@@ -1,22 +1,22 @@
 @import "tailwindcss";
 
 :root {
-  --background: #0a0d10;
-  --foreground: #eef2f6;
-  --surface-base: #101418;
-  --surface-raised: #161b20;
-  --surface-muted: #0d1115;
-  --surface-subtle: #14191f;
-  --surface-selected: #1a2128;
-  --border-subtle: rgba(164, 174, 186, 0.14);
-  --border-strong: rgba(164, 174, 186, 0.24);
-  --text-muted: #93a0ae;
-  --text-soft: #b3becb;
-  --accent: #b29061;
-  --accent-strong: #d7b27b;
-  --success: #6aa48a;
-  --warning: #bf9156;
-  --danger: #c56f6f;
+  --background: #020202;
+  --foreground: #f3f3f3;
+  --surface-base: #050505;
+  --surface-raised: #0a0a0a;
+  --surface-muted: #080808;
+  --surface-subtle: #0d0d0d;
+  --surface-selected: #111111;
+  --border-subtle: rgba(255, 255, 255, 0.08);
+  --border-strong: rgba(255, 255, 255, 0.14);
+  --text-muted: #8a8a8a;
+  --text-soft: #b6b6b6;
+  --accent: #d9d9d9;
+  --accent-strong: #ffffff;
+  --success: #cfcfcf;
+  --warning: #d8d8d8;
+  --danger: #b3b3b3;
 }
 
 @theme inline {
@@ -43,16 +43,14 @@ body {
 }
 
 body {
-  background:
-    radial-gradient(circle at top left, rgba(178, 144, 97, 0.06), transparent 28%),
-    linear-gradient(180deg, #0c0f13 0%, #090c0f 100%);
+  background: var(--background);
   color: var(--foreground);
   font-family: var(--font-sans);
   text-rendering: optimizeLegibility;
 }
 
 ::selection {
-  background: rgba(178, 144, 97, 0.3);
+  background: rgba(255, 255, 255, 0.2);
 }
 
 a,
@@ -72,43 +70,25 @@ button {
   cursor: pointer;
 }
 
-.dashboard-grid {
-  position: relative;
-}
-
-.dashboard-grid::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  pointer-events: none;
-  background-image:
-    linear-gradient(rgba(255, 255, 255, 0.014) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(255, 255, 255, 0.014) 1px, transparent 1px);
-  background-size: 28px 28px;
-  mask-image: linear-gradient(180deg, rgba(0, 0, 0, 0.48), transparent 84%);
-}
-
 @layer components {
   .surface-panel {
-    background: linear-gradient(180deg, rgba(22, 27, 32, 0.96), rgba(15, 19, 24, 0.98));
+    background: rgba(10, 10, 10, 0.98);
     border: 1px solid var(--border-subtle);
-    box-shadow: 0 10px 24px rgba(0, 0, 0, 0.18);
   }
 
   .surface-subtle {
-    background: rgba(20, 25, 31, 0.92);
-    border: 1px solid rgba(164, 174, 186, 0.12);
+    background: rgba(13, 13, 13, 0.98);
+    border: 1px solid rgba(255, 255, 255, 0.06);
   }
 
   .surface-muted {
-    background: rgba(13, 17, 21, 0.98);
-    border: 1px solid rgba(164, 174, 186, 0.1);
+    background: rgba(8, 8, 8, 0.98);
+    border: 1px solid rgba(255, 255, 255, 0.05);
   }
 
   .surface-selected {
-    background: linear-gradient(180deg, rgba(28, 35, 42, 0.98), rgba(22, 27, 32, 0.98));
-    border: 1px solid rgba(178, 144, 97, 0.34);
-    box-shadow: inset 0 0 0 1px rgba(178, 144, 97, 0.08);
+    background: rgba(17, 17, 17, 0.98);
+    border: 1px solid rgba(255, 255, 255, 0.16);
   }
 
   .section-label {
@@ -136,20 +116,20 @@ button {
 
   .control-input {
     width: 100%;
-    border-radius: 12px;
-    border: 1px solid rgba(164, 174, 186, 0.16);
-    background: rgba(11, 15, 19, 0.96);
+    border-radius: 14px;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    background: rgba(6, 6, 6, 0.98);
     padding: 0.72rem 0.88rem;
     color: var(--foreground);
     outline: none;
   }
 
   .control-input::placeholder {
-    color: #667281;
+    color: #666666;
   }
 
   .control-input:focus {
-    border-color: rgba(178, 144, 97, 0.44);
-    box-shadow: 0 0 0 1px rgba(178, 144, 97, 0.16);
+    border-color: rgba(255, 255, 255, 0.18);
+    box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.08);
   }
 }

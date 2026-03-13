@@ -4,55 +4,46 @@ import { BriefFeed, DocList } from "@/components/mission/mission-cards";
 import { useWorkspace } from "@/components/providers/workspace-provider";
 import { Button } from "@/components/ui/button";
 import { PageHeader } from "@/components/ui/page-header";
-import { Panel } from "@/components/ui/panel";
 
 export default function DocsPage() {
   const { briefs, docs, openDrawer, showFeedback } = useWorkspace();
 
   return (
-    <div className="space-y-4">
+    <div className="space-y-3">
       <PageHeader
         eyebrow="Docs"
-        title="Reference library and brief archive for the active operating workflow."
-        description="Docs remain seeded for now, but this route works as a cohesive reference surface instead of a disconnected list page."
+        title="Reference"
+        description="Specs and briefs."
         actions={
           <>
-            <Button
-              variant="primary"
-              onClick={() =>
-                showFeedback("Document editing is not implemented yet. The current route provides discoverability and linked inspection.")
-              }
-            >
+            <Button size="sm" variant="primary" onClick={() => showFeedback("Document editing is not implemented yet.")}>
               New doc
             </Button>
-            <Button onClick={() => openDrawer("memory")}>Capture note</Button>
+            <Button size="sm" onClick={() => openDrawer("memory")}>
+              Note
+            </Button>
           </>
         }
       />
 
-      <div className="grid gap-4 xl:grid-cols-[minmax(0,1fr)_420px]">
-        <Panel
-          title="Reference library"
-          description="Structured notes and specs stay close to the operating surface and active projects."
-        >
-          <DocList docs={docs} />
-        </Panel>
-        <Panel
-          title="Brief archive"
-          description="Morning briefs and nightly updates are visible here as an operational log, not hidden elsewhere."
-          action={
-            <Button
-              size="sm"
-              onClick={() =>
-                showFeedback("Brief authoring will later be generated automatically from the day's state and project changes.")
-              }
-            >
-              Future generation
-            </Button>
-          }
-        >
-          <BriefFeed briefs={briefs} />
-        </Panel>
+      <div className="grid gap-3 xl:grid-cols-[minmax(0,1fr)_380px]">
+        <section className="rounded-[24px] border border-white/6 bg-[#0a0a0a] p-4">
+          <div className="border-b border-white/6 pb-3">
+            <p className="text-sm font-medium text-white">Docs</p>
+          </div>
+          <div className="mt-4">
+            <DocList docs={docs} />
+          </div>
+        </section>
+
+        <section className="rounded-[24px] border border-white/6 bg-[#0a0a0a] p-4">
+          <div className="border-b border-white/6 pb-3">
+            <p className="text-sm font-medium text-white">Briefs</p>
+          </div>
+          <div className="mt-4">
+            <BriefFeed briefs={briefs} />
+          </div>
+        </section>
       </div>
     </div>
   );

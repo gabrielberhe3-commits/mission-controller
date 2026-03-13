@@ -1,10 +1,12 @@
 import type {
+  ApprovalItem,
   BriefEntry,
   CalendarEvent,
   CalendarView,
   Doc,
   MemoryItem,
   NavItem,
+  Person,
   Project,
   Task,
   WorkspaceMetric,
@@ -14,47 +16,59 @@ import type {
 export const workspaceMeta = {
   operator: "Gabriel",
   productName: "Mission Controller",
-  strapline: "A personal operating system for planning, execution, and durable context.",
-  status: "Operator sync ready",
+  strapline: "Local-first operating system.",
+  status: "Local only",
   snapshotDate: "Friday, March 13, 2026",
 };
 
 export const navigationItems: NavItem[] = [
   {
     href: "/",
-    label: "Mission Control",
+    label: "Overview",
     shortLabel: "Home",
-    description: "Daily operating layer across briefs, time, tasks, and context.",
-  },
-  {
-    href: "/calendar",
-    label: "Calendar",
-    shortLabel: "Cal",
-    description: "Plan by month, week, day, and agenda without leaving the workspace.",
+    description: "Dashboard",
   },
   {
     href: "/tasks",
     label: "Tasks",
-    shortLabel: "Task",
-    description: "Local-first execution queue that automation can append to later.",
+    shortLabel: "Tasks",
+    description: "Queue",
+  },
+  {
+    href: "/approvals",
+    label: "Approvals",
+    shortLabel: "Approve",
+    description: "Reviews",
+  },
+  {
+    href: "/calendar",
+    label: "Calendar",
+    shortLabel: "Calendar",
+    description: "Schedule",
   },
   {
     href: "/projects",
     label: "Projects",
-    shortLabel: "Proj",
-    description: "Nightly-built work, deliverables, and change history by project.",
+    shortLabel: "Projects",
+    description: "Portfolio",
   },
   {
     href: "/memory",
     label: "Memory",
-    shortLabel: "Memo",
-    description: "Durable notes, decisions, and project-linked context anchors.",
+    shortLabel: "Memory",
+    description: "Notes",
   },
   {
     href: "/docs",
     label: "Docs",
     shortLabel: "Docs",
-    description: "Reference pages, playbooks, and product specs tied to active work.",
+    description: "Reference",
+  },
+  {
+    href: "/people",
+    label: "People",
+    shortLabel: "People",
+    description: "Contacts",
   },
 ];
 
@@ -425,6 +439,60 @@ export const roadmapItems = [
   "Introduce assistant automation that inserts tasks, briefs, and linked project updates programmatically.",
 ];
 
+export const seededApprovals: ApprovalItem[] = [
+  {
+    id: "a1",
+    title: "Calendar shell v4",
+    detail: "Final pass on black shell and calendar density.",
+    owner: "Gabriel",
+    due: "Today",
+    status: "Waiting",
+  },
+  {
+    id: "a2",
+    title: "Import adapter scope",
+    detail: "Approve local-only `.ics` parsing scope before sync work.",
+    owner: "Product",
+    due: "Mar 14",
+    status: "Ready",
+  },
+  {
+    id: "a3",
+    title: "Agent offer framing",
+    detail: "Positioning still needs clearer proof and market wedge.",
+    owner: "Strategy",
+    due: "Mar 16",
+    status: "Blocked",
+  },
+];
+
+export const seededPeople: Person[] = [
+  {
+    id: "person-1",
+    name: "Gabriel",
+    role: "Operator",
+    focus: "Mission Controller",
+    initials: "GA",
+    status: "Focus",
+  },
+  {
+    id: "person-2",
+    name: "Maya Chen",
+    role: "Design Review",
+    focus: "Calendar shell",
+    initials: "MC",
+    status: "Available",
+  },
+  {
+    id: "person-3",
+    name: "Noah Price",
+    role: "Research",
+    focus: "AI infra map",
+    initials: "NP",
+    status: "Away",
+  },
+];
+
 export const initialWorkspaceState: WorkspaceState = {
   tasks: seededTasks,
   memories: seededMemories,
@@ -467,21 +535,21 @@ export function buildWorkspaceMetrics(
   return [
     {
       id: "wm1",
-      label: "Open loops",
+      label: "Open",
       value: String(openTasks.length + todayEvents.length),
-      detail: "Tasks and scheduled events requiring attention across the active horizon.",
+      detail: "Tasks and events",
     },
     {
       id: "wm2",
-      label: "Deep work blocks",
+      label: "Deep work",
       value: `${tasks.filter((task) => task.energy === "Deep" && task.status !== "Done").length}`,
-      detail: "High-cognitive tasks still sitting in the queue.",
+      detail: "Deep tasks",
     },
     {
       id: "wm3",
-      label: "Context anchors",
+      label: "Context",
       value: String(linkedItems),
-      detail: "Project-linked memory entries and docs available as durable context.",
+      detail: "Docs and memory",
     },
   ];
 }
