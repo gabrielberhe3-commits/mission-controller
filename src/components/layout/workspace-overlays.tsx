@@ -6,7 +6,7 @@ import { Button } from "@/components/ui/button";
 import { Drawer } from "@/components/ui/drawer";
 
 function inputClassName() {
-  return "mt-2 w-full rounded-[18px] border border-white/10 bg-white/[0.03] px-4 py-3 text-sm text-white outline-none placeholder:text-[#708196] focus:border-[rgba(213,159,97,0.5)]";
+  return "control-input mt-2";
 }
 
 export function WorkspaceOverlays() {
@@ -155,7 +155,7 @@ export function WorkspaceOverlays() {
               </select>
             </label>
           </div>
-          <div className="flex gap-3">
+          <div className="flex gap-2">
             <Button type="submit" variant="primary">
               Save task
             </Button>
@@ -256,7 +256,7 @@ export function WorkspaceOverlays() {
               </select>
             </label>
           </div>
-          <div className="flex gap-3">
+          <div className="flex gap-2">
             <Button type="submit" variant="primary">
               Save memory
             </Button>
@@ -275,7 +275,7 @@ export function WorkspaceOverlays() {
 
       <div className="pointer-events-none fixed bottom-6 right-6 z-50">
         <div
-          className={`rounded-full border border-[rgba(213,159,97,0.35)] bg-[rgba(12,17,22,0.92)] px-4 py-3 text-sm text-[#f3e1c2] shadow-[0_25px_60px_rgba(0,0,0,0.35)] transition ${
+          className={`rounded-xl border border-[rgba(200,163,106,0.28)] bg-[rgba(12,17,22,0.96)] px-4 py-3 text-sm text-[#f3e1c2] shadow-[0_18px_40px_rgba(0,0,0,0.3)] transition ${
             feedback ? "translate-y-0 opacity-100" : "translate-y-4 opacity-0"
           }`}
         >

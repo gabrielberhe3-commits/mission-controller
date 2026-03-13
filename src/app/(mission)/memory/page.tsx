@@ -14,11 +14,11 @@ export default function MemoryPage() {
   const uncategorized = memories.filter((memory) => !memory.linkedProjectId);
 
   return (
-    <div className="space-y-6">
+    <div className="space-y-5">
       <PageHeader
         eyebrow="Memory"
-        title="Durable context now has visible structure and project-linked notes."
-        description="Memory is no longer a flat dump. You can capture notes locally, inspect project-linked context, and preserve decisions and preferences that should outlive tasks."
+        title="Durable context with visible structure and project-linked notes."
+        description="Capture notes locally, inspect project-linked context, and preserve decisions and preferences that should outlive the task queue."
         actions={
           <>
             <Button variant="primary" onClick={() => openDrawer("memory")}>
@@ -35,7 +35,7 @@ export default function MemoryPage() {
         }
       />
 
-      <div className="grid gap-6 xl:grid-cols-[0.38fr_0.62fr]">
+      <div className="grid gap-5 xl:grid-cols-[0.38fr_0.62fr]">
         <Panel
           title="Project memory"
           description="Choose a project to inspect the durable notes linked to it."
@@ -43,7 +43,7 @@ export default function MemoryPage() {
           <ProjectList projects={projects} selectedProjectId={selectedProject.id} />
         </Panel>
 
-        <div className="space-y-6">
+        <div className="space-y-5">
           <Panel
             title="Linked entries"
             description={`${selectedProject.name} has ${linkedMemories.length} memory anchor(s) attached to active work.`}

@@ -12,20 +12,20 @@ export function PageHeader({
   actions?: ReactNode;
 }) {
   return (
-    <div className="rounded-[32px] border border-white/10 bg-[radial-gradient(circle_at_top_left,rgba(214,155,83,0.25),transparent_32%),linear-gradient(135deg,rgba(17,24,33,0.96),rgba(9,13,19,0.92))] p-6 sm:p-8">
-      <div className="flex flex-col gap-5 lg:flex-row lg:items-end lg:justify-between">
+    <div className="surface-panel rounded-2xl p-5 sm:p-6">
+      <div className="flex flex-col gap-4 lg:flex-row lg:items-end lg:justify-between">
         <div className="max-w-3xl">
-          <p className="text-[11px] font-semibold uppercase tracking-[0.28em] text-[#d0b48b]">
+          <p className="text-[11px] font-semibold uppercase tracking-[0.22em] text-[#c8a36a]">
             {eyebrow}
           </p>
-          <h1 className="mt-3 text-3xl font-semibold tracking-[-0.03em] text-white sm:text-4xl">
+          <h1 className="mt-2 text-2xl font-semibold tracking-[-0.025em] text-white sm:text-3xl">
             {title}
           </h1>
-          <p className="mt-3 max-w-2xl text-sm leading-6 text-[#a9b7c8] sm:text-base">
+          <p className="mt-3 max-w-2xl text-sm leading-6 text-[#a9b7c8]">
             {description}
           </p>
         </div>
-        {actions ? <div className="flex flex-wrap gap-3">{actions}</div> : null}
+        {actions ? <div className="flex flex-wrap gap-2">{actions}</div> : null}
       </div>
     </div>
   );

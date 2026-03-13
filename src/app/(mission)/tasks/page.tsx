@@ -21,11 +21,11 @@ export default function TasksPage() {
       : tasks.filter((task) => task.projectId === projectFilter);
 
   return (
-    <div className="space-y-6">
+    <div className="space-y-5">
       <PageHeader
         eyebrow="Tasks"
-        title="Execution queue with user-created and system-ready insertion paths."
-        description="This route is now the functional task workspace. Add tasks locally, inspect them by project, and move them through the queue without waiting for backend automation."
+        title="Execution queue for operator-managed and automation-ready work."
+        description="Add tasks locally, inspect them by project, and move them through the queue without changing the local-first interaction model."
         actions={
           <>
             <Button variant="primary" onClick={() => openDrawer("task")}>
@@ -44,7 +44,7 @@ export default function TasksPage() {
 
       <Panel
         title="Filters"
-        description="Focus the task queue by project while keeping a single local-first source of truth."
+        description="Focus the queue by project while keeping a single local-first source of truth."
         action={
           <SegmentedControl
             items={[
@@ -56,13 +56,13 @@ export default function TasksPage() {
           />
         }
       >
-        <div className="grid gap-4 md:grid-cols-4">
+        <div className="grid gap-3 md:grid-cols-4">
           {taskColumns.map((column) => {
             const count = filteredTasks.filter((task) => task.status === column).length;
 
             return (
-              <div key={column} className="rounded-[24px] border border-white/10 bg-white/[0.03] p-4">
-                <p className="text-sm text-[#8ea0b5]">{column}</p>
+              <div key={column} className="surface-subtle rounded-xl p-4">
+                <p className="text-[11px] font-semibold uppercase tracking-[0.18em] text-[#8ea0b5]">{column}</p>
                 <p className="mt-2 text-3xl font-semibold text-white">{count}</p>
               </div>
             );

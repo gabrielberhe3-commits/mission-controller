@@ -21,11 +21,11 @@ export default function ProjectsPage() {
   const selectedProject = projects.find((project) => project.id === selectedProjectId) ?? projects[0];
 
   return (
-    <div className="space-y-6">
+    <div className="space-y-5">
       <PageHeader
         eyebrow="Projects"
-        title="Projects are now the discoverability layer for nightly-built work."
-        description="Deliverables, updates, briefs, events, tasks, docs, and memory can now all be inspected from the project surface instead of remaining scattered across the app."
+        title="Project inspection layer for deliverables, linked work, and history."
+        description="Deliverables, updates, briefs, events, tasks, docs, and memory can all be inspected from the project surface instead of remaining scattered across the app."
         actions={
           <>
             <Button variant="primary" onClick={() => openDrawer("task")}>
@@ -36,7 +36,7 @@ export default function ProjectsPage() {
         }
       />
 
-      <div className="grid gap-6 xl:grid-cols-[0.4fr_0.6fr]">
+      <div className="grid gap-5 xl:grid-cols-[0.4fr_0.6fr]">
         <Panel
           title="Portfolio"
           description="Select a project to inspect its deliverables, updates, history, and linked operational objects."

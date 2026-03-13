@@ -7,10 +7,10 @@ import { WorkspaceProvider } from "@/components/providers/workspace-provider";
 export function AppShell({ children }: { children: ReactNode }) {
   return (
     <WorkspaceProvider>
-      <div className="min-h-screen bg-[radial-gradient(circle_at_top_left,rgba(213,159,97,0.18),transparent_24%),radial-gradient(circle_at_bottom_right,rgba(81,125,153,0.22),transparent_30%),linear-gradient(180deg,#05070a,#091018_52%,#070b10)] text-white">
-        <div className="mx-auto grid min-h-screen max-w-[1600px] grid-cols-1 xl:grid-cols-[320px_minmax(0,1fr)]">
+      <div className="min-h-screen bg-background text-white">
+        <div className="mx-auto grid min-h-screen max-w-[1680px] grid-cols-1 xl:grid-cols-[292px_minmax(0,1fr)]">
           <SidebarNav />
-          <main className="grain relative p-4 sm:p-6 lg:p-8">
+          <main className="grain relative border-l border-white/6 p-4 sm:p-5 lg:p-6">
             <Topbar />
             {children}
           </main>

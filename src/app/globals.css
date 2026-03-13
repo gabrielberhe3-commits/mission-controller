@@ -1,15 +1,28 @@
 @import "tailwindcss";
 
 :root {
-  --background: #06080b;
-  --foreground: #f4f7fb;
+  --background: #06090f;
+  --foreground: #e8edf5;
+  --surface-base: #0d131b;
+  --surface-raised: #121a24;
+  --surface-muted: #0a1016;
+  --surface-selected: #151f2b;
+  --border-subtle: rgba(148, 163, 184, 0.16);
+  --border-strong: rgba(148, 163, 184, 0.24);
+  --text-muted: #97a5b8;
+  --text-soft: #b9c4d3;
+  --accent: #c8a36a;
+  --accent-strong: #e0bf88;
+  --success: #61b38f;
+  --warning: #c79b57;
+  --danger: #d67878;
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
   --font-sans:
-    "Avenir Next", "Segoe UI", "Helvetica Neue", ui-sans-serif, system-ui, sans-serif;
+    "IBM Plex Sans", "Avenir Next", "Segoe UI", "Helvetica Neue", ui-sans-serif, system-ui, sans-serif;
   --font-mono:
     "SFMono-Regular", "SF Mono", "IBM Plex Mono", "Roboto Mono", ui-monospace, monospace;
 }
@@ -29,13 +42,15 @@ html {
 }
 
 body {
-  background: var(--background);
+  background:
+    radial-gradient(circle at top, rgba(200, 163, 106, 0.08), transparent 28%),
+    linear-gradient(180deg, #070b10 0%, #090d12 40%, #06090f 100%);
   color: var(--foreground);
   font-family: var(--font-sans);
   text-rendering: optimizeLegibility;
 }
 
-body::selection {
+::selection {
   background: rgba(214, 155, 83, 0.35);
 }
 
@@ -62,9 +77,74 @@ button {
   position: absolute;
   inset: 0;
   pointer-events: none;
-  opacity: 0.12;
+  opacity: 0.04;
   background-image:
-    linear-gradient(rgba(255, 255, 255, 0.04) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(255, 255, 255, 0.04) 1px, transparent 1px);
-  background-size: 24px 24px;
+    linear-gradient(rgba(255, 255, 255, 0.025) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.025) 1px, transparent 1px);
+  background-size: 28px 28px;
+}
+
+@layer components {
+  .surface-panel {
+    background: linear-gradient(180deg, rgba(18, 26, 36, 0.96), rgba(12, 18, 26, 0.98));
+    border: 1px solid var(--border-subtle);
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.22);
+  }
+
+  .surface-subtle {
+    background: rgba(13, 19, 27, 0.82);
+    border: 1px solid rgba(148, 163, 184, 0.12);
+  }
+
+  .surface-muted {
+    background: rgba(10, 16, 22, 0.94);
+    border: 1px solid rgba(148, 163, 184, 0.1);
+  }
+
+  .surface-selected {
+    background: linear-gradient(180deg, rgba(24, 34, 46, 0.98), rgba(18, 26, 36, 0.98));
+    border: 1px solid rgba(200, 163, 106, 0.3);
+  }
+
+  .section-label {
+    color: #90a0b4;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+  }
+
+  .section-title {
+    color: var(--foreground);
+    font-size: 1rem;
+    font-weight: 600;
+    letter-spacing: -0.02em;
+  }
+
+  .text-muted {
+    color: var(--text-muted);
+  }
+
+  .text-soft {
+    color: var(--text-soft);
+  }
+
+  .control-input {
+    width: 100%;
+    border-radius: 12px;
+    border: 1px solid rgba(148, 163, 184, 0.16);
+    background: rgba(7, 11, 16, 0.9);
+    padding: 0.7rem 0.85rem;
+    color: var(--foreground);
+    outline: none;
+  }
+
+  .control-input::placeholder {
+    color: #64748b;
+  }
+
+  .control-input:focus {
+    border-color: rgba(200, 163, 106, 0.45);
+    box-shadow: 0 0 0 1px rgba(200, 163, 106, 0.16);
+  }
 }

@@ -16,7 +16,7 @@ export function SegmentedControl<T extends string>({
   onChange: (value: T) => void;
 }) {
   return (
-    <div className="inline-flex flex-wrap gap-2 rounded-full border border-white/10 bg-black/20 p-1">
+    <div className="inline-flex flex-wrap gap-1 rounded-xl border border-white/10 bg-black/20 p-1">
       {items.map((item) => {
         const active = item.value === value;
 
@@ -24,10 +24,10 @@ export function SegmentedControl<T extends string>({
           <button
             key={item.value}
             onClick={() => onChange(item.value)}
-            className={`rounded-full px-4 py-2 text-sm font-medium ${
+            className={`rounded-lg px-3 py-2 text-xs font-semibold uppercase tracking-[0.12em] ${
               active
-                ? "bg-[linear-gradient(135deg,#f4ddb4,#d59f61)] text-[#11151a]"
-                : "text-[#c7d3df] hover:bg-white/[0.05]"
+                ? "border border-[rgba(200,163,106,0.28)] bg-[rgba(200,163,106,0.16)] text-[#f3e3c2]"
+                : "border border-transparent text-[#c7d3df] hover:border-white/8 hover:bg-white/[0.05]"
             }`}
           >
             <span>{item.label}</span>

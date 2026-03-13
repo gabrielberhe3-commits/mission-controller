@@ -10,11 +10,11 @@ export default function DocsPage() {
   const { briefs, docs, openDrawer, showFeedback } = useWorkspace();
 
   return (
-    <div className="space-y-6">
+    <div className="space-y-5">
       <PageHeader
         eyebrow="Docs"
-        title="Reference pages and brief archives now support the operating workflow."
-        description="Docs remain seeded for now, but this route now works as a cohesive reference surface instead of a disconnected list page."
+        title="Reference library and brief archive for the active operating workflow."
+        description="Docs remain seeded for now, but this route works as a cohesive reference surface instead of a disconnected list page."
         actions={
           <>
             <Button
@@ -30,7 +30,7 @@ export default function DocsPage() {
         }
       />
 
-      <div className="grid gap-6 xl:grid-cols-[0.54fr_0.46fr]">
+      <div className="grid gap-5 xl:grid-cols-[0.54fr_0.46fr]">
         <Panel
           title="Reference library"
           description="Structured notes and specs stay close to the operating surface and active projects."

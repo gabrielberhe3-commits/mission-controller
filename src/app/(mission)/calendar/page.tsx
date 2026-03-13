@@ -35,20 +35,20 @@ function WeekStrip({
   });
 
   return (
-    <div className="grid gap-3 md:grid-cols-7">
+    <div className="grid gap-2 md:grid-cols-7">
       {days.map((date) => (
         <button
           key={date}
           onClick={() => onSelect(date)}
-          className={`rounded-[20px] border p-4 text-left ${
+          className={`rounded-xl border p-3 text-left ${
             date === focusDate
-              ? "border-[rgba(213,159,97,0.38)] bg-[rgba(213,159,97,0.08)]"
+              ? "border-[rgba(200,163,106,0.3)] bg-[rgba(200,163,106,0.12)]"
               : "border-white/10 bg-black/20 hover:bg-white/[0.04]"
           }`}
         >
           <p className="text-xs uppercase tracking-[0.18em] text-[#708196]">{formatDisplayDate(date)}</p>
-          <p className="mt-3 text-3xl font-semibold text-white">{eventsByDate.get(date) ?? 0}</p>
-          <p className="mt-1 text-sm text-[#96a8bc]">events</p>
+          <p className="mt-3 text-2xl font-semibold text-white">{eventsByDate.get(date) ?? 0}</p>
+          <p className="mt-1 text-xs uppercase tracking-[0.14em] text-[#96a8bc]">events</p>
         </button>
       ))}
     </div>
@@ -77,23 +77,23 @@ function MonthGrid({
   });
 
   return (
-    <div className="grid gap-3 md:grid-cols-7">
+    <div className="grid gap-2 md:grid-cols-7">
       {cells.map((date) => {
         const inMonth = date.slice(5, 7) === focusDate.slice(5, 7);
         return (
           <button
             key={date}
             onClick={() => onSelect(date)}
-            className={`min-h-28 rounded-[20px] border p-4 text-left ${
+            className={`min-h-26 rounded-xl border p-3 text-left ${
               date === focusDate
-                ? "border-[rgba(213,159,97,0.38)] bg-[rgba(213,159,97,0.08)]"
+                ? "border-[rgba(200,163,106,0.3)] bg-[rgba(200,163,106,0.12)]"
                 : "border-white/10 bg-black/20 hover:bg-white/[0.04]"
             }`}
           >
             <p className={`text-sm font-semibold ${inMonth ? "text-white" : "text-[#5f7082]"}`}>
               {Number(date.slice(-2))}
             </p>
-            <p className="mt-3 text-xs text-[#8ea0b5]">{eventsByDate.get(date) ?? 0} items</p>
+            <p className="mt-3 text-xs uppercase tracking-[0.14em] text-[#8ea0b5]">{eventsByDate.get(date) ?? 0} items</p>
           </button>
         );
       })}
@@ -110,13 +110,14 @@ export default function CalendarPage() {
   events.forEach((event) => {
     eventsByDate.set(event.date, (eventsByDate.get(event.date) ?? 0) + 1);
   });
+  const focusWeekEvents = events.filter((event) => event.date >= shiftDate(focusDate, -3) && event.date <= shiftDate(focusDate, 3));
 
   return (
-    <div className="space-y-6">
+    <div className="space-y-5">
       <PageHeader
         eyebrow="Calendar"
-        title="Month, week, day, and agenda views now switch in-place."
-        description="The calendar is still local-first, but the view state is real and the route is now useful for planning rather than acting like a static mock."
+        title="Planning surface for month, week, day, and agenda operations."
+        description="Calendar is the core operating plane. Switch views in place, inspect the focused date, and keep linked events available without breaking workflow continuity."
         actions={
           <>
             <Button
@@ -130,50 +131,82 @@ export default function CalendarPage() {
         }
       />
 
-      <Panel
-        title="Views"
-        description="Switch the route between different planning surfaces without leaving the page."
-        action={
-          <SegmentedControl
-            items={calendarViews.map((view) => ({ label: view, value: view }))}
-            value={calendarView}
-            onChange={setCalendarView}
-          />
-        }
-      >
-        <div className="flex flex-wrap items-center gap-3">
-          <Button size="sm" onClick={() => setFocusDate(shiftDate(focusDate, calendarView === "Month" ? -28 : -1))}>
-            Previous
-          </Button>
-          <Button size="sm" onClick={() => setFocusDate(shiftDate(focusDate, calendarView === "Month" ? 28 : 1))}>
-            Next
-          </Button>
-          <p className="text-sm text-[#a8b7c7]">Focused date: {formatDisplayDate(focusDate)}</p>
-        </div>
-      </Panel>
-
-      <Panel
-        title={`${calendarView} plan`}
-        description="The calendar surface changes based on the selected view and keeps the same linked event objects."
-      >
-        {calendarView === "Month" ? (
-          <MonthGrid focusDate={focusDate} eventsByDate={eventsByDate} onSelect={setFocusDate} />
-        ) : null}
-        {calendarView === "Week" ? (
-          <WeekStrip focusDate={focusDate} eventsByDate={eventsByDate} onSelect={setFocusDate} />
-        ) : null}
-        {calendarView === "Day" ? (
-          <div className="rounded-[22px] border border-white/10 bg-black/20 p-5">
-            <p className="text-sm text-[#90a2b5]">
-              {formatDisplayDate(focusDate)} · {visibleEvents.length} scheduled item(s)
-            </p>
-            <div className="mt-4">
-              <EventList events={visibleEvents.length ? visibleEvents : events.filter((event) => event.date === "2026-03-13")} />
+      <div className="grid gap-5 xl:grid-cols-[1.35fr_0.65fr]">
+        <Panel
+          title="Calendar board"
+          description="Switch planning surfaces without leaving the route. The focused date and linked events remain consistent across views."
+          action={
+            <SegmentedControl
+              items={calendarViews.map((view) => ({ label: view, value: view }))}
+              value={calendarView}
+              onChange={setCalendarView}
+            />
+          }
+        >
+          <div className="mb-4 flex flex-wrap items-center justify-between gap-3 rounded-xl border border-white/8 bg-black/20 px-3 py-3">
+            <div>
+              <p className="text-[11px] font-semibold uppercase tracking-[0.18em] text-[#8ea0b5]">
+                Focused date
+              </p>
+              <p className="mt-1 text-lg font-semibold text-white">{formatDisplayDate(focusDate)}</p>
+            </div>
+            <div className="flex flex-wrap gap-2">
+              <Button size="sm" onClick={() => setFocusDate(shiftDate(focusDate, calendarView === "Month" ? -28 : -1))}>
+                Previous
+              </Button>
+              <Button size="sm" onClick={() => setFocusDate(shiftDate(focusDate, calendarView === "Month" ? 28 : 1))}>
+                Next
+              </Button>
             </div>
           </div>
-        ) : null}
-        {calendarView === "Agenda" ? <EventList events={events} /> : null}
-      </Panel>
+
+          {calendarView === "Month" ? (
+            <MonthGrid focusDate={focusDate} eventsByDate={eventsByDate} onSelect={setFocusDate} />
+          ) : null}
+          {calendarView === "Week" ? (
+            <WeekStrip focusDate={focusDate} eventsByDate={eventsByDate} onSelect={setFocusDate} />
+          ) : null}
+          {calendarView === "Day" ? (
+            <div className="surface-muted rounded-xl p-4">
+              <p className="text-sm text-[#90a2b5]">
+                {formatDisplayDate(focusDate)} · {visibleEvents.length} scheduled item(s)
+              </p>
+              <div className="mt-4">
+                <EventList events={visibleEvents.length ? visibleEvents : events.filter((event) => event.date === "2026-03-13")} />
+              </div>
+            </div>
+          ) : null}
+          {calendarView === "Agenda" ? <EventList events={events} /> : null}
+        </Panel>
+
+        <div className="space-y-5">
+          <Panel title="Focused day" description="The selected date remains inspectable as an operational slice.">
+            <div className="grid gap-3">
+              <div className="surface-subtle rounded-xl p-4">
+                <p className="text-[11px] font-semibold uppercase tracking-[0.18em] text-[#8ea0b5]">
+                  Scheduled items
+                </p>
+                <p className="mt-2 text-3xl font-semibold text-white">{visibleEvents.length}</p>
+                <p className="mt-1 text-sm text-[#90a2b5]">Items directly attached to {formatDisplayDate(focusDate)}</p>
+              </div>
+              <div className="surface-subtle rounded-xl p-4">
+                <p className="text-[11px] font-semibold uppercase tracking-[0.18em] text-[#8ea0b5]">
+                  Week load
+                </p>
+                <p className="mt-2 text-3xl font-semibold text-white">{focusWeekEvents.length}</p>
+                <p className="mt-1 text-sm text-[#90a2b5]">Events within the current seven-day window</p>
+              </div>
+            </div>
+          </Panel>
+
+          <Panel
+            title="Event detail"
+            description="Focused events stay visible while switching between month, week, day, and agenda views."
+          >
+            <EventList events={visibleEvents.length ? visibleEvents : events.filter((event) => event.date === "2026-03-13")} />
+          </Panel>
+        </div>
+      </div>
     </div>
   );
 }

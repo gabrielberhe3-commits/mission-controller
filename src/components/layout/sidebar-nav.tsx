@@ -15,20 +15,20 @@ export function SidebarNav() {
   const metrics = buildWorkspaceMetrics(tasks, memories);
 
   return (
-    <aside className="border-b border-white/10 bg-[rgba(8,11,15,0.9)] p-5 backdrop-blur xl:border-r xl:border-b-0 xl:p-6">
+    <aside className="border-b border-white/8 bg-[rgba(7,11,16,0.96)] p-4 xl:border-r xl:border-b-0 xl:p-5">
       <div className="flex items-start justify-between gap-4 xl:block">
         <div>
-          <p className="text-[11px] font-semibold uppercase tracking-[0.28em] text-[#94a3b8]">
+          <p className="text-[11px] font-semibold uppercase tracking-[0.24em] text-[#94a3b8]">
             {workspaceMeta.operator} OS
           </p>
-          <h1 className="mt-2 text-2xl font-semibold tracking-[-0.03em] text-white">
+          <h1 className="mt-2 text-xl font-semibold tracking-[-0.03em] text-white">
             {workspaceMeta.productName}
           </h1>
           <p className="mt-2 max-w-xs text-sm leading-6 text-[#8ea0b5]">
             {workspaceMeta.strapline}
           </p>
         </div>
-        <div className="rounded-[24px] border border-[rgba(213,159,97,0.22)] bg-[rgba(213,159,97,0.08)] px-4 py-3">
+        <div className="rounded-xl border border-[rgba(200,163,106,0.24)] bg-[rgba(200,163,106,0.08)] px-3 py-2.5">
           <p className="text-[10px] font-semibold uppercase tracking-[0.22em] text-[#d0b48b]">
             Status
           </p>
@@ -36,7 +36,7 @@ export function SidebarNav() {
         </div>
       </div>
 
-      <nav className="mt-8 grid gap-2">
+      <nav className="mt-7 grid gap-1.5">
         {navigationItems.map((item) => {
           const isActive =
             item.href === "/" ? pathname === "/" : pathname.startsWith(item.href);
@@ -45,17 +45,17 @@ export function SidebarNav() {
             <Link
               key={item.href}
               href={item.href}
-              className={`rounded-[22px] px-4 py-3 transition ${
+              className={`rounded-xl border px-3 py-3 transition ${
                 isActive
-                  ? "bg-[linear-gradient(135deg,#f4ddb4,#d59f61)] text-[#11151a] shadow-[0_18px_40px_rgba(209,165,106,0.24)]"
-                  : "bg-white/[0.03] text-[#c3cfdb] hover:bg-white/[0.06] hover:text-white"
+                  ? "border-[rgba(200,163,106,0.26)] bg-[rgba(200,163,106,0.12)] text-[#f5e2c0]"
+                  : "border-white/6 bg-white/[0.02] text-[#c3cfdb] hover:border-white/10 hover:bg-white/[0.05] hover:text-white"
               }`}
             >
               <div className="flex items-center justify-between gap-4">
                 <span className="text-sm font-medium">{item.label}</span>
                 <span
-                  className={`text-[10px] font-semibold uppercase tracking-[0.18em] ${
-                    isActive ? "text-[#54412b]" : "text-[#708196]"
+                  className={`text-[10px] font-semibold uppercase tracking-[0.16em] ${
+                    isActive ? "text-[#ccb188]" : "text-[#708196]"
                   }`}
                 >
                   {item.shortLabel}
@@ -63,7 +63,7 @@ export function SidebarNav() {
               </div>
               <p
                 className={`mt-1 text-xs leading-5 ${
-                  isActive ? "text-[#493923]" : "text-[#7f90a5]"
+                  isActive ? "text-[#d6c4a4]" : "text-[#7f90a5]"
                 }`}
               >
                 {item.description}
@@ -73,7 +73,7 @@ export function SidebarNav() {
         })}
       </nav>
 
-      <div className="mt-8 rounded-[28px] border border-white/10 bg-white/[0.03] p-4">
+      <div className="surface-panel mt-6 rounded-2xl p-4">
         <p className="text-[11px] font-semibold uppercase tracking-[0.24em] text-[#94a3b8]">
           Today
         </p>
@@ -99,13 +99,13 @@ export function SidebarNav() {
         </div>
       </div>
 
-      <div className="mt-6 rounded-[28px] border border-white/10 bg-black/20 p-4">
+      <div className="surface-muted mt-4 rounded-2xl p-4">
         <p className="text-[11px] font-semibold uppercase tracking-[0.24em] text-[#94a3b8]">
           Signals
         </p>
         <div className="mt-4 grid gap-3">
           {metrics.map((metric) => (
-            <div key={metric.id} className="rounded-[18px] border border-white/8 bg-white/[0.03] p-3">
+            <div key={metric.id} className="rounded-xl border border-white/8 bg-white/[0.03] p-3">
               <p className="text-xs uppercase tracking-[0.18em] text-[#708196]">{metric.label}</p>
               <p className="mt-2 text-xl font-semibold text-white">{metric.value}</p>
               <p className="mt-1 text-xs leading-5 text-[#8fa2b8]">{metric.detail}</p>
