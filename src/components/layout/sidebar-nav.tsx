@@ -14,29 +14,29 @@ export function SidebarNav() {
   const selectedProject = projects.find((project) => project.id === selectedProjectId) ?? projects[0];
 
   return (
-    <aside className="border-b border-white/6 px-3 py-3 xl:min-h-screen xl:border-r xl:border-b-0 xl:px-4 xl:py-5">
-      <div className="xl:sticky xl:top-5">
-        <div className="shell-panel-alt rounded-[20px] p-4">
-          <div className="flex items-center justify-between gap-3">
-            <div>
+    <aside className="border-b border-white/5 px-2.5 py-2.5 xl:min-h-screen xl:border-r xl:border-b-0 xl:px-3 xl:py-4">
+      <div className="xl:sticky xl:top-4">
+        <div className="shell-panel-alt rounded-[16px] p-3.5">
+          <div className="flex items-start justify-between gap-3">
+            <div className="min-w-0">
               <p className="eyebrow">{workspaceMeta.status}</p>
-              <h2 className="mt-2 text-[18px] font-semibold tracking-[-0.05em] text-white">
+              <h2 className="mt-1.5 text-[17px] font-semibold tracking-[-0.05em] text-white">
                 {workspaceMeta.productName}
               </h2>
             </div>
-            <div className="flex h-10 w-10 items-center justify-center rounded-[12px] border border-white/10 bg-[#101010] text-xs font-semibold tracking-[0.2em] text-white">
+            <div className="flex h-9 w-9 items-center justify-center rounded-[10px] border border-white/8 bg-[#090909] text-[11px] font-semibold tracking-[0.18em] text-white">
               MC
             </div>
           </div>
 
-          <div className="mt-4 grid grid-cols-3 gap-2">
+          <div className="mt-3 grid grid-cols-3 gap-1.5">
             <NavStat label="Tasks" value={String(openTasks)} />
             <NavStat label="Appr" value={String(approvals)} />
             <NavStat label="Cal" value={String(todayEvents)} />
           </div>
         </div>
 
-        <nav className="mt-4 grid gap-1">
+        <nav className="mt-3 grid gap-1">
           {navigationItems
             .filter((item) => item.href !== "/")
             .map((item) => {
@@ -46,14 +46,14 @@ export function SidebarNav() {
                 <Link
                   key={item.href}
                   href={item.href}
-                  className={`flex items-center justify-between rounded-[12px] px-3 py-2.5 ${
+                  className={`flex items-center justify-between rounded-[10px] px-2.5 py-2 ${
                     isActive
                       ? "shell-card-strong text-white"
-                      : "text-[#8f8f8f] hover:bg-[#0a0a0a] hover:text-white"
+                      : "text-[#7f7f7f] hover:bg-[#070707] hover:text-white"
                   }`}
                 >
                   <span className="text-sm font-medium">{item.label}</span>
-                  <span className="text-[10px] uppercase tracking-[0.16em] text-[#595959]">
+                  <span className="text-[10px] uppercase tracking-[0.14em] text-[#555]">
                     {item.shortLabel}
                   </span>
                 </Link>
@@ -63,19 +63,19 @@ export function SidebarNav() {
 
         <Link
           href="/"
-          className={`mt-4 block rounded-[14px] p-4 ${
-            pathname === "/" ? "shell-card-strong" : "shell-panel-alt hover:bg-[#090909]"
+          className={`mt-3 block rounded-[12px] p-3 ${
+            pathname === "/" ? "shell-card-strong" : "shell-panel-alt hover:bg-[#070707]"
           }`}
         >
           <p className="eyebrow">Home</p>
-          <p className="mt-2 text-base font-semibold tracking-[-0.04em] text-white">Mission view</p>
+          <p className="mt-1.5 text-sm font-semibold tracking-[-0.04em] text-white">Mission view</p>
         </Link>
 
-        <div className="mt-4 rounded-[16px] border border-white/8 bg-[#070707] p-4">
+        <div className="mt-3 rounded-[12px] border border-white/6 bg-[#050505] p-3">
           <p className="eyebrow">Focus</p>
-          <p className="mt-2 text-sm font-medium text-white">{selectedProject.name}</p>
-          <p className="mt-1 text-sm text-[#7d7d7d]">{selectedProject.horizon}</p>
-          <p className="mt-4 text-[11px] leading-5 text-[#b4b4b4]">{selectedProject.nextMilestone}</p>
+          <p className="mt-1.5 text-sm font-medium text-white">{selectedProject.name}</p>
+          <p className="mt-1 text-[12px] text-[#727272]">{selectedProject.horizon}</p>
+          <p className="mt-3 text-[11px] leading-5 text-[#9f9f9f]">{selectedProject.nextMilestone}</p>
         </div>
       </div>
     </aside>
@@ -84,9 +84,9 @@ export function SidebarNav() {
 
 function NavStat({ label, value }: { label: string; value: string }) {
   return (
-    <div className="rounded-[12px] border border-white/8 bg-[#0b0b0b] px-2.5 py-2">
-      <p className="text-[10px] uppercase tracking-[0.16em] text-[#666]">{label}</p>
-      <p className="mt-1 text-base font-semibold tracking-[-0.05em] text-white">{value}</p>
+    <div className="rounded-[10px] border border-white/6 bg-[#070707] px-2 py-1.5">
+      <p className="text-[10px] uppercase tracking-[0.14em] text-[#5f5f5f]">{label}</p>
+      <p className="mt-1 text-[15px] font-semibold tracking-[-0.05em] text-white">{value}</p>
     </div>
   );
 }

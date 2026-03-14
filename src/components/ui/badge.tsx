@@ -1,12 +1,12 @@
 import type { ReactNode } from "react";
 
 const tones = {
-  neutral: "border-white/10 bg-[#111] text-[#d6d6d6]",
-  sky: "border-white/12 bg-[#151515] text-white",
-  emerald: "border-white/8 bg-[#0e0e0e] text-[#cecece]",
-  amber: "border-white/14 bg-white text-black",
-  rose: "border-white/8 bg-[#0d0d0d] text-[#b4b4b4]",
-  copper: "border-white/10 bg-[#121212] text-[#dedede]",
+  neutral: "border-white/6 bg-[#090909] text-[#cfcfcf]",
+  sky: "border-white/7 bg-[#0b0b0b] text-[#f1f1f1]",
+  emerald: "border-white/6 bg-[#080808] text-[#cdcdcd]",
+  amber: "border-white/12 bg-white text-black",
+  rose: "border-white/6 bg-[#080808] text-[#b8b8b8]",
+  copper: "border-white/6 bg-[#0a0a0a] text-[#dedede]",
 } as const;
 
 export function Badge({
@@ -18,7 +18,7 @@ export function Badge({
 }) {
   return (
     <span
-      className={`inline-flex items-center rounded-[8px] border px-2 py-1 text-[10px] font-semibold uppercase tracking-[0.16em] ${tones[tone]}`}
+      className={`inline-flex items-center rounded-[7px] border px-2 py-1 text-[10px] font-semibold uppercase tracking-[0.14em] ${tones[tone]}`}
     >
       {children}
     </span>

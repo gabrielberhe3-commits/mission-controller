@@ -16,30 +16,30 @@ export function Topbar() {
   const todayEvents = events.filter((event) => event.date === "2026-03-13").length;
 
   return (
-    <header className="shell-panel rounded-[18px] px-4 py-3">
-      <div className="flex flex-col gap-4 xl:flex-row xl:items-center xl:justify-between">
-        <div className="grid gap-3 sm:grid-cols-[minmax(0,1fr)_240px] sm:items-end">
+    <header className="shell-panel rounded-[14px] px-3 py-2.5">
+      <div className="flex flex-col gap-3 xl:flex-row xl:items-center xl:justify-between">
+        <div className="grid gap-2.5 sm:grid-cols-[minmax(0,1fr)_200px] sm:items-end">
           <div className="min-w-0">
             <p className="eyebrow">{current.label}</p>
-            <div className="mt-2 flex flex-wrap items-center gap-3">
-              <h1 className="text-[22px] font-semibold tracking-[-0.06em] text-white">
+            <div className="mt-1.5 flex flex-wrap items-center gap-2.5">
+              <h1 className="text-[20px] font-semibold tracking-[-0.06em] text-white">
                 {current.description}
               </h1>
-              <span className="rounded-[8px] border border-white/8 px-2 py-1 text-[10px] font-semibold uppercase tracking-[0.16em] text-[#8c8c8c]">
+              <span className="rounded-[7px] border border-white/6 px-2 py-1 text-[10px] font-semibold uppercase tracking-[0.14em] text-[#7b7b7b]">
                 {workspaceMeta.snapshotDate}
               </span>
             </div>
           </div>
-          <div className="grid grid-cols-2 gap-2">
+          <div className="grid grid-cols-2 gap-1.5">
             <TopMetric label="Open" value={String(activeTasks)} />
             <TopMetric label="Today" value={String(todayEvents)} />
           </div>
         </div>
 
         <div className="flex flex-col gap-2 sm:flex-row sm:items-center">
-          <label className="sm:w-[260px]">
+          <label className="sm:w-[220px]">
             <input
-              className="control-input h-10 text-sm"
+              className="control-input h-9 text-sm"
               placeholder="Search"
               aria-label="Search workspace"
             />
@@ -60,9 +60,9 @@ export function Topbar() {
 
 function TopMetric({ label, value }: { label: string; value: string }) {
   return (
-    <div className="rounded-[12px] border border-white/8 bg-[#0b0b0b] px-3 py-2">
-      <p className="text-[10px] uppercase tracking-[0.16em] text-[#666]">{label}</p>
-      <p className="mt-1 text-lg font-semibold tracking-[-0.05em] text-white">{value}</p>
+    <div className="rounded-[10px] border border-white/6 bg-[#070707] px-2.5 py-1.5">
+      <p className="text-[10px] uppercase tracking-[0.14em] text-[#5f5f5f]">{label}</p>
+      <p className="mt-1 text-[17px] font-semibold tracking-[-0.05em] text-white">{value}</p>
     </div>
   );
 }
