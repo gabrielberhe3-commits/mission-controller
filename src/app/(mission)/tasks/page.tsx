@@ -19,9 +19,7 @@ export default function TasksPage() {
   return (
     <div className="space-y-3">
       <PageHeader
-        eyebrow="Tasks"
         title="Queue"
-        description="Active work."
         actions={
           <Button size="sm" variant="primary" onClick={() => openDrawer("task")}>
             New

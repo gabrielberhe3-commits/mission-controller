@@ -11,9 +11,7 @@ export default function DocsPage() {
   return (
     <div className="space-y-3">
       <PageHeader
-        eyebrow="Docs"
-        title="Reference"
-        description="Specs and briefs."
+        title="Docs"
         actions={
           <>
             <Button size="sm" variant="primary" onClick={() => showFeedback("Document editing is not implemented yet.")}>

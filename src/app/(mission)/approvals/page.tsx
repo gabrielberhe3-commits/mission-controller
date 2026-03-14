@@ -22,9 +22,7 @@ export default function ApprovalsPage() {
   return (
     <div className="space-y-3">
       <PageHeader
-        eyebrow="Approvals"
-        title="Review"
-        description="Pending decisions."
+        title="Approvals"
         actions={
           <Button size="sm" variant="primary" onClick={() => showFeedback("Approval flows are seeded locally only.")}>
             New

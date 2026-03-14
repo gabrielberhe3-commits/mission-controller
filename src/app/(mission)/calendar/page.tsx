@@ -53,7 +53,7 @@ export default function CalendarPage() {
   const { calendarView, events, setCalendarView } = useWorkspace();
   const [focusDate, setFocusDate] = useState("2026-03-13");
   const visibleEvents = events.filter((event) => event.date === focusDate);
-  const nextUp = events.filter((event) => event.date >= focusDate).slice(0, 6);
+  const nextUp = events.filter((event) => event.date >= focusDate).slice(0, 5);
   const focusMonthToken = focusDate.slice(5, 7);
   const eventTitlesByDate = new Map<string, typeof events>();
 
@@ -64,15 +64,11 @@ export default function CalendarPage() {
   return (
     <div className="grid gap-2.5 2xl:grid-cols-[minmax(0,1fr)_300px]">
       <section className="shell-panel rounded-[18px] p-3">
-        <div className="flex flex-col gap-3 border-b border-white/5 pb-3 xl:flex-row xl:items-end xl:justify-between">
+        <div className="flex flex-col gap-3 border-b border-white/5 pb-3 xl:flex-row xl:items-center xl:justify-between">
           <div className="min-w-0">
-            <p className="eyebrow">Calendar</p>
-            <div className="mt-1.5 flex flex-wrap items-end gap-3">
-              <h1 className="text-[30px] font-semibold tracking-[-0.08em] text-white sm:text-[36px]">
-                Schedule
-              </h1>
-              <p className="pb-1 text-[12px] uppercase tracking-[0.14em] text-[#6c6c6c]">{monthLabel(focusDate)}</p>
-            </div>
+            <h1 className="text-[30px] font-semibold tracking-[-0.08em] text-white sm:text-[34px]">
+              {monthLabel(focusDate)}
+            </h1>
           </div>
           <div className="flex flex-col gap-2 lg:flex-row lg:items-center lg:justify-end">
             <div className="flex gap-1.5">
@@ -135,12 +131,9 @@ export default function CalendarPage() {
                         </span>
                       </div>
                       <div className="mt-3 space-y-1.5">
-                        {items.slice(0, 3).map((item) => (
+                        {items.slice(0, 2).map((item) => (
                           <div key={item.id} className="rounded-[9px] border border-white/5 bg-[#090909] px-2 py-1.5">
                             <p className="truncate text-[11px] font-medium text-white">{item.title}</p>
-                            <p className="mt-0.5 text-[10px] uppercase tracking-[0.12em] text-[#666]">
-                              {item.timeRange.split(" - ")[0]}
-                            </p>
                           </div>
                         ))}
                       </div>
@@ -176,9 +169,6 @@ export default function CalendarPage() {
                         items.map((item) => (
                           <div key={item.id} className="rounded-[9px] border border-white/5 bg-[#090909] px-2 py-1.5">
                             <p className="text-[11px] font-medium text-white">{item.title}</p>
-                            <p className="mt-0.5 text-[10px] uppercase tracking-[0.12em] text-[#666]">
-                              {item.timeRange}
-                            </p>
                           </div>
                         ))
                       ) : (
@@ -198,10 +188,7 @@ export default function CalendarPage() {
               {(visibleEvents.length ? visibleEvents : nextUp).map((event) => (
                 <div key={event.id} className="shell-card rounded-[12px] px-3 py-3">
                   <div className="flex items-center justify-between gap-3">
-                    <div>
-                      <p className="text-sm font-medium text-white">{event.title}</p>
-                      <p className="mt-1 text-sm text-[#787878]">{event.location}</p>
-                    </div>
+                    <p className="text-sm font-medium text-white">{event.title}</p>
                     <p className="text-[11px] font-medium uppercase tracking-[0.12em] text-[#a7a7a7]">
                       {event.timeRange}
                     </p>
@@ -216,12 +203,9 @@ export default function CalendarPage() {
               {events.map((event) => (
                 <div key={event.id} className="shell-card rounded-[12px] px-3 py-3">
                   <div className="flex items-center justify-between gap-3">
-                    <div>
-                      <p className="text-sm font-medium text-white">{event.title}</p>
-                      <p className="mt-1 text-sm text-[#787878]">{formatDisplayDate(event.date)}</p>
-                    </div>
+                    <p className="text-sm font-medium text-white">{event.title}</p>
                     <p className="text-[11px] font-medium uppercase tracking-[0.12em] text-[#a7a7a7]">
-                      {event.timeRange.split(" - ")[0]}
+                      {formatDisplayDate(event.date)} · {event.timeRange.split(" - ")[0]}
                     </p>
                   </div>
                 </div>
@@ -234,8 +218,7 @@ export default function CalendarPage() {
       <aside className="shell-panel rounded-[18px] p-3">
         <div className="flex h-full flex-col">
           <section className="border-b border-white/5 pb-3">
-            <p className="eyebrow">Selected</p>
-            <h2 className="mt-1.5 text-[24px] font-semibold tracking-[-0.06em] text-white">
+            <h2 className="text-[24px] font-semibold tracking-[-0.06em] text-white">
               {formatDisplayDate(focusDate)}
             </h2>
             <div className="mt-3 space-y-1.5">
@@ -245,22 +228,18 @@ export default function CalendarPage() {
                     <p className="text-sm font-medium text-white">{event.title}</p>
                     <p className="text-[11px] font-medium text-[#9f9f9f]">{event.timeRange.split(" - ")[0]}</p>
                   </div>
-                  <p className="mt-1 text-sm text-[#767676]">{event.location}</p>
                 </div>
               ))}
               {!visibleEvents.length ? (
                 <div className="rounded-[10px] border border-dashed border-white/7 px-2.5 py-2.5 text-sm text-[#5f5f5f]">
-                  No events
+                  Empty
                 </div>
               ) : null}
             </div>
           </section>
 
           <section className="flex-1 pt-3">
-            <div className="flex items-center justify-between">
-              <p className="eyebrow">Next up</p>
-              <span className="text-[10px] uppercase tracking-[0.14em] text-[#555]">6</span>
-            </div>
+            <p className="eyebrow">Next</p>
             <div className="mt-3 space-y-1.5">
               {nextUp.map((event) => (
                 <button
@@ -272,12 +251,9 @@ export default function CalendarPage() {
                     <div className="min-w-0">
                       <p className="truncate text-sm font-medium text-white">{event.title}</p>
                       <p className="mt-0.5 text-[10px] uppercase tracking-[0.12em] text-[#6a6a6a]">
-                        {formatDisplayDate(event.date)}
+                        {formatDisplayDate(event.date)} · {event.timeRange.split(" - ")[0]}
                       </p>
                     </div>
-                    <p className="shrink-0 text-[11px] font-medium text-[#a2a2a2]">
-                      {event.timeRange.split(" - ")[0]}
-                    </p>
                   </div>
                 </button>
               ))}

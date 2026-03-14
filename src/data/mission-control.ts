@@ -16,59 +16,59 @@ import type {
 export const workspaceMeta = {
   operator: "Gabriel",
   productName: "Mission Controller",
-  strapline: "Local-first operating system.",
-  status: "Local only",
+  strapline: "",
+  status: "",
   snapshotDate: "Friday, March 13, 2026",
 };
 
 export const navigationItems: NavItem[] = [
   {
     href: "/",
-    label: "Overview",
+    label: "Home",
     shortLabel: "Home",
-    description: "Dashboard",
+    description: "Home",
   },
   {
     href: "/tasks",
     label: "Tasks",
     shortLabel: "Tasks",
-    description: "Queue",
+    description: "Tasks",
   },
   {
     href: "/approvals",
     label: "Approvals",
     shortLabel: "Approve",
-    description: "Reviews",
+    description: "Approvals",
   },
   {
     href: "/calendar",
     label: "Calendar",
     shortLabel: "Calendar",
-    description: "Schedule",
+    description: "Calendar",
   },
   {
     href: "/projects",
     label: "Projects",
     shortLabel: "Projects",
-    description: "Portfolio",
+    description: "Projects",
   },
   {
     href: "/memory",
     label: "Memory",
     shortLabel: "Memory",
-    description: "Notes",
+    description: "Memory",
   },
   {
     href: "/docs",
     label: "Docs",
     shortLabel: "Docs",
-    description: "Reference",
+    description: "Docs",
   },
   {
     href: "/people",
     label: "People",
     shortLabel: "People",
-    description: "Contacts",
+    description: "People",
   },
 ];
 

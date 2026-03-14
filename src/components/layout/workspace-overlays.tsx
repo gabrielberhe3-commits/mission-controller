@@ -62,8 +62,7 @@ export function WorkspaceOverlays() {
           closeDrawer();
           resetTask();
         }}
-        title="Create Task"
-        description="Local-first task capture."
+        title="Task"
       >
         <form
           className="space-y-4"
@@ -91,7 +90,7 @@ export function WorkspaceOverlays() {
               className={inputClassName()}
               value={taskTitle}
               onChange={(event) => setTaskTitle(event.target.value)}
-              placeholder="Add a concrete next action"
+              placeholder="Next action"
             />
           </label>
           <label className="block text-sm text-[#c8d3df]">
@@ -100,7 +99,7 @@ export function WorkspaceOverlays() {
               className={`${inputClassName()} min-h-28 resize-none`}
               value={taskNotes}
               onChange={(event) => setTaskNotes(event.target.value)}
-              placeholder="Optional execution details or acceptance criteria"
+              placeholder="Optional"
             />
           </label>
           <div className="grid gap-4 sm:grid-cols-2">
@@ -178,8 +177,7 @@ export function WorkspaceOverlays() {
           closeDrawer();
           resetMemory();
         }}
-        title="Capture Memory"
-        description="Save durable context."
+        title="Note"
       >
         <form
           className="space-y-4"
@@ -205,7 +203,7 @@ export function WorkspaceOverlays() {
               className={inputClassName()}
               value={memoryTitle}
               onChange={(event) => setMemoryTitle(event.target.value)}
-              placeholder="Name the note so it is easy to retrieve later"
+              placeholder="Title"
             />
           </label>
           <label className="block text-sm text-[#c8d3df]">
@@ -214,7 +212,7 @@ export function WorkspaceOverlays() {
               className={`${inputClassName()} min-h-32 resize-none`}
               value={memoryNote}
               onChange={(event) => setMemoryNote(event.target.value)}
-              placeholder="Capture the decision, principle, insight, or project note"
+              placeholder="Write note"
             />
           </label>
           <div className="grid gap-4 sm:grid-cols-2">

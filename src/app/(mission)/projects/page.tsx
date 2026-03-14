@@ -19,9 +19,7 @@ export default function ProjectsPage() {
   return (
     <div className="space-y-3">
       <PageHeader
-        eyebrow="Projects"
-        title="Portfolio"
-        description="Delivery and context."
+        title="Projects"
         actions={
           <>
             <Button size="sm" onClick={() => openDrawer("task")}>

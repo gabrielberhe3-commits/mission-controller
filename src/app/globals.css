@@ -70,14 +70,14 @@ button {
 @layer components {
   .app-shell-grid {
     background-image:
-      linear-gradient(rgba(255, 255, 255, 0.014) 1px, transparent 1px),
-      linear-gradient(90deg, rgba(255, 255, 255, 0.014) 1px, transparent 1px);
+      linear-gradient(rgba(255, 255, 255, 0.01) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255, 255, 255, 0.01) 1px, transparent 1px);
     background-position: center;
-    background-size: 28px 28px;
+    background-size: 32px 32px;
   }
 
   .shell-panel {
-    background: rgba(3, 3, 3, 0.96);
+    background: rgba(2, 2, 2, 0.96);
     border: 1px solid var(--border);
   }
 

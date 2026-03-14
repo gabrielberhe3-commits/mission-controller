@@ -9,7 +9,7 @@ export function Drawer({
 }: {
   open: boolean;
   title: string;
-  description: string;
+  description?: string;
   onClose: () => void;
   children: ReactNode;
 }) {
@@ -27,9 +27,8 @@ export function Drawer({
       >
         <div className="flex items-start justify-between gap-4 border-b border-white/8 pb-4">
           <div>
-            <p className="eyebrow">Capture</p>
-            <h2 className="mt-2 text-[24px] font-semibold tracking-[-0.05em] text-white">{title}</h2>
-            <p className="mt-2 max-w-md text-sm text-[#8a8a8a]">{description}</p>
+            <h2 className="text-[24px] font-semibold tracking-[-0.05em] text-white">{title}</h2>
+            {description ? <p className="mt-2 max-w-md text-sm text-[#8a8a8a]">{description}</p> : null}
           </div>
           <button
             className="rounded-[10px] border border-white/10 px-3 py-2 text-[10px] font-semibold uppercase tracking-[0.16em] text-[#d5d5d5] hover:bg-[#101010]"

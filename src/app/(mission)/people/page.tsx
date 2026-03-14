@@ -22,9 +22,7 @@ export default function PeoplePage() {
   return (
     <div className="space-y-3">
       <PageHeader
-        eyebrow="People"
-        title="Contacts"
-        description="Who is in the loop."
+        title="People"
         actions={
           <Button size="sm" variant="primary" onClick={() => showFeedback("People are seeded locally in this build.")}>
             Add

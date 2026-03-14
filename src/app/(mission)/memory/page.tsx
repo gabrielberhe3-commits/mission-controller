@@ -15,9 +15,7 @@ export default function MemoryPage() {
   return (
     <div className="space-y-3">
       <PageHeader
-        eyebrow="Memory"
-        title="Notes"
-        description="Durable context."
+        title="Memory"
         actions={
           <Button size="sm" variant="primary" onClick={() => openDrawer("memory")}>
             New

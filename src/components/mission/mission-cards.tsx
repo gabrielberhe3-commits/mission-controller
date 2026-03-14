@@ -29,17 +29,6 @@ function getEventTone(kind: CalendarEvent["kind"]) {
   }
 }
 
-function getPriorityTone(priority: Task["priority"]) {
-  switch (priority) {
-    case "High":
-      return "amber";
-    case "Medium":
-      return "sky";
-    case "Low":
-      return "neutral";
-  }
-}
-
 function getStatusTone(status: Project["status"] | Task["status"]) {
   switch (status) {
     case "On Track":
@@ -62,10 +51,7 @@ export function MetricGrid({ metrics }: { metrics: WorkspaceMetric[] }) {
       {metrics.map((metric) => (
         <div key={metric.id} className="shell-panel rounded-[16px] px-4 py-4">
           <p className="eyebrow">{metric.label}</p>
-          <div className="mt-3 flex items-end justify-between gap-3">
-            <p className="metric-value text-white">{metric.value}</p>
-            <p className="text-[10px] uppercase tracking-[0.16em] text-[#5f5f5f]">{metric.detail}</p>
-          </div>
+          <p className="mt-3 metric-value text-white">{metric.value}</p>
         </div>
       ))}
     </div>
@@ -145,7 +131,7 @@ export function EventList({ events }: { events: CalendarEvent[] }) {
 }
 
 export function TaskList({ tasks }: { tasks: Task[] }) {
-  const { cycleTaskStatus, getProject, setSelectedProjectId, showFeedback } = useWorkspace();
+  const { cycleTaskStatus, getProject, setSelectedProjectId } = useWorkspace();
 
   return (
     <div className="space-y-2">
@@ -156,15 +142,12 @@ export function TaskList({ tasks }: { tasks: Task[] }) {
           <div key={task.id} className="shell-card rounded-[14px] p-4">
             <div className="flex items-start justify-between gap-3">
               <div className="min-w-0 flex-1">
-                <div className="flex flex-wrap items-center gap-2">
-                  <p className="text-sm font-medium text-white">{task.title}</p>
-                  <Badge tone={getStatusTone(task.status)}>{task.status}</Badge>
-                  <Badge tone={getPriorityTone(task.priority)}>{task.priority}</Badge>
-                </div>
+                <p className="text-sm font-medium text-white">{task.title}</p>
                 <p className="mt-1 text-sm text-[#868686]">
-                  {project?.name} · {formatDueLabel(task.dueDate)} · {task.energy}
+                  {project?.name} · {formatDueLabel(task.dueDate)}
                 </p>
               </div>
+              <Badge tone={getStatusTone(task.status)}>{task.status}</Badge>
             </div>
             <div className="mt-3 flex flex-wrap gap-2">
               <Button size="sm" onClick={() => cycleTaskStatus(task.id)}>
@@ -172,13 +155,6 @@ export function TaskList({ tasks }: { tasks: Task[] }) {
               </Button>
               <Button size="sm" onClick={() => setSelectedProjectId(task.projectId)}>
                 Project
-              </Button>
-              <Button
-                size="sm"
-                variant="ghost"
-                onClick={() => showFeedback(task.notes ?? "No extra notes on this task yet.")}
-              >
-                Notes
               </Button>
             </div>
           </div>
@@ -195,7 +171,7 @@ export function ProjectList({
   projects: Project[];
   selectedProjectId?: string;
 }) {
-  const { setSelectedProjectId, showFeedback } = useWorkspace();
+  const { setSelectedProjectId } = useWorkspace();
 
   return (
     <div className="space-y-2">
@@ -209,10 +185,7 @@ export function ProjectList({
           >
             <div className="flex items-start justify-between gap-3">
               <div className="min-w-0 flex-1">
-                <div className="flex flex-wrap items-center gap-2">
-                  <p className="text-sm font-medium text-white">{project.name}</p>
-                  <Badge tone={getStatusTone(project.status)}>{project.status}</Badge>
-                </div>
+                <p className="text-sm font-medium text-white">{project.name}</p>
                 <p className="mt-1 text-sm text-[#868686]">{project.nextMilestone}</p>
               </div>
               <span className="text-sm font-semibold tracking-[-0.05em] text-white">{project.progress}%</span>
@@ -223,9 +196,6 @@ export function ProjectList({
             <div className="mt-3 flex flex-wrap gap-2">
               <Button size="sm" onClick={() => setSelectedProjectId(project.id)}>
                 Open
-              </Button>
-              <Button size="sm" variant="ghost" onClick={() => showFeedback(project.summary)}>
-                Summary
               </Button>
             </div>
           </div>
@@ -386,10 +356,7 @@ export function MemoryList({ memories }: { memories: MemoryItem[] }) {
         <div key={memory.id} className="shell-card rounded-[14px] p-4">
           <div className="flex flex-wrap items-center justify-between gap-3">
             <p className="text-sm font-medium text-white">{memory.title}</p>
-            <div className="flex flex-wrap gap-2">
-              <Badge tone="neutral">{memory.kind}</Badge>
-              <Badge tone={memory.source === "system" ? "sky" : "amber"}>{memory.source}</Badge>
-            </div>
+            <Badge tone="neutral">{memory.kind}</Badge>
           </div>
           <p className="mt-2 text-sm text-[#898989]">{memory.note}</p>
           <div className="mt-3 flex items-center justify-between gap-3">
@@ -415,11 +382,10 @@ export function DocList({ docs }: { docs: Doc[] }) {
         <div key={doc.id} className="shell-card rounded-[14px] p-4">
           <div className="flex flex-wrap items-center justify-between gap-3">
             <p className="text-sm font-medium text-white">{doc.title}</p>
-            <Badge tone="sky">{doc.category}</Badge>
+            <p className="text-[10px] uppercase tracking-[0.16em] text-[#666]">{doc.updatedAt}</p>
           </div>
           <p className="mt-2 text-sm text-[#898989]">{doc.summary}</p>
           <div className="mt-3 flex flex-wrap items-center justify-between gap-3">
-            <p className="text-[10px] uppercase tracking-[0.16em] text-[#666]">{doc.updatedAt}</p>
             <div className="flex gap-2">
               {doc.linkedProjectId ? (
                 <Button size="sm" onClick={() => setSelectedProjectId(doc.linkedProjectId!)}>
