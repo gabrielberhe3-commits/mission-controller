@@ -20,14 +20,14 @@ export default function HomePage() {
           <div className="space-y-4">
             <div className="flex flex-wrap items-end justify-between gap-3">
               <div>
-                <h1 className="text-[34px] font-semibold tracking-[-0.08em] text-[#18191b] sm:text-[40px]">
+                <h1 className="text-main text-[34px] font-semibold tracking-[-0.08em] sm:text-[40px]">
                   Home
                 </h1>
               </div>
               <div className="flex gap-2">
                 <Link
                   href="/calendar"
-                  className="inline-flex h-8 items-center justify-center rounded-[10px] border border-black/8 bg-white/86 px-3 text-[10px] font-semibold uppercase tracking-[0.16em] text-[#191a1d] hover:bg-white"
+                  className="inline-flex h-8 items-center justify-center rounded-[10px] border border-[var(--border)] bg-[var(--button-secondary-bg)] px-3 text-[10px] font-semibold uppercase tracking-[0.16em] text-[var(--button-secondary-text)] hover:bg-[var(--button-secondary-hover)]"
                 >
                   Calendar
                 </Link>
@@ -42,12 +42,12 @@ export default function HomePage() {
             <div className="grid gap-3 lg:grid-cols-[minmax(0,1fr)_280px]">
               <div className="shell-card rounded-[18px] p-4">
                 <div className="flex items-center justify-between">
-                  <h2 className="text-xl font-semibold tracking-[-0.05em] text-[#18191b]">{focusProject.name}</h2>
-                  <span className="text-[28px] font-semibold tracking-[-0.06em] text-[#18191b]">
+                  <h2 className="text-main text-xl font-semibold tracking-[-0.05em]">{focusProject.name}</h2>
+                  <span className="text-main text-[28px] font-semibold tracking-[-0.06em]">
                     {focusProject.progress}%
                   </span>
                 </div>
-                <p className="mt-3 text-sm text-[#74787c]">{focusProject.nextMilestone}</p>
+                <p className="text-muted mt-3 text-sm">{focusProject.nextMilestone}</p>
                 <div className="mt-4 grid gap-3 md:grid-cols-3">
                   <MiniStat label="Tasks" value={String(openTasks.filter((task) => task.projectId === focusProject.id).length)} />
                   <MiniStat label="Events" value={String(events.filter((event) => event.linkedProjectId === focusProject.id).length)} />
@@ -59,10 +59,10 @@ export default function HomePage() {
                 <p className="eyebrow">Today</p>
                 <div className="mt-3 space-y-2">
                   {todayEvents.map((event) => (
-                    <div key={event.id} className="rounded-[12px] border border-black/6 bg-[#f7f5f1] px-3 py-3">
+                    <div key={event.id} className="surface-soft rounded-[12px] px-3 py-3">
                       <div className="flex items-center justify-between gap-3">
-                        <p className="text-sm font-medium text-[#18191b]">{event.title}</p>
-                        <p className="text-[11px] font-medium text-[#7b7f83]">{event.timeRange.split(" - ")[0]}</p>
+                        <p className="text-main text-sm font-medium">{event.title}</p>
+                        <p className="text-faint text-[11px] font-medium">{event.timeRange.split(" - ")[0]}</p>
                       </div>
                     </div>
                   ))}
@@ -75,7 +75,7 @@ export default function HomePage() {
             <section className="shell-card rounded-[18px] p-4">
               <div className="flex items-center justify-between">
                 <p className="eyebrow">Queue</p>
-                <Link href="/tasks" className="text-[10px] uppercase tracking-[0.16em] text-[#727272]">
+                <Link href="/tasks" className="text-faint text-[10px] uppercase tracking-[0.16em]">
                   Open
                 </Link>
               </div>
@@ -94,7 +94,7 @@ export default function HomePage() {
             <Button size="sm" onClick={() => openDrawer("memory")}>
               Note
             </Button>
-            <Link href="/projects" className="text-[10px] uppercase tracking-[0.16em] text-[#727272]">
+            <Link href="/projects" className="text-faint text-[10px] uppercase tracking-[0.16em]">
               Open
             </Link>
           </div>
@@ -109,9 +109,9 @@ export default function HomePage() {
 
 function MiniStat({ label, value }: { label: string; value: string }) {
   return (
-    <div className="rounded-[12px] border border-black/6 bg-[#f7f5f1] px-3 py-3">
+    <div className="surface-soft rounded-[12px] px-3 py-3">
       <p className="eyebrow">{label}</p>
-      <p className="mt-2 text-2xl font-semibold tracking-[-0.06em] text-[#18191b]">{value}</p>
+      <p className="text-main mt-2 text-2xl font-semibold tracking-[-0.06em]">{value}</p>
     </div>
   );
 }

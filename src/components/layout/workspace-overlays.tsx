@@ -84,7 +84,7 @@ export function WorkspaceOverlays() {
             resetTask();
           }}
         >
-          <label className="block text-sm text-[#5d6165]">
+          <label className="text-muted block text-sm">
             Title
             <input
               className={inputClassName()}
@@ -93,7 +93,7 @@ export function WorkspaceOverlays() {
               placeholder="Next action"
             />
           </label>
-          <label className="block text-sm text-[#5d6165]">
+          <label className="text-muted block text-sm">
             Notes
             <textarea
               className={`${inputClassName()} min-h-28 resize-none`}
@@ -103,7 +103,7 @@ export function WorkspaceOverlays() {
             />
           </label>
           <div className="grid gap-4 sm:grid-cols-2">
-            <label className="block text-sm text-[#5d6165]">
+            <label className="text-muted block text-sm">
               Due date
               <input
                 type="date"
@@ -112,7 +112,7 @@ export function WorkspaceOverlays() {
                 onChange={(event) => setTaskDueDate(event.target.value)}
               />
             </label>
-            <label className="block text-sm text-[#5d6165]">
+            <label className="text-muted block text-sm">
               Project
               <select
                 className={inputClassName()}
@@ -126,7 +126,7 @@ export function WorkspaceOverlays() {
                 ))}
               </select>
             </label>
-            <label className="block text-sm text-[#5d6165]">
+            <label className="text-muted block text-sm">
               Priority
               <select
                 className={inputClassName()}
@@ -140,7 +140,7 @@ export function WorkspaceOverlays() {
                 <option value="Low">Low</option>
               </select>
             </label>
-            <label className="block text-sm text-[#5d6165]">
+            <label className="text-muted block text-sm">
               Energy
               <select
                 className={inputClassName()}
@@ -197,7 +197,7 @@ export function WorkspaceOverlays() {
             resetMemory();
           }}
         >
-          <label className="block text-sm text-[#5d6165]">
+          <label className="text-muted block text-sm">
             Title
             <input
               className={inputClassName()}
@@ -206,7 +206,7 @@ export function WorkspaceOverlays() {
               placeholder="Title"
             />
           </label>
-          <label className="block text-sm text-[#5d6165]">
+          <label className="text-muted block text-sm">
             Memory
             <textarea
               className={`${inputClassName()} min-h-32 resize-none`}
@@ -216,7 +216,7 @@ export function WorkspaceOverlays() {
             />
           </label>
           <div className="grid gap-4 sm:grid-cols-2">
-            <label className="block text-sm text-[#5d6165]">
+            <label className="text-muted block text-sm">
               Kind
               <select
                 className={inputClassName()}
@@ -239,7 +239,7 @@ export function WorkspaceOverlays() {
                 <option value="preference">Preference</option>
               </select>
             </label>
-            <label className="block text-sm text-[#5d6165]">
+            <label className="text-muted block text-sm">
               Linked project
               <select
                 className={inputClassName()}
@@ -273,7 +273,7 @@ export function WorkspaceOverlays() {
 
       <div className="pointer-events-none fixed bottom-6 right-6 z-50">
         <div
-          className={`rounded-xl border border-black/8 bg-[#1f2124] px-4 py-3 text-sm text-[#f8f7f4] shadow-[0_18px_40px_rgba(0,0,0,0.12)] transition ${
+          className={`shell-toast rounded-xl px-4 py-3 text-sm transition ${
             feedback ? "translate-y-0 opacity-100" : "translate-y-4 opacity-0"
           }`}
         >

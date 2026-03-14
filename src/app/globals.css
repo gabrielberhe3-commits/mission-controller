@@ -1,16 +1,131 @@
 @import "tailwindcss";
 
 :root {
-  --background: #f5f4f1;
-  --foreground: #18181a;
-  --panel: rgba(255, 255, 255, 0.76);
-  --panel-alt: rgba(252, 252, 250, 0.92);
-  --panel-soft: #f1efeb;
-  --panel-strong: #fbfaf7;
+  color-scheme: light;
+  --background: #f3f0e8;
+  --foreground: #17181b;
+  --title: #16171a;
+  --panel: rgba(255, 251, 245, 0.76);
+  --panel-alt: rgba(252, 249, 244, 0.92);
+  --panel-soft: #ece6dc;
+  --panel-strong: #faf6ef;
+  --card: rgba(255, 250, 245, 0.84);
+  --card-soft: #f4ede3;
+  --card-strong: #fcf8f1;
   --border: rgba(24, 24, 26, 0.08);
   --border-strong: rgba(24, 24, 26, 0.14);
-  --muted: #6e706f;
-  --soft: #4c4e52;
+  --muted: #6c675f;
+  --soft: #4f5054;
+  --faint: #888077;
+  --body-top: rgba(255, 252, 247, 0.9);
+  --body-glow: rgba(214, 201, 183, 0.4);
+  --body-bottom: #efe7dc;
+  --grid-line: rgba(24, 24, 26, 0.025);
+  --input-bg: rgba(255, 251, 245, 0.96);
+  --input-border: rgba(24, 24, 26, 0.1);
+  --input-placeholder: #998f85;
+  --input-focus: rgba(24, 24, 26, 0.18);
+  --input-ring: rgba(24, 24, 26, 0.05);
+  --button-primary-bg: #1b1c1f;
+  --button-primary-hover: #2a2c31;
+  --button-primary-text: #faf7f2;
+  --button-secondary-bg: rgba(255, 251, 245, 0.88);
+  --button-secondary-hover: rgba(255, 255, 255, 0.98);
+  --button-secondary-text: #191a1d;
+  --button-ghost-text: #6d675f;
+  --button-ghost-hover-bg: rgba(255, 255, 255, 0.7);
+  --button-ghost-hover-text: #191a1d;
+  --progress-track: rgba(24, 24, 26, 0.08);
+  --progress-fill: #222428;
+  --drawer-backdrop: rgba(28, 29, 31, 0.18);
+  --drawer-surface: #f7f1e7;
+  --toast-bg: #1f2124;
+  --toast-text: #f8f7f4;
+  --shadow-soft: 0 18px 40px rgba(15, 15, 15, 0.04);
+  --shadow-drawer: 0 24px 80px rgba(17, 17, 17, 0.14);
+  --shadow-toast: 0 18px 40px rgba(0, 0, 0, 0.12);
+  --tone-neutral-border: rgba(24, 24, 26, 0.08);
+  --tone-neutral-bg: #ece6dc;
+  --tone-neutral-text: #54565b;
+  --tone-sky-border: #c4d3df;
+  --tone-sky-bg: #e9f0f6;
+  --tone-sky-text: #466277;
+  --tone-emerald-border: #c7d8cd;
+  --tone-emerald-bg: #ebf2ed;
+  --tone-emerald-text: #496250;
+  --tone-amber-border: #d8ceb9;
+  --tone-amber-bg: #f5eee0;
+  --tone-amber-text: #715f44;
+  --tone-rose-border: #dcc9c8;
+  --tone-rose-bg: #f5ebea;
+  --tone-rose-text: #7a5a5a;
+  --tone-copper-border: #dbcbb9;
+  --tone-copper-bg: #f2ebe2;
+  --tone-copper-text: #725f4d;
+}
+
+[data-theme="dark"] {
+  color-scheme: dark;
+  --background: #0d1117;
+  --foreground: #edf1f7;
+  --title: #f7f9fc;
+  --panel: rgba(18, 24, 33, 0.78);
+  --panel-alt: rgba(20, 26, 36, 0.9);
+  --panel-soft: #141b24;
+  --panel-strong: #1a2330;
+  --card: rgba(21, 28, 38, 0.88);
+  --card-soft: #17202b;
+  --card-strong: #202a38;
+  --border: rgba(228, 236, 248, 0.1);
+  --border-strong: rgba(228, 236, 248, 0.16);
+  --muted: #9da8b6;
+  --soft: #c1c8d2;
+  --faint: #7f8997;
+  --body-top: rgba(43, 58, 79, 0.3);
+  --body-glow: rgba(78, 111, 148, 0.16);
+  --body-bottom: #090d13;
+  --grid-line: rgba(228, 236, 248, 0.04);
+  --input-bg: rgba(19, 26, 36, 0.96);
+  --input-border: rgba(228, 236, 248, 0.1);
+  --input-placeholder: #798494;
+  --input-focus: rgba(164, 185, 215, 0.28);
+  --input-ring: rgba(122, 154, 194, 0.16);
+  --button-primary-bg: #eef3f9;
+  --button-primary-hover: #ffffff;
+  --button-primary-text: #12161d;
+  --button-secondary-bg: rgba(25, 33, 44, 0.9);
+  --button-secondary-hover: rgba(34, 44, 58, 1);
+  --button-secondary-text: #ecf1f7;
+  --button-ghost-text: #aab4c1;
+  --button-ghost-hover-bg: rgba(29, 39, 52, 0.84);
+  --button-ghost-hover-text: #f6f9fc;
+  --progress-track: rgba(228, 236, 248, 0.1);
+  --progress-fill: #eef3f9;
+  --drawer-backdrop: rgba(5, 8, 13, 0.42);
+  --drawer-surface: #0f151d;
+  --toast-bg: #eff4fb;
+  --toast-text: #131820;
+  --shadow-soft: 0 22px 54px rgba(2, 6, 12, 0.34);
+  --shadow-drawer: 0 30px 96px rgba(0, 0, 0, 0.42);
+  --shadow-toast: 0 20px 44px rgba(0, 0, 0, 0.3);
+  --tone-neutral-border: rgba(228, 236, 248, 0.1);
+  --tone-neutral-bg: #1c2732;
+  --tone-neutral-text: #c4cfda;
+  --tone-sky-border: #355472;
+  --tone-sky-bg: #17283a;
+  --tone-sky-text: #a9cceb;
+  --tone-emerald-border: #365143;
+  --tone-emerald-bg: #16261f;
+  --tone-emerald-text: #acd2b8;
+  --tone-amber-border: #5f5138;
+  --tone-amber-bg: #261f16;
+  --tone-amber-text: #e7cc98;
+  --tone-rose-border: #624243;
+  --tone-rose-bg: #291b1d;
+  --tone-rose-text: #ebb5b9;
+  --tone-copper-border: #5d4a39;
+  --tone-copper-bg: #261d16;
+  --tone-copper-text: #e0bea1;
 }
 
 @theme inline {
@@ -39,16 +154,16 @@ html {
 body {
   margin: 0;
   background:
-    radial-gradient(circle at top left, rgba(255, 255, 255, 0.85), transparent 24%),
-    radial-gradient(circle at right 12%, rgba(223, 221, 216, 0.55), transparent 22%),
-    linear-gradient(180deg, #f8f7f4 0%, #f1efeb 100%);
+    radial-gradient(circle at top left, var(--body-top), transparent 24%),
+    radial-gradient(circle at right 12%, var(--body-glow), transparent 22%),
+    linear-gradient(180deg, var(--background) 0%, var(--body-bottom) 100%);
   color: var(--foreground);
   font-family: var(--font-sans);
   text-rendering: optimizeLegibility;
 }
 
 ::selection {
-  background: rgba(24, 24, 26, 0.12);
+  background: color-mix(in srgb, var(--foreground) 14%, transparent);
 }
 
 a,
@@ -71,8 +186,8 @@ button {
 @layer components {
   .app-shell-grid {
     background-image:
-      linear-gradient(rgba(24, 24, 26, 0.025) 1px, transparent 1px),
-      linear-gradient(90deg, rgba(24, 24, 26, 0.025) 1px, transparent 1px);
+      linear-gradient(var(--grid-line) 1px, transparent 1px),
+      linear-gradient(90deg, var(--grid-line) 1px, transparent 1px);
     background-position: center;
     background-size: 32px 32px;
   }
@@ -80,7 +195,7 @@ button {
   .shell-panel {
     background: var(--panel);
     border: 1px solid var(--border);
-    box-shadow: 0 18px 40px rgba(15, 15, 15, 0.04);
+    box-shadow: var(--shadow-soft);
     backdrop-filter: blur(12px);
   }
 
@@ -89,15 +204,97 @@ button {
     border: 1px solid var(--border);
   }
 
+  .surface-panel {
+    background: var(--panel);
+    border: 1px solid var(--border);
+    box-shadow: var(--shadow-soft);
+    backdrop-filter: blur(12px);
+  }
+
   .shell-card {
-    background: rgba(255, 255, 255, 0.84);
-    border: 1px solid rgba(24, 24, 26, 0.08);
+    background: var(--card);
+    border: 1px solid var(--border);
   }
 
   .shell-card-strong {
-    background: var(--panel-strong);
+    background: var(--card-strong);
     border: 1px solid var(--border-strong);
-    box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.55);
+    box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--foreground) 5%, transparent);
+  }
+
+  .surface-soft {
+    background: var(--card-soft);
+    border: 1px solid var(--border);
+  }
+
+  .surface-strong {
+    background: var(--card-strong);
+    border: 1px solid var(--border-strong);
+  }
+
+  .surface-inverse {
+    background: var(--toast-bg);
+    color: var(--toast-text);
+  }
+
+  .text-main {
+    color: var(--title);
+  }
+
+  .text-muted {
+    color: var(--muted);
+  }
+
+  .text-soft {
+    color: var(--soft);
+  }
+
+  .text-faint {
+    color: var(--faint);
+  }
+
+  .border-subtle {
+    border-color: var(--border);
+  }
+
+  .border-strong {
+    border-color: var(--border-strong);
+  }
+
+  .tone-neutral {
+    border-color: var(--tone-neutral-border);
+    background: var(--tone-neutral-bg);
+    color: var(--tone-neutral-text);
+  }
+
+  .tone-sky {
+    border-color: var(--tone-sky-border);
+    background: var(--tone-sky-bg);
+    color: var(--tone-sky-text);
+  }
+
+  .tone-emerald {
+    border-color: var(--tone-emerald-border);
+    background: var(--tone-emerald-bg);
+    color: var(--tone-emerald-text);
+  }
+
+  .tone-amber {
+    border-color: var(--tone-amber-border);
+    background: var(--tone-amber-bg);
+    color: var(--tone-amber-text);
+  }
+
+  .tone-rose {
+    border-color: var(--tone-rose-border);
+    background: var(--tone-rose-bg);
+    color: var(--tone-rose-text);
+  }
+
+  .tone-copper {
+    border-color: var(--tone-copper-border);
+    background: var(--tone-copper-bg);
+    color: var(--tone-copper-text);
   }
 
   .eyebrow {
@@ -118,19 +315,37 @@ button {
   .control-input {
     width: 100%;
     border-radius: 10px;
-    border: 1px solid rgba(24, 24, 26, 0.1);
-    background: rgba(255, 255, 255, 0.96);
+    border: 1px solid var(--input-border);
+    background: var(--input-bg);
     padding: 0.72rem 0.82rem;
     color: var(--foreground);
     outline: none;
   }
 
   .control-input::placeholder {
-    color: #989a9d;
+    color: var(--input-placeholder);
   }
 
   .control-input:focus {
-    border-color: rgba(24, 24, 26, 0.18);
-    box-shadow: 0 0 0 3px rgba(24, 24, 26, 0.05);
+    border-color: var(--input-focus);
+    box-shadow: 0 0 0 3px var(--input-ring);
+  }
+
+  .theme-toggle {
+    border: 1px solid var(--border);
+    background: var(--button-secondary-bg);
+    color: var(--button-secondary-text);
+    box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--foreground) 2%, transparent);
+  }
+
+  .theme-toggle:hover {
+    background: var(--button-secondary-hover);
+  }
+
+  .shell-toast {
+    border: 1px solid var(--border);
+    background: var(--toast-bg);
+    color: var(--toast-text);
+    box-shadow: var(--shadow-toast);
   }
 }

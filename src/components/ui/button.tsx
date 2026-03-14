@@ -5,10 +5,12 @@ type ButtonVariant = "primary" | "secondary" | "ghost";
 type ButtonSize = "sm" | "md";
 
 const variantClasses: Record<ButtonVariant, string> = {
-  primary: "border border-[#1b1c1f]/10 bg-[#1b1c1f] text-[#faf9f6] hover:bg-[#2a2b2f]",
-  secondary: "border border-black/8 bg-white/86 text-[#191a1d] hover:bg-white",
+  primary:
+    "border border-transparent bg-[var(--button-primary-bg)] text-[var(--button-primary-text)] hover:bg-[var(--button-primary-hover)]",
+  secondary:
+    "border border-[var(--border)] bg-[var(--button-secondary-bg)] text-[var(--button-secondary-text)] hover:bg-[var(--button-secondary-hover)]",
   ghost:
-    "border border-transparent bg-transparent text-[#6f7276] hover:border-black/8 hover:bg-white/70 hover:text-[#191a1d]",
+    "border border-transparent bg-transparent text-[var(--button-ghost-text)] hover:border-[var(--border)] hover:bg-[var(--button-ghost-hover-bg)] hover:text-[var(--button-ghost-hover-text)]",
 };
 
 const sizeClasses: Record<ButtonSize, string> = {
