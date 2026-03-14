@@ -20,14 +20,14 @@ export default function HomePage() {
           <div className="space-y-4">
             <div className="flex flex-wrap items-end justify-between gap-3">
               <div>
-                <h1 className="text-[34px] font-semibold tracking-[-0.08em] text-white sm:text-[40px]">
+                <h1 className="text-[34px] font-semibold tracking-[-0.08em] text-[#18191b] sm:text-[40px]">
                   Home
                 </h1>
               </div>
               <div className="flex gap-2">
                 <Link
                   href="/calendar"
-                  className="inline-flex h-8 items-center justify-center rounded-[10px] border border-white/14 bg-white px-3 text-[10px] font-semibold uppercase tracking-[0.16em] text-black hover:bg-[#d9d9d9]"
+                  className="inline-flex h-8 items-center justify-center rounded-[10px] border border-black/8 bg-white/86 px-3 text-[10px] font-semibold uppercase tracking-[0.16em] text-[#191a1d] hover:bg-white"
                 >
                   Calendar
                 </Link>
@@ -42,12 +42,12 @@ export default function HomePage() {
             <div className="grid gap-3 lg:grid-cols-[minmax(0,1fr)_280px]">
               <div className="shell-card rounded-[18px] p-4">
                 <div className="flex items-center justify-between">
-                  <h2 className="text-xl font-semibold tracking-[-0.05em] text-white">{focusProject.name}</h2>
-                  <span className="text-[28px] font-semibold tracking-[-0.06em] text-white">
+                  <h2 className="text-xl font-semibold tracking-[-0.05em] text-[#18191b]">{focusProject.name}</h2>
+                  <span className="text-[28px] font-semibold tracking-[-0.06em] text-[#18191b]">
                     {focusProject.progress}%
                   </span>
                 </div>
-                <p className="mt-3 text-sm text-[#898989]">{focusProject.nextMilestone}</p>
+                <p className="mt-3 text-sm text-[#74787c]">{focusProject.nextMilestone}</p>
                 <div className="mt-4 grid gap-3 md:grid-cols-3">
                   <MiniStat label="Tasks" value={String(openTasks.filter((task) => task.projectId === focusProject.id).length)} />
                   <MiniStat label="Events" value={String(events.filter((event) => event.linkedProjectId === focusProject.id).length)} />
@@ -59,10 +59,10 @@ export default function HomePage() {
                 <p className="eyebrow">Today</p>
                 <div className="mt-3 space-y-2">
                   {todayEvents.map((event) => (
-                    <div key={event.id} className="rounded-[12px] border border-white/6 bg-[#080808] px-3 py-3">
+                    <div key={event.id} className="rounded-[12px] border border-black/6 bg-[#f7f5f1] px-3 py-3">
                       <div className="flex items-center justify-between gap-3">
-                        <p className="text-sm font-medium text-white">{event.title}</p>
-                        <p className="text-[11px] font-medium text-[#a8a8a8]">{event.timeRange.split(" - ")[0]}</p>
+                        <p className="text-sm font-medium text-[#18191b]">{event.title}</p>
+                        <p className="text-[11px] font-medium text-[#7b7f83]">{event.timeRange.split(" - ")[0]}</p>
                       </div>
                     </div>
                   ))}
@@ -109,9 +109,9 @@ export default function HomePage() {
 
 function MiniStat({ label, value }: { label: string; value: string }) {
   return (
-    <div className="rounded-[12px] border border-white/6 bg-[#080808] px-3 py-3">
+    <div className="rounded-[12px] border border-black/6 bg-[#f7f5f1] px-3 py-3">
       <p className="eyebrow">{label}</p>
-      <p className="mt-2 text-2xl font-semibold tracking-[-0.06em] text-white">{value}</p>
+      <p className="mt-2 text-2xl font-semibold tracking-[-0.06em] text-[#18191b]">{value}</p>
     </div>
   );
 }

@@ -1,12 +1,12 @@
 import type { ReactNode } from "react";
 
 const tones = {
-  neutral: "border-white/6 bg-[#090909] text-[#cfcfcf]",
-  sky: "border-white/7 bg-[#0b0b0b] text-[#f1f1f1]",
-  emerald: "border-white/6 bg-[#080808] text-[#cdcdcd]",
-  amber: "border-white/12 bg-white text-black",
-  rose: "border-white/6 bg-[#080808] text-[#b8b8b8]",
-  copper: "border-white/6 bg-[#0a0a0a] text-[#dedede]",
+  neutral: "border-black/8 bg-[#f1efeb] text-[#52565a]",
+  sky: "border-[#c7d2dc] bg-[#eef3f7] text-[#466277]",
+  emerald: "border-[#c6d5cd] bg-[#edf3ef] text-[#48634f]",
+  amber: "border-[#d9d0bf] bg-[#f7f2e8] text-[#716043]",
+  rose: "border-[#dfcaca] bg-[#f7eeee] text-[#7c5959]",
+  copper: "border-[#ddcfbf] bg-[#f4efe8] text-[#74604a]",
 } as const;
 
 export function Badge({

@@ -8,11 +8,11 @@ import { seededPeople } from "@/data/mission-control";
 function statusClass(status: string) {
   switch (status) {
     case "Available":
-      return "text-white";
+      return "text-[#18191b]";
     case "Focus":
-      return "text-[#d8d8d8]";
+      return "text-[#55595d]";
     default:
-      return "text-[#7a7a7a]";
+      return "text-[#8e9296]";
   }
 }
 
@@ -36,17 +36,17 @@ export default function PeoplePage() {
           {seededPeople.map((person) => (
             <div key={person.id} className="shell-card rounded-[16px] p-4">
               <div className="flex items-center justify-between">
-                <div className="flex h-12 w-12 items-center justify-center rounded-[12px] border border-white/8 bg-[#101010] text-sm font-semibold text-white">
+                <div className="flex h-12 w-12 items-center justify-center rounded-[12px] border border-black/8 bg-[#f1efeb] text-sm font-semibold text-[#18191b]">
                   {person.initials}
                 </div>
                 <span className={`text-[10px] uppercase tracking-[0.16em] ${statusClass(person.status)}`}>
                   {person.status}
                 </span>
               </div>
-              <p className="mt-4 text-sm font-medium text-white">{person.name}</p>
-              <p className="mt-1 text-sm text-[#8a8a8a]">{person.role}</p>
-              <p className="mt-3 text-[10px] uppercase tracking-[0.16em] text-[#666]">Focus</p>
-              <p className="mt-1 text-sm text-[#d2d2d2]">{person.focus}</p>
+              <p className="mt-4 text-sm font-medium text-[#18191b]">{person.name}</p>
+              <p className="mt-1 text-sm text-[#74787c]">{person.role}</p>
+              <p className="mt-3 text-[10px] uppercase tracking-[0.16em] text-[#86898c]">Focus</p>
+              <p className="mt-1 text-sm text-[#4f5357]">{person.focus}</p>
               <div className="mt-4">
                 <Button size="sm" onClick={() => showFeedback(`${person.name} is represented as local seed data only.`)}>
                   Open

@@ -39,9 +39,9 @@ export default function TasksPage() {
           />
           <div className="grid grid-cols-2 gap-2 md:grid-cols-4">
             {taskColumns.map((column) => (
-              <div key={column} className="rounded-[12px] border border-white/8 bg-[#080808] px-3 py-3">
+              <div key={column} className="rounded-[12px] border border-black/8 bg-[#f7f5f1] px-3 py-3">
                 <p className="eyebrow">{column}</p>
-                <p className="mt-2 text-2xl font-semibold tracking-[-0.06em] text-white">
+                <p className="mt-2 text-2xl font-semibold tracking-[-0.06em] text-[#18191b]">
                   {filteredTasks.filter((task) => task.status === column).length}
                 </p>
               </div>

@@ -1,16 +1,16 @@
 @import "tailwindcss";
 
 :root {
-  --background: #000000;
-  --foreground: #f2f2f2;
-  --panel: #020202;
-  --panel-alt: #050505;
-  --panel-soft: #080808;
-  --panel-strong: #0c0c0c;
-  --border: rgba(255, 255, 255, 0.055);
-  --border-strong: rgba(255, 255, 255, 0.1);
-  --muted: #686868;
-  --soft: #b0b0b0;
+  --background: #f5f4f1;
+  --foreground: #18181a;
+  --panel: rgba(255, 255, 255, 0.76);
+  --panel-alt: rgba(252, 252, 250, 0.92);
+  --panel-soft: #f1efeb;
+  --panel-strong: #fbfaf7;
+  --border: rgba(24, 24, 26, 0.08);
+  --border-strong: rgba(24, 24, 26, 0.14);
+  --muted: #6e706f;
+  --soft: #4c4e52;
 }
 
 @theme inline {
@@ -39,15 +39,16 @@ html {
 body {
   margin: 0;
   background:
-    radial-gradient(circle at top left, rgba(255, 255, 255, 0.03), transparent 26%),
-    linear-gradient(180deg, #010101 0%, #000000 100%);
+    radial-gradient(circle at top left, rgba(255, 255, 255, 0.85), transparent 24%),
+    radial-gradient(circle at right 12%, rgba(223, 221, 216, 0.55), transparent 22%),
+    linear-gradient(180deg, #f8f7f4 0%, #f1efeb 100%);
   color: var(--foreground);
   font-family: var(--font-sans);
   text-rendering: optimizeLegibility;
 }
 
 ::selection {
-  background: rgba(255, 255, 255, 0.18);
+  background: rgba(24, 24, 26, 0.12);
 }
 
 a,
@@ -70,30 +71,33 @@ button {
 @layer components {
   .app-shell-grid {
     background-image:
-      linear-gradient(rgba(255, 255, 255, 0.01) 1px, transparent 1px),
-      linear-gradient(90deg, rgba(255, 255, 255, 0.01) 1px, transparent 1px);
+      linear-gradient(rgba(24, 24, 26, 0.025) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(24, 24, 26, 0.025) 1px, transparent 1px);
     background-position: center;
     background-size: 32px 32px;
   }
 
   .shell-panel {
-    background: rgba(2, 2, 2, 0.96);
+    background: var(--panel);
     border: 1px solid var(--border);
+    box-shadow: 0 18px 40px rgba(15, 15, 15, 0.04);
+    backdrop-filter: blur(12px);
   }
 
   .shell-panel-alt {
-    background: rgba(5, 5, 5, 0.98);
-    border: 1px solid rgba(255, 255, 255, 0.05);
+    background: var(--panel-alt);
+    border: 1px solid var(--border);
   }
 
   .shell-card {
-    background: rgba(7, 7, 7, 0.98);
-    border: 1px solid rgba(255, 255, 255, 0.05);
+    background: rgba(255, 255, 255, 0.84);
+    border: 1px solid rgba(24, 24, 26, 0.08);
   }
 
   .shell-card-strong {
-    background: rgba(10, 10, 10, 0.98);
+    background: var(--panel-strong);
     border: 1px solid var(--border-strong);
+    box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.55);
   }
 
   .eyebrow {
@@ -114,19 +118,19 @@ button {
   .control-input {
     width: 100%;
     border-radius: 10px;
-    border: 1px solid rgba(255, 255, 255, 0.06);
-    background: rgba(5, 5, 5, 0.98);
+    border: 1px solid rgba(24, 24, 26, 0.1);
+    background: rgba(255, 255, 255, 0.96);
     padding: 0.72rem 0.82rem;
     color: var(--foreground);
     outline: none;
   }
 
   .control-input::placeholder {
-    color: #5f5f5f;
+    color: #989a9d;
   }
 
   .control-input:focus {
-    border-color: rgba(255, 255, 255, 0.11);
-    box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.03);
+    border-color: rgba(24, 24, 26, 0.18);
+    box-shadow: 0 0 0 3px rgba(24, 24, 26, 0.05);
   }
 }

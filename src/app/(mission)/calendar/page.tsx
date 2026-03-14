@@ -64,9 +64,9 @@ export default function CalendarPage() {
   return (
     <div className="grid gap-2.5 2xl:grid-cols-[minmax(0,1fr)_300px]">
       <section className="shell-panel rounded-[18px] p-3">
-        <div className="flex flex-col gap-3 border-b border-white/5 pb-3 xl:flex-row xl:items-center xl:justify-between">
+        <div className="flex flex-col gap-3 border-b border-black/5 pb-3 xl:flex-row xl:items-center xl:justify-between">
           <div className="min-w-0">
-            <h1 className="text-[30px] font-semibold tracking-[-0.08em] text-white sm:text-[34px]">
+            <h1 className="text-[30px] font-semibold tracking-[-0.08em] text-[#18191b] sm:text-[34px]">
               {monthLabel(focusDate)}
             </h1>
           </div>
@@ -101,7 +101,7 @@ export default function CalendarPage() {
             <div className="space-y-1.5">
               <div className="grid grid-cols-7 gap-1.5 px-0.5">
                 {["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"].map((label) => (
-                  <div key={label} className="px-2 py-1 text-[10px] font-semibold uppercase tracking-[0.14em] text-[#5d5d5d]">
+                  <div key={label} className="px-2 py-1 text-[10px] font-semibold uppercase tracking-[0.14em] text-[#85898d]">
                     {label}
                   </div>
                 ))}
@@ -118,22 +118,22 @@ export default function CalendarPage() {
                       onClick={() => setFocusDate(date)}
                       className={`min-h-[132px] rounded-[12px] border px-2.5 py-2.5 text-left ${
                         active
-                          ? "border-white/10 bg-[#0b0b0b]"
-                          : "border-white/5 bg-[#030303] hover:bg-[#070707]"
+                          ? "border-black/10 bg-[#fbfaf7]"
+                          : "border-black/6 bg-white/68 hover:bg-white/88"
                       }`}
                     >
                       <div className="flex items-center justify-between">
-                        <span className={`text-[17px] font-semibold tracking-[-0.04em] ${inMonth ? "text-white" : "text-[#454545]"}`}>
+                        <span className={`text-[17px] font-semibold tracking-[-0.04em] ${inMonth ? "text-[#18191b]" : "text-[#b0b3b6]"}`}>
                           {Number(date.slice(-2))}
                         </span>
-                        <span className="text-[10px] uppercase tracking-[0.14em] text-[#565656]">
+                        <span className="text-[10px] uppercase tracking-[0.14em] text-[#8b8f93]">
                           {dayName(date, "narrow")}
                         </span>
                       </div>
                       <div className="mt-3 space-y-1.5">
                         {items.slice(0, 2).map((item) => (
-                          <div key={item.id} className="rounded-[9px] border border-white/5 bg-[#090909] px-2 py-1.5">
-                            <p className="truncate text-[11px] font-medium text-white">{item.title}</p>
+                          <div key={item.id} className="rounded-[9px] border border-black/6 bg-[#f4f2ee] px-2 py-1.5">
+                            <p className="truncate text-[11px] font-medium text-[#18191b]">{item.title}</p>
                           </div>
                         ))}
                       </div>
@@ -156,23 +156,23 @@ export default function CalendarPage() {
                     onClick={() => setFocusDate(date)}
                     className={`min-h-[360px] rounded-[12px] border px-2.5 py-2.5 text-left ${
                       active
-                        ? "border-white/10 bg-[#0b0b0b]"
-                        : "border-white/5 bg-[#030303] hover:bg-[#070707]"
+                        ? "border-black/10 bg-[#fbfaf7]"
+                        : "border-black/6 bg-white/68 hover:bg-white/88"
                     }`}
                   >
-                    <p className="text-[10px] uppercase tracking-[0.14em] text-[#5d5d5d]">{dayName(date)}</p>
-                    <p className="mt-1.5 text-[24px] font-semibold tracking-[-0.07em] text-white">
+                    <p className="text-[10px] uppercase tracking-[0.14em] text-[#85898d]">{dayName(date)}</p>
+                    <p className="mt-1.5 text-[24px] font-semibold tracking-[-0.07em] text-[#18191b]">
                       {Number(date.slice(-2))}
                     </p>
                     <div className="mt-3 space-y-1.5">
                       {items.length ? (
                         items.map((item) => (
-                          <div key={item.id} className="rounded-[9px] border border-white/5 bg-[#090909] px-2 py-1.5">
-                            <p className="text-[11px] font-medium text-white">{item.title}</p>
+                          <div key={item.id} className="rounded-[9px] border border-black/6 bg-[#f4f2ee] px-2 py-1.5">
+                            <p className="text-[11px] font-medium text-[#18191b]">{item.title}</p>
                           </div>
                         ))
                       ) : (
-                        <div className="rounded-[9px] border border-dashed border-white/7 px-2 py-1.5 text-[11px] uppercase tracking-[0.12em] text-[#555]">
+                        <div className="rounded-[9px] border border-dashed border-black/10 px-2 py-1.5 text-[11px] uppercase tracking-[0.12em] text-[#9c9fa2]">
                           Open
                         </div>
                       )}
@@ -188,8 +188,8 @@ export default function CalendarPage() {
               {(visibleEvents.length ? visibleEvents : nextUp).map((event) => (
                 <div key={event.id} className="shell-card rounded-[12px] px-3 py-3">
                   <div className="flex items-center justify-between gap-3">
-                    <p className="text-sm font-medium text-white">{event.title}</p>
-                    <p className="text-[11px] font-medium uppercase tracking-[0.12em] text-[#a7a7a7]">
+                    <p className="text-sm font-medium text-[#18191b]">{event.title}</p>
+                    <p className="text-[11px] font-medium uppercase tracking-[0.12em] text-[#7d8185]">
                       {event.timeRange}
                     </p>
                   </div>
@@ -203,8 +203,8 @@ export default function CalendarPage() {
               {events.map((event) => (
                 <div key={event.id} className="shell-card rounded-[12px] px-3 py-3">
                   <div className="flex items-center justify-between gap-3">
-                    <p className="text-sm font-medium text-white">{event.title}</p>
-                    <p className="text-[11px] font-medium uppercase tracking-[0.12em] text-[#a7a7a7]">
+                    <p className="text-sm font-medium text-[#18191b]">{event.title}</p>
+                    <p className="text-[11px] font-medium uppercase tracking-[0.12em] text-[#7d8185]">
                       {formatDisplayDate(event.date)} · {event.timeRange.split(" - ")[0]}
                     </p>
                   </div>
@@ -217,21 +217,21 @@ export default function CalendarPage() {
 
       <aside className="shell-panel rounded-[18px] p-3">
         <div className="flex h-full flex-col">
-          <section className="border-b border-white/5 pb-3">
-            <h2 className="text-[24px] font-semibold tracking-[-0.06em] text-white">
+          <section className="border-b border-black/5 pb-3">
+            <h2 className="text-[24px] font-semibold tracking-[-0.06em] text-[#18191b]">
               {formatDisplayDate(focusDate)}
             </h2>
             <div className="mt-3 space-y-1.5">
               {(visibleEvents.length ? visibleEvents : []).map((event) => (
-                <div key={event.id} className="rounded-[10px] border border-white/5 bg-[#070707] px-2.5 py-2.5">
+                <div key={event.id} className="rounded-[10px] border border-black/6 bg-[#f7f5f1] px-2.5 py-2.5">
                   <div className="flex items-center justify-between gap-3">
-                    <p className="text-sm font-medium text-white">{event.title}</p>
-                    <p className="text-[11px] font-medium text-[#9f9f9f]">{event.timeRange.split(" - ")[0]}</p>
+                    <p className="text-sm font-medium text-[#18191b]">{event.title}</p>
+                    <p className="text-[11px] font-medium text-[#7d8185]">{event.timeRange.split(" - ")[0]}</p>
                   </div>
                 </div>
               ))}
               {!visibleEvents.length ? (
-                <div className="rounded-[10px] border border-dashed border-white/7 px-2.5 py-2.5 text-sm text-[#5f5f5f]">
+                <div className="rounded-[10px] border border-dashed border-black/10 px-2.5 py-2.5 text-sm text-[#95989b]">
                   Empty
                 </div>
               ) : null}
@@ -245,12 +245,12 @@ export default function CalendarPage() {
                 <button
                   key={event.id}
                   onClick={() => setFocusDate(event.date)}
-                  className="block w-full rounded-[10px] border border-white/5 bg-[#070707] px-2.5 py-2.5 text-left hover:bg-[#0b0b0b]"
+                  className="block w-full rounded-[10px] border border-black/6 bg-[#f7f5f1] px-2.5 py-2.5 text-left hover:bg-white"
                 >
                   <div className="flex items-start justify-between gap-3">
                     <div className="min-w-0">
-                      <p className="truncate text-sm font-medium text-white">{event.title}</p>
-                      <p className="mt-0.5 text-[10px] uppercase tracking-[0.12em] text-[#6a6a6a]">
+                      <p className="truncate text-sm font-medium text-[#18191b]">{event.title}</p>
+                      <p className="mt-0.5 text-[10px] uppercase tracking-[0.12em] text-[#86898c]">
                         {formatDisplayDate(event.date)} · {event.timeRange.split(" - ")[0]}
                       </p>
                     </div>

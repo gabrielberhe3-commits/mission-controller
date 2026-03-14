@@ -16,7 +16,7 @@ export function Topbar() {
   return (
     <header className="shell-panel rounded-[14px] px-3 py-2">
       <div className="flex items-center justify-between gap-3">
-        <h1 className="text-[16px] font-medium tracking-[-0.04em] text-white">{current.label}</h1>
+        <h1 className="text-[16px] font-medium tracking-[-0.04em] text-[#161719]">{current.label}</h1>
         <div className="flex gap-2">
           <Button size="sm" onClick={() => openDrawer("task")}>
             Task

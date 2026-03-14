@@ -51,7 +51,7 @@ export function MetricGrid({ metrics }: { metrics: WorkspaceMetric[] }) {
       {metrics.map((metric) => (
         <div key={metric.id} className="shell-panel rounded-[16px] px-4 py-4">
           <p className="eyebrow">{metric.label}</p>
-          <p className="mt-3 metric-value text-white">{metric.value}</p>
+          <p className="mt-3 metric-value text-[#18191b]">{metric.value}</p>
         </div>
       ))}
     </div>
@@ -69,9 +69,9 @@ export function BriefFeed({ briefs }: { briefs: BriefEntry[] }) {
             <div className="min-w-0 flex-1">
               <div className="flex flex-wrap items-center gap-2">
                 <Badge tone={brief.type === "Morning Brief" ? "amber" : "sky"}>{brief.type}</Badge>
-                <p className="text-[10px] uppercase tracking-[0.16em] text-[#666]">{brief.createdAt}</p>
+                <p className="text-[10px] uppercase tracking-[0.16em] text-[#86898c]">{brief.createdAt}</p>
               </div>
-              <p className="mt-3 text-sm font-medium text-white">{brief.title}</p>
+              <p className="mt-3 text-sm font-medium text-[#18191b]">{brief.title}</p>
             </div>
             {brief.linkedProjectIds[0] ? (
               <Button size="sm" onClick={() => setSelectedProjectId(brief.linkedProjectIds[0])}>
@@ -81,7 +81,7 @@ export function BriefFeed({ briefs }: { briefs: BriefEntry[] }) {
           </div>
           <ul className="mt-3 space-y-2">
             {brief.bullets.map((bullet) => (
-              <li key={bullet} className="rounded-[10px] border border-white/6 bg-[#080808] px-3 py-2 text-sm text-[#bcbcbc]">
+              <li key={bullet} className="rounded-[10px] border border-black/6 bg-[#f7f5f1] px-3 py-2 text-sm text-[#4f5357]">
                 {bullet}
               </li>
             ))}
@@ -102,10 +102,10 @@ export function EventList({ events }: { events: CalendarEvent[] }) {
           <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
             <div className="min-w-0 flex-1">
               <div className="flex flex-wrap items-center gap-2">
-                <p className="text-sm font-medium text-white">{event.title}</p>
+                <p className="text-sm font-medium text-[#18191b]">{event.title}</p>
                 <Badge tone={getEventTone(event.kind)}>{event.kind}</Badge>
               </div>
-              <p className="mt-1 text-sm text-[#8b8b8b]">
+              <p className="mt-1 text-sm text-[#74787c]">
                 {event.timeRange} · {event.location}
               </p>
             </div>
@@ -142,8 +142,8 @@ export function TaskList({ tasks }: { tasks: Task[] }) {
           <div key={task.id} className="shell-card rounded-[14px] p-4">
             <div className="flex items-start justify-between gap-3">
               <div className="min-w-0 flex-1">
-                <p className="text-sm font-medium text-white">{task.title}</p>
-                <p className="mt-1 text-sm text-[#868686]">
+                <p className="text-sm font-medium text-[#18191b]">{task.title}</p>
+                <p className="mt-1 text-sm text-[#74787c]">
                   {project?.name} · {formatDueLabel(task.dueDate)}
                 </p>
               </div>
@@ -185,10 +185,10 @@ export function ProjectList({
           >
             <div className="flex items-start justify-between gap-3">
               <div className="min-w-0 flex-1">
-                <p className="text-sm font-medium text-white">{project.name}</p>
-                <p className="mt-1 text-sm text-[#868686]">{project.nextMilestone}</p>
+                <p className="text-sm font-medium text-[#18191b]">{project.name}</p>
+                <p className="mt-1 text-sm text-[#74787c]">{project.nextMilestone}</p>
               </div>
-              <span className="text-sm font-semibold tracking-[-0.05em] text-white">{project.progress}%</span>
+              <span className="text-sm font-semibold tracking-[-0.05em] text-[#18191b]">{project.progress}%</span>
             </div>
             <div className="mt-3">
               <ProgressBar value={project.progress} />
@@ -226,14 +226,14 @@ export function ProjectDetail({
         <div className="flex flex-col gap-4 lg:flex-row lg:items-start lg:justify-between">
           <div className="min-w-0 flex-1">
             <div className="flex flex-wrap items-center gap-2">
-              <h3 className="text-xl font-semibold tracking-[-0.05em] text-white">{project.name}</h3>
+              <h3 className="text-xl font-semibold tracking-[-0.05em] text-[#18191b]">{project.name}</h3>
               <Badge tone={getStatusTone(project.status)}>{project.status}</Badge>
             </div>
-            <p className="mt-2 max-w-3xl text-sm text-[#8c8c8c]">{project.summary}</p>
+            <p className="mt-2 max-w-3xl text-sm text-[#74787c]">{project.summary}</p>
           </div>
-          <div className="w-full max-w-56 rounded-[14px] border border-white/8 bg-[#080808] p-3">
+          <div className="w-full max-w-56 rounded-[14px] border border-black/8 bg-[#f8f6f2] p-3">
             <p className="eyebrow">Progress</p>
-            <p className="mt-2 text-3xl font-semibold tracking-[-0.06em] text-white">{project.progress}%</p>
+            <p className="mt-2 text-3xl font-semibold tracking-[-0.06em] text-[#18191b]">{project.progress}%</p>
             <div className="mt-3">
               <ProgressBar value={project.progress} />
             </div>
@@ -253,7 +253,7 @@ export function ProjectDetail({
           {project.deliverables.map((deliverable) => (
             <RowCard key={deliverable.id}>
               <div className="flex flex-wrap items-center justify-between gap-2">
-                <p className="text-sm font-medium text-white">{deliverable.title}</p>
+              <p className="text-sm font-medium text-[#18191b]">{deliverable.title}</p>
                 <Badge
                   tone={
                     deliverable.status === "Ready"
@@ -266,7 +266,7 @@ export function ProjectDetail({
                   {deliverable.status}
                 </Badge>
               </div>
-              <p className="mt-1 text-sm text-[#8a8a8a]">{deliverable.summary}</p>
+              <p className="mt-1 text-sm text-[#74787c]">{deliverable.summary}</p>
             </RowCard>
           ))}
         </InfoColumn>
@@ -274,14 +274,14 @@ export function ProjectDetail({
         <InfoColumn title="Updates">
           {project.updates.map((update) => (
             <RowCard key={update.id}>
-              <p className="text-sm font-medium text-white">{update.title}</p>
-              <p className="mt-1 text-sm text-[#8a8a8a]">{update.summary}</p>
+              <p className="text-sm font-medium text-[#18191b]">{update.title}</p>
+              <p className="mt-1 text-sm text-[#74787c]">{update.summary}</p>
             </RowCard>
           ))}
           {project.history.map((item) => (
             <RowCard key={item.id} muted>
-              <p className="text-sm font-medium text-white">{item.label}</p>
-              <p className="mt-1 text-sm text-[#8a8a8a]">{item.detail}</p>
+              <p className="text-sm font-medium text-[#18191b]">{item.label}</p>
+              <p className="mt-1 text-sm text-[#74787c]">{item.detail}</p>
             </RowCard>
           ))}
         </InfoColumn>
@@ -316,12 +316,12 @@ function LinkedList({ title, items }: { title: string; items: string[] }) {
       <div className="mt-3 space-y-2">
         {items.length ? (
           items.map((item) => (
-            <div key={item} className="rounded-[10px] border border-white/6 bg-[#080808] px-3 py-2 text-sm text-[#c1c1c1]">
+            <div key={item} className="rounded-[10px] border border-black/6 bg-[#f7f5f1] px-3 py-2 text-sm text-[#505458]">
               {item}
             </div>
           ))
         ) : (
-          <div className="rounded-[10px] border border-dashed border-white/8 px-3 py-2 text-sm text-[#727272]">
+          <div className="rounded-[10px] border border-dashed border-black/10 px-3 py-2 text-sm text-[#878a8d]">
             Empty
           </div>
         )}
@@ -334,14 +334,14 @@ function DetailStat({ label, value }: { label: string; value: string }) {
   return (
     <div className="shell-panel rounded-[14px] px-4 py-3">
       <p className="eyebrow">{label}</p>
-      <p className="mt-2 text-2xl font-semibold tracking-[-0.06em] text-white">{value}</p>
+      <p className="mt-2 text-2xl font-semibold tracking-[-0.06em] text-[#18191b]">{value}</p>
     </div>
   );
 }
 
 function RowCard({ children, muted = false }: { children: ReactNode; muted?: boolean }) {
   return (
-    <div className={`rounded-[12px] border p-3 ${muted ? "border-white/5 bg-[#070707]" : "border-white/6 bg-[#090909]"}`}>
+    <div className={`rounded-[12px] border p-3 ${muted ? "border-black/6 bg-[#f3f1ed]" : "border-black/7 bg-[#f8f6f2]"}`}>
       {children}
     </div>
   );
@@ -355,12 +355,12 @@ export function MemoryList({ memories }: { memories: MemoryItem[] }) {
       {memories.map((memory) => (
         <div key={memory.id} className="shell-card rounded-[14px] p-4">
           <div className="flex flex-wrap items-center justify-between gap-3">
-            <p className="text-sm font-medium text-white">{memory.title}</p>
+            <p className="text-sm font-medium text-[#18191b]">{memory.title}</p>
             <Badge tone="neutral">{memory.kind}</Badge>
           </div>
-          <p className="mt-2 text-sm text-[#898989]">{memory.note}</p>
+          <p className="mt-2 text-sm text-[#74787c]">{memory.note}</p>
           <div className="mt-3 flex items-center justify-between gap-3">
-            <p className="text-[10px] uppercase tracking-[0.16em] text-[#666]">{memory.updatedAt}</p>
+            <p className="text-[10px] uppercase tracking-[0.16em] text-[#86898c]">{memory.updatedAt}</p>
             {memory.linkedProjectId ? (
               <Button size="sm" onClick={() => setSelectedProjectId(memory.linkedProjectId!)}>
                 Project
@@ -381,10 +381,10 @@ export function DocList({ docs }: { docs: Doc[] }) {
       {docs.map((doc) => (
         <div key={doc.id} className="shell-card rounded-[14px] p-4">
           <div className="flex flex-wrap items-center justify-between gap-3">
-            <p className="text-sm font-medium text-white">{doc.title}</p>
-            <p className="text-[10px] uppercase tracking-[0.16em] text-[#666]">{doc.updatedAt}</p>
+            <p className="text-sm font-medium text-[#18191b]">{doc.title}</p>
+            <p className="text-[10px] uppercase tracking-[0.16em] text-[#86898c]">{doc.updatedAt}</p>
           </div>
-          <p className="mt-2 text-sm text-[#898989]">{doc.summary}</p>
+          <p className="mt-2 text-sm text-[#74787c]">{doc.summary}</p>
           <div className="mt-3 flex flex-wrap items-center justify-between gap-3">
             <div className="flex gap-2">
               {doc.linkedProjectId ? (
@@ -411,8 +411,8 @@ export function RoadmapList({ items }: { items: string[] }) {
   return (
     <ol className="space-y-2">
       {items.map((item, index) => (
-        <li key={item} className="shell-card rounded-[14px] px-4 py-3 text-sm text-[#c1c1c1]">
-          <span className="mr-2 text-[#747474]">{index + 1}.</span>
+        <li key={item} className="shell-card rounded-[14px] px-4 py-3 text-sm text-[#505458]">
+          <span className="mr-2 text-[#8a8d91]">{index + 1}.</span>
           {item}
         </li>
       ))}
